@@ -23,7 +23,27 @@
 	};
 	tinyslider();
 
-	
+	var tinysliderclient = function() {
+		var el = document.querySelectorAll('.client-slider');
+
+		if (el.length > 0) {
+			var slider = tns({
+				container: '.client-slider',
+				items: 1,
+				axis: "horizontal",
+				controlsContainer: "#client-nav",
+				swipeAngle: false,
+				speed: 700,
+				nav: true,
+				controls: false,
+				autoplay: true,
+				autoplayHoverPause: false,
+				autoplayTimeout: 1500,
+				autoplayButtonOutput: false
+			});
+		}
+	};
+	tinysliderclient();
 
 
 	var sitePlusMinus = function() {

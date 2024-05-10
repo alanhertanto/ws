@@ -84,7 +84,6 @@
 		<div class="product-section">
 			<div class="container">
 				<div class="row">
-
 					<!-- Start Column Top -->
 					<div class="col-md-12 col-lg-12 mb-5 mb-lg-5">
 						<h2 class="mb-4 section-title text-center">Our Services.</h2>
@@ -177,9 +176,10 @@
 		</div>
 		<!-- End Vertically -->
 
-			<!-- Start Gallery Slider -->
-			<div class="testimonial-section galleryfilter">
-			<div id="myBtnContainer">
+		<!-- Start Gallery Slider -->
+		<div class="product-section	 galleryfilter">
+			<h2 class="mb-4 section-title text-center">Gallery Kegiatan dan Aktivitas Kami</h2>
+			<div id="myBtnContainer" class="d-flex gap-20 justify-content-center">
 				<button class="btn active" onclick="filterSelection('all')"> Show all</button>
 				<button class="btn" onclick="filterSelection('nature')"> Nature</button>
 				<button class="btn" onclick="filterSelection('cars')"> Cars</button>
@@ -309,12 +309,71 @@
 		</div>
 		<!-- End Why Choose Us Section -->
 
+		<!-- Start client Slider -->
+		<div class="client-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-7 mx-auto text-center"> 	
+						<h2 class="section-title">Client Kami</h2>
+					</div>
+				</div>
+
+				<div class="row justify-content-center">
+					<div class="col-lg-12">
+						<div class="client-slider-wrap text-center">
+
+							<div id="client-nav">
+							</div>
+
+							<div class="client-slider">
+								
+								<div class="item">
+									<div class="row justify-content-center">
+										<div class="col-lg-8 mx-auto">
+											<div class="client-block text-center">
+												<div class="author-info">
+													<div class="author-pic">
+														<img src="images/person-1.png" alt="Maria Jones" class="img-fluid">
+													</div>
+													<h3 class="font-weight-bold">XL Axiata</h3>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div> 
+								<div class="item">
+									<div class="row justify-content-center">
+										<div class="col-lg-8 mx-auto">
+
+											<div class="client-block text-center">
+												<div class="author-info">
+													<div class="author-pic">
+														<img src="images/person-1.png" alt="Maria Jones" class="img-fluid">
+													</div>
+													<h3 class="font-weight-bold">XL Axiata</h3>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div> 
+								
+							</div>
+
+						</div> 	
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End client Slider -->
+
 		<!-- Start Testimonial Slider -->
 		<div class="testimonial-section">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-7 mx-auto text-center">
-						<h2 class="section-title">Project Terbaru Yang Sukses</h2>
+						<h2 class="section-title">Penghargaan</h2>
 					</div>
 				</div>
 
@@ -350,8 +409,28 @@
 										</div>
 									</div>
 								</div> 
-								<!-- END item -->
+								<div class="item">
+									<div class="row justify-content-center">
+										<div class="col-lg-8 mx-auto">
 
+											<div class="testimonial-block text-center">
+												<blockquote class="mb-5">
+													<p>&ldquo;Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque.&rdquo;</p>
+												</blockquote>
+
+												<div class="author-info">
+													<div class="author-pic">
+														<img src="images/person-1.png" alt="Maria Jones" class="img-fluid">
+													</div>
+													<h3 class="font-weight-bold">Maria Jones</h3>
+													<span class="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div> 
+								
 							</div>
 
 						</div> 	
@@ -360,7 +439,7 @@
 			</div>
 		</div>
 		<!-- End Testimonial Slider -->
-
+		
 		<!-- Start Footer Section -->
 		<footer class="footer-section">
 			<div class="container relative">
@@ -386,10 +465,10 @@
 						<div class="row links-wrap">
 							<div class="col-4 col-sm-4 col-md-4">
 								<ul class="list-unstyled">
-									<li><a href="#">About us</a></li>
+									<li><a href="#">Jobs</a></li>
+									<li><a href="#">Our team</a></li>
 									<li><a href="#">Services</a></li>
 									<li><a href="#">Blog</a></li>
-									<li><a href="#">Contact us</a></li>
 								</ul>
 							</div>
 
@@ -403,10 +482,6 @@
 
 							<div class="col-4 col-sm-4 col-md-4">
 								<ul class="list-unstyled">
-									<li><a href="#">Jobs</a></li>
-									<li><a href="#">Our team</a></li>
-									<li><a href="#">Leadership</a></li>
-									<li><a href="#">Privacy Policy</a></li>
 								</ul>
 							</div>
 
@@ -419,14 +494,7 @@
 					<div class="row pt-4">
 						<div class="col-lg-6">
 							<p class="mb-2 text-center text-lg-start">Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved.   <!-- License information: https://untree.co/license/ -->
-            </p>
-						</div>
-
-						<div class="col-lg-6 text-center text-lg-end">
-							<ul class="list-unstyled d-inline-flex ms-auto">
-								<li class="me-4"><a href="#">Terms &amp; Conditions</a></li>
-								<li><a href="#">Privacy Policy</a></li>
-							</ul>
+							</p>
 						</div>
 
 					</div>
