@@ -310,7 +310,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-7 mx-auto text-center">
-						<h2 class="section-title">Testimonials</h2>
+						<h2 class="section-title">Project Terbaru Yang Sukses</h2>
 					</div>
 				</div>
 
@@ -410,7 +410,7 @@
 				<div class="sofa-img">
 					<img src="images/sofa.png" alt="Image" class="img-fluid">
 				</div>
-				
+
 				<div class="row g-5 mb-5">
 					<div class="col-lg-6">
 						<div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Hubungi Kami<span>.</span></a></div>
