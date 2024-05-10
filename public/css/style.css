@@ -408,9 +408,9 @@ a.more {
     background-image: url("../images/dots-yellow.svg");
     background-repeat: no-repeat;
     background-size: contain;
-    -webkit-transform: translate(-40%, -40%);
-    -ms-transform: translate(-40%, -40%);
-    transform: translate(-40%, -40%);
+    -webkit-transform: translate(-30%, -30%);
+    -ms-transform: translate(-30%, -30%);
+    transform: translate(-30%, -30%);
     z-index: -1;
 }
 
