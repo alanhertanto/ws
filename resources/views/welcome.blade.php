@@ -176,6 +176,86 @@
 			</div>	
 		</div>
 		<!-- End Vertically -->
+
+			<!-- Start Gallery Slider -->
+			<div class="testimonial-section galleryfilter">
+			<div id="myBtnContainer">
+				<button class="btn active" onclick="filterSelection('all')"> Show all</button>
+				<button class="btn" onclick="filterSelection('nature')"> Nature</button>
+				<button class="btn" onclick="filterSelection('cars')"> Cars</button>
+				<button class="btn" onclick="filterSelection('people')"> People</button>
+			</div>
+
+			<!-- Portfolio Gallery Grid -->
+			<div class="row galleryfilter">
+				<div class="column nature">
+					<div class="content">
+					<img src="/images/mountains.jpg" alt="Mountains" style="width:100%">
+					<h4>Mountains</h4>
+					<p>Lorem ipsum dolor..</p>
+					</div>
+				</div>
+				<div class="column nature">
+					<div class="content">
+					<img src="/images/lights.jpg" alt="Lights" style="width:100%">
+					<h4>Lights</h4>
+					<p>Lorem ipsum dolor..</p>
+					</div>
+				</div>
+				<div class="column nature">
+					<div class="content">
+					<img src="/images/nature.jpg" alt="Nature" style="width:100%">
+					<h4>Forest</h4>
+					<p>Lorem ipsum dolor..</p>
+					</div>
+				</div>
+				<div class="column cars">
+					<div class="content">
+					<img src="/images/cars1.jpg" alt="Car" style="width:100%">
+					<h4>Retro</h4>
+					<p>Lorem ipsum dolor..</p>
+					</div>
+				</div>
+				<div class="column cars">
+					<div class="content">
+					<img src="/images/cars2.jpg" alt="Car" style="width:100%">
+					<h4>Fast</h4>
+					<p>Lorem ipsum dolor..</p>
+					</div>
+				</div>
+				<div class="column cars">
+					<div class="content">
+					<img src="/images/cars3.jpg" alt="Car" style="width:100%">
+					<h4>Classic</h4>
+					<p>Lorem ipsum dolor..</p>
+					</div>
+				</div>
+				<div class="column people">
+					<div class="content">
+					<img src="/images/people1.jpg" alt="People" style="width:100%">
+					<h4>Girl</h4>
+					<p>Lorem ipsum dolor..</p>
+					</div>
+				</div>
+				<div class="column people">
+					<div class="content">
+					<img src="/images/people2.jpg" alt="People" style="width:100%">
+					<h4>Man</h4>
+					<p>Lorem ipsum dolor..</p>
+					</div>
+				</div>
+				<div class="column people">
+					<div class="content">
+					<img src="/images/people3.jpg" alt="People" style="width:100%">
+					<h4>Woman</h4>
+					<p>Lorem ipsum dolor..</p>
+					</div>
+				</div>
+			<!-- END GRID -->
+			</div>
+		</div>
+		<!-- End Gallery Slider -->
+
 		<!-- Start Why Choose Us Section -->
 		<div class="why-choose-section">
 			<div class="container">
@@ -280,86 +360,6 @@
 			</div>
 		</div>
 		<!-- End Testimonial Slider -->
-
-
-		<!-- Start Gallery Slider -->
-		<div class="testimonial-section galleryfilter">
-			<div id="myBtnContainer">
-				<button class="btn active" onclick="filterSelection('all')"> Show all</button>
-				<button class="btn" onclick="filterSelection('nature')"> Nature</button>
-				<button class="btn" onclick="filterSelection('cars')"> Cars</button>
-				<button class="btn" onclick="filterSelection('people')"> People</button>
-			</div>
-
-			<!-- Portfolio Gallery Grid -->
-			<div class="row galleryfilter">
-				<div class="column nature">
-					<div class="content">
-					<img src="/images/mountains.jpg" alt="Mountains" style="width:100%">
-					<h4>Mountains</h4>
-					<p>Lorem ipsum dolor..</p>
-					</div>
-				</div>
-				<div class="column nature">
-					<div class="content">
-					<img src="/images/lights.jpg" alt="Lights" style="width:100%">
-					<h4>Lights</h4>
-					<p>Lorem ipsum dolor..</p>
-					</div>
-				</div>
-				<div class="column nature">
-					<div class="content">
-					<img src="/images/nature.jpg" alt="Nature" style="width:100%">
-					<h4>Forest</h4>
-					<p>Lorem ipsum dolor..</p>
-					</div>
-				</div>
-				<div class="column cars">
-					<div class="content">
-					<img src="/images/cars1.jpg" alt="Car" style="width:100%">
-					<h4>Retro</h4>
-					<p>Lorem ipsum dolor..</p>
-					</div>
-				</div>
-				<div class="column cars">
-					<div class="content">
-					<img src="/images/cars2.jpg" alt="Car" style="width:100%">
-					<h4>Fast</h4>
-					<p>Lorem ipsum dolor..</p>
-					</div>
-				</div>
-				<div class="column cars">
-					<div class="content">
-					<img src="/images/cars3.jpg" alt="Car" style="width:100%">
-					<h4>Classic</h4>
-					<p>Lorem ipsum dolor..</p>
-					</div>
-				</div>
-				<div class="column people">
-					<div class="content">
-					<img src="/images/people1.jpg" alt="People" style="width:100%">
-					<h4>Girl</h4>
-					<p>Lorem ipsum dolor..</p>
-					</div>
-				</div>
-				<div class="column people">
-					<div class="content">
-					<img src="/images/people2.jpg" alt="People" style="width:100%">
-					<h4>Man</h4>
-					<p>Lorem ipsum dolor..</p>
-					</div>
-				</div>
-				<div class="column people">
-					<div class="content">
-					<img src="/images/people3.jpg" alt="People" style="width:100%">
-					<h4>Woman</h4>
-					<p>Lorem ipsum dolor..</p>
-					</div>
-				</div>
-			<!-- END GRID -->
-			</div>
-		</div>
-		<!-- End Gallery Slider -->
 
 		<!-- Start Footer Section -->
 		<footer class="footer-section">
