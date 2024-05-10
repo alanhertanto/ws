@@ -93,7 +93,7 @@
 
 					<!-- Start Column 1 -->
 					<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-						<a class="product-item" href="cart.html">
+						<a class="product-item" data-bs-toggle="modal" data-bs-target="#modalMentoring">
 							<img src="images/product-1.png" class="img-fluid product-thumbnail">
 							<h3 class="product-title">Mentoring</h3>
 							<strong class="product-price">Learn More</strong>
@@ -146,7 +146,6 @@
 						</a>
 					</div>
 					<!-- End Column 4 -->
-
 					<!-- Start Column Bottom -->
 					<div class="d-flex justify-content-center mt-5">
 						<a href="shop.html" class="btn">Explore More</a>
@@ -157,7 +156,25 @@
 			</div>
 		</div>
 		<!-- End Product Section -->
-
+		<!-- Vertically centered scrollable modal -->
+		<div class="modal fade" id="modalMentoring" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						Sakit Perut
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				</div>
+			</div>	
+		</div>
+		<!-- End Vertically -->
 		<!-- Start Why Choose Us Section -->
 		<div class="why-choose-section">
 			<div class="container">
@@ -490,7 +507,6 @@
 			</div>
 		</footer>
 		<!-- End Footer Section -->	
-
 
 		<script src="js/bootstrap.bundle.min.js"></script>
 		<script src="js/tiny-slider.js"></script>
