@@ -84,35 +84,48 @@
 			<div class="container">
 				<div class="row">
 
-					<!-- Start Column 1 -->
-					<div class="col-md-12 col-lg-3 mb-5 mb-lg-0">
-						<h2 class="mb-4 section-title">Crafted with excellent material.</h2>
-						<p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. </p>
-						<p><a href="shop.html" class="btn">Explore</a></p>
+					<!-- Start Column Top -->
+					<div class="col-md-12 col-lg-12 mb-5 mb-lg-5">
+						<h2 class="mb-4 section-title text-center">Our Services.</h2>
+						<p class="mb-4 text-center"><b>Dengan dedikasi yang tak tertandingi dan pengalaman yang luas, kami berkomitmen untuk memberikan solusi terbaik bagi klien kami.</b></p>
 					</div> 
-					<!-- End Column 1 -->
+					<!-- End Column Top -->
 
-					<!-- Start Column 2 -->
+					<!-- Start Column 1 -->
 					<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
 						<a class="product-item" href="cart.html">
 							<img src="images/product-1.png" class="img-fluid product-thumbnail">
-							<h3 class="product-title">Nordic Chair</h3>
-							<strong class="product-price">$50.00</strong>
+							<h3 class="product-title">Mentoring</h3>
+							<strong class="product-price">Learn More</strong>
 
 							<span class="icon-cross">
 								<img src="images/cross.svg" class="img-fluid">
 							</span>
 						</a>
 					</div> 
+					<!-- End Column 1 -->
+
+					<!-- Start Column 2 -->
+					<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
+						<a class="product-item" href="cart.html">
+							<img src="images/product-2.png" class="img-fluid product-thumbnail">
+							<h3 class="product-title">Webinar</h3>
+							<strong class="product-price">Learn more</strong>
+
+							<span class="icon-cross">
+								<img src="images/cross.svg" class="img-fluid">
+							</span>
+						</a>
+					</div>
 					<!-- End Column 2 -->
 
 					<!-- Start Column 3 -->
 					<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
 						<a class="product-item" href="cart.html">
-							<img src="images/product-2.png" class="img-fluid product-thumbnail">
-							<h3 class="product-title">Kruzo Aero Chair</h3>
-							<strong class="product-price">$78.00</strong>
-
+							<img src="images/product-3.png" class="img-fluid product-thumbnail">
+							<h3 class="product-title">Community Support</h3>
+							<strong class="product-price">Learn More</strong>
+				
 							<span class="icon-cross">
 								<img src="images/cross.svg" class="img-fluid">
 							</span>
@@ -124,8 +137,8 @@
 					<div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
 						<a class="product-item" href="cart.html">
 							<img src="images/product-3.png" class="img-fluid product-thumbnail">
-							<h3 class="product-title">Ergonomic Chair</h3>
-							<strong class="product-price">$43.00</strong>
+							<h3 class="product-title">KOL Support</h3>
+							<strong class="product-price">Learn More</strong>
 
 							<span class="icon-cross">
 								<img src="images/cross.svg" class="img-fluid">
@@ -133,6 +146,12 @@
 						</a>
 					</div>
 					<!-- End Column 4 -->
+
+					<!-- Start Column Bottom -->
+					<div class="d-flex justify-content-center mt-5">
+						<a href="shop.html" class="btn">Explore More</a>
+					</div> 
+					<!-- End Column Bottom -->
 
 				</div>
 			</div>
@@ -144,50 +163,40 @@
 			<div class="container">
 				<div class="row justify-content-between">
 					<div class="col-lg-6">
-						<h2 class="section-title">Why Choose Us</h2>
-						<p>Choose us for unparalleled flexibility and support. Our platform is designed to adapt to your unique needs, offering a dynamic environment where creativity thrives. With seamless collaboration tools and a vibrant community, we empower you to excel on your terms, wherever you are. Your success is our priority.</p>
-
-						<div class="row my-5">
-							<div class="col-6 col-md-6">
+						<h2 class="section-title text-center">Visi Workin Studio</h2>
+						<p class="text-center">Menjadi perusahaan agensi tenaga kerja paruh waktu yang kompeten dan berintegritas, baik bekerja secara online/offline.</p>
+						<h2 class="section-title text-center">Misi Workin Studio</h2>
+						<div class="row my-3 ">
+							<div class="col-4 col-md-4">
 								<div class="feature">
 									<div class="icon">
-										<img src="images/truck.svg" alt="Image" class="imf-fluid">
+										<img src="images/file-contract-solid.svg" alt="Image" class="imf-fluid">
 									</div>
-									<h3>Tailored Flexibility</h3>
-									<p>Unlike other platforms, we prioritize personalized flexibility. Whether you're a freelancer, entrepreneur, or part of a remote team, our platform adapts to your schedule and work style, offering unparalleled freedom to work when and where you choose.</p>
+									<h3>Membuat Pelatihan Peningkatan Skill</h3>
+									<p>Kami mengerti pentingnya investasi dalam pengembangan karyawan. Dengan solusi pelatihan disesuaikan, kami meningkatkan kompetensi dan produktivitas. Dari analisis ke penyampaian materi pelatihan, tim ahli kami membantu merancang program efektif.</p>
 								</div>
 							</div>
 
-							<div class="col-6 col-md-6">
+							<div class="col-4 col-md-4 centered">
 								<div class="feature">
 									<div class="icon">
-										<img src="images/bag.svg" alt="Image" class="imf-fluid">
+										<img src="images/user-tie-solid.svg" alt="Image" class="imf-fluid">
 									</div>
-									<h3>Dynamic Collaboration</h3>
-									<p>We foster a vibrant community where collaboration is effortless. Our platform integrates intuitive tools that facilitate seamless communication and project management, ensuring that you can easily connect with clients, colleagues, and collaborators to bring your ideas to life.</p>
+									<h3>Branding Talent</h3>
+									<p>Dalam era digital, Branding Talent kunci kesuksesan karier. Kami paham betapa pentingnya citra personal yang kuat. 
+										Dengan pendekatan inovatif, kami membantu Anda merancang strategi branding unik, dari identitas visual hingga manajemen media sosial, memperkuat kehadiran Anda secara online dan offline.</p>
 								</div>
 							</div>
 
-							<div class="col-6 col-md-6">
+							<div class="col-4 col-md-4">
 								<div class="feature">
 									<div class="icon">
-										<img src="images/support.svg" alt="Image" class="imf-fluid">
+										<img src="images/handshake-regular.svg" alt="Image" class="imf-fluid">
 									</div>
-									<h3>Empowering Creativity</h3>
-									<p>At our core, we believe in empowering creativity. Unlike traditional platforms, we provide resources and support specifically curated to fuel your creative process. From inspirational content to tailored workshops and networking opportunities, we're dedicated to nurturing your creative journey.</p>
+									<h3>Bermitra Dengan Perusahaan Lain</h3>
+									<p>Kami paham pentingnya kemitraan dalam bisnis. Dengan solusi kemitraan yang disesuaikan, kami optimalisasi kolaborasi. Dari peluang hingga negosiasi, tim kami siap merancang strategi. Hubungi kami untuk memperluas jangkauan bisnis Anda.</p>
 								</div>
 							</div>
-
-							<div class="col-6 col-md-6">
-								<div class="feature">
-									<div class="icon">
-										<img src="images/support.svg" alt="Image" class="imf-fluid">
-									</div>
-									<h3>Exceptional Support</h3>
-									<p>Your success is our priority. Unlike other platforms, we offer comprehensive support every step of the way. Our dedicated team is here to assist you with any challenges you may encounter, ensuring that you have the resources and guidance needed to thrive in your endeavors.</p>
-								</div>
-							</div>
-
 						</div>
 					</div>
 
@@ -370,7 +379,7 @@
 
 							</div>
 
-						</div>
+						</div> 	
 					</div>
 				</div>
 			</div>
