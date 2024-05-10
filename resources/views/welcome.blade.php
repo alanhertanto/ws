@@ -21,6 +21,7 @@
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 		<link href="css/tiny-slider.css" rel="stylesheet">
 		<link href="css/style.css" rel="stylesheet">
+		<link href="css/card_gallery.css" rel="stylesheet">
 		<title>WorkinStudio </title>
 	</head>
 
@@ -228,83 +229,6 @@
 		</div>
 		<!-- End Why Choose Us Section -->
 
-		<!-- Start We Help Section -->
-		<div class="we-help-section">
-			<div class="container">
-				<div class="row justify-content-between">
-					<div class="col-lg-7 mb-5 mb-lg-0">
-						<div class="imgs-grid">
-							<div class="grid grid-1"><img src="images/img-grid-1.jpg" alt="Untree.co"></div>
-							<div class="grid grid-2"><img src="images/img-grid-2.jpg" alt="Untree.co"></div>
-							<div class="grid grid-3"><img src="images/img-grid-3.jpg" alt="Untree.co"></div>
-						</div>
-					</div>
-					<div class="col-lg-5 ps-lg-5">
-						<h2 class="section-title mb-4">We Help You Make Modern Interior Design</h2>
-						<p>Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada</p>
-
-						<ul class="list-unstyled custom-list my-4">
-							<li>Donec vitae odio quis nisl dapibus malesuada</li>
-							<li>Donec vitae odio quis nisl dapibus malesuada</li>
-							<li>Donec vitae odio quis nisl dapibus malesuada</li>
-							<li>Donec vitae odio quis nisl dapibus malesuada</li>
-						</ul>
-						<p><a herf="#" class="btn">Explore</a></p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- End We Help Section -->
-
-		<!-- Start Popular Product -->
-		<div class="popular-product">
-			<div class="container">
-				<div class="row">
-
-					<div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
-						<div class="product-item-sm d-flex">
-							<div class="thumbnail">
-								<img src="images/product-1.png" alt="Image" class="img-fluid">
-							</div>
-							<div class="pt-3">
-								<h3>Nordic Chair</h3>
-								<p>Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio </p>
-								<p><a href="#">Read More</a></p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
-						<div class="product-item-sm d-flex">
-							<div class="thumbnail">
-								<img src="images/product-2.png" alt="Image" class="img-fluid">
-							</div>
-							<div class="pt-3">
-								<h3>Kruzo Aero Chair</h3>
-								<p>Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio </p>
-								<p><a href="#">Read More</a></p>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
-						<div class="product-item-sm d-flex">
-							<div class="thumbnail">
-								<img src="images/product-3.png" alt="Image" class="img-fluid">
-							</div>
-							<div class="pt-3">
-								<h3>Ergonomic Chair</h3>
-								<p>Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio </p>
-								<p><a href="#">Read More</a></p>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
-		<!-- End Popular Product -->
-
 		<!-- Start Testimonial Slider -->
 		<div class="testimonial-section">
 			<div class="container">
@@ -348,52 +272,6 @@
 								</div> 
 								<!-- END item -->
 
-								<div class="item">
-									<div class="row justify-content-center">
-										<div class="col-lg-8 mx-auto">
-
-											<div class="testimonial-block text-center">
-												<blockquote class="mb-5">
-													<p>&ldquo;Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque.&rdquo;</p>
-												</blockquote>
-
-												<div class="author-info">
-													<div class="author-pic">
-														<img src="images/person-1.png" alt="Maria Jones" class="img-fluid">
-													</div>
-													<h3 class="font-weight-bold">Maria Jones</h3>
-													<span class="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
-												</div>
-											</div>
-
-										</div>
-									</div>
-								</div> 
-								<!-- END item -->
-
-								<div class="item">
-									<div class="row justify-content-center">
-										<div class="col-lg-8 mx-auto">
-
-											<div class="testimonial-block text-center">
-												<blockquote class="mb-5">
-													<p>&ldquo;Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer convallis volutpat dui quis scelerisque.&rdquo;</p>
-												</blockquote>
-
-												<div class="author-info">
-													<div class="author-pic">
-														<img src="images/person-1.png" alt="Maria Jones" class="img-fluid">
-													</div>
-													<h3 class="font-weight-bold">Maria Jones</h3>
-													<span class="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
-												</div>
-											</div>
-
-										</div>
-									</div>
-								</div> 
-								<!-- END item -->
-
 							</div>
 
 						</div> 	
@@ -402,6 +280,86 @@
 			</div>
 		</div>
 		<!-- End Testimonial Slider -->
+
+
+		<!-- Start Gallery Slider -->
+		<div class="testimonial-section galleryfilter">
+			<div id="myBtnContainer">
+				<button class="btn active" onclick="filterSelection('all')"> Show all</button>
+				<button class="btn" onclick="filterSelection('nature')"> Nature</button>
+				<button class="btn" onclick="filterSelection('cars')"> Cars</button>
+				<button class="btn" onclick="filterSelection('people')"> People</button>
+			</div>
+
+			<!-- Portfolio Gallery Grid -->
+			<div class="row galleryfilter">
+				<div class="column nature">
+					<div class="content">
+					<img src="/images/mountains.jpg" alt="Mountains" style="width:100%">
+					<h4>Mountains</h4>
+					<p>Lorem ipsum dolor..</p>
+					</div>
+				</div>
+				<div class="column nature">
+					<div class="content">
+					<img src="/images/lights.jpg" alt="Lights" style="width:100%">
+					<h4>Lights</h4>
+					<p>Lorem ipsum dolor..</p>
+					</div>
+				</div>
+				<div class="column nature">
+					<div class="content">
+					<img src="/images/nature.jpg" alt="Nature" style="width:100%">
+					<h4>Forest</h4>
+					<p>Lorem ipsum dolor..</p>
+					</div>
+				</div>
+				<div class="column cars">
+					<div class="content">
+					<img src="/images/cars1.jpg" alt="Car" style="width:100%">
+					<h4>Retro</h4>
+					<p>Lorem ipsum dolor..</p>
+					</div>
+				</div>
+				<div class="column cars">
+					<div class="content">
+					<img src="/images/cars2.jpg" alt="Car" style="width:100%">
+					<h4>Fast</h4>
+					<p>Lorem ipsum dolor..</p>
+					</div>
+				</div>
+				<div class="column cars">
+					<div class="content">
+					<img src="/images/cars3.jpg" alt="Car" style="width:100%">
+					<h4>Classic</h4>
+					<p>Lorem ipsum dolor..</p>
+					</div>
+				</div>
+				<div class="column people">
+					<div class="content">
+					<img src="/images/people1.jpg" alt="People" style="width:100%">
+					<h4>Girl</h4>
+					<p>Lorem ipsum dolor..</p>
+					</div>
+				</div>
+				<div class="column people">
+					<div class="content">
+					<img src="/images/people2.jpg" alt="People" style="width:100%">
+					<h4>Man</h4>
+					<p>Lorem ipsum dolor..</p>
+					</div>
+				</div>
+				<div class="column people">
+					<div class="content">
+					<img src="/images/people3.jpg" alt="People" style="width:100%">
+					<h4>Woman</h4>
+					<p>Lorem ipsum dolor..</p>
+					</div>
+				</div>
+			<!-- END GRID -->
+			</div>
+		</div>
+		<!-- End Gallery Slider -->
 
 		<!-- Start Footer Section -->
 		<footer class="footer-section">
@@ -481,6 +439,7 @@
 		<script src="js/bootstrap.bundle.min.js"></script>
 		<script src="js/tiny-slider.js"></script>
 		<script src="js/custom.js"></script>
+		<script src="js/card.gallery.js"></script>
 	</body>
 
 </html>
