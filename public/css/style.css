@@ -243,8 +243,8 @@ a.more {
     padding: 12px 30px;
     border-radius: 30px;
     color: #ffffff;
-    background: #2f2f2f;
-    border-color: #2f2f2f;
+    background: #7A949C;
+    border-color: #7A949C;
 }
 
 .btn:hover {
@@ -261,17 +261,17 @@ a.more {
 }
 
 .btn.btn-primary {
-    background: #3b5d50;
-    border-color: #3b5d50;
+    background: #2A4551;
+    border-color: #2A4551;
 }
 
 .btn.btn-primary:hover {
-    background: #314d43;
-    border-color: #314d43;
+    background: #7A949C;
+    border-color: #7A949C;
 }
 
 .btn.btn-secondary {
-    color: #2f2f2f;
+    color: #ffffff;
     background: #7A949C;
     border-color: #7A949C;
 }

@@ -45,7 +45,6 @@
                     </li>
                     <li><a class="nav-link" href="/job">Find Work</a></li>
                     <li><a class="nav-link" href="/talent">Find Talent</a></li>
-                    <li><a class="nav-link" href="/services">Services</a></li>
                     <li class="active"><a class="nav-link" href="/blog">Blog</a></li>
                     <li><a class="nav-link" href="/about">About Us</a></li>
                 </ul>
