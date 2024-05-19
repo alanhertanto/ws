@@ -53,37 +53,43 @@
 
     </nav>
     <!-- End Header/Navigation -->
+    <!-- Start Hero Section -->
+    <div class="hero">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-lg-8">
+                    <div class="intro-excerpt">
+                        <h1>Work In <span class="d-block">Flexibility</span></h1>
+                        <h2>Find Your Passion On Our Projects</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Hero Section -->
 
     <!-- Start Blog Section -->
     <div class="blog-section">
         <div class="container">
-            <h2 class="section-title text-center">Find Your Passion On Our Projects</h2>
-            <div class="row justify-content-center">
+            <div class="row">
                 @forelse ($jobs as $job)
                     <div class="col-12 col-sm-6 col-md-4 mb-5">
                         <div class="post-entry">
-                            <a href="#" class="post-thumbnail"><img src="images/post-1.jpg" alt="Image"
-                                    class="img-fluid"></a>
+                            <h2><a href="#">{{$job->projectName}}</a></h2>
                             <div class="post-content-entry">
-                                <h3><a href="#">{{$job->projectName}}</a></h3>
-                                <div class="meta">
-                                    <span>by <a href="#">Kristin Watson</a></span> <span>on <a href="#">Dec 19,
-                                            2021</a></span>
-                                </div>
+                                <p>Posted {{$job->timeAgo}}</p>
+                                <p class="lead">{{$job->projectDescription}}</p>
+                                <p class="text-capitalize small">{{$job->paymentType}}</p>
                             </div>
                         </div>
                     </div>
-                    @empty
-                                    <div class="alert alert-danger">
-                                        Belum Ada Projects.
-                                    </div>
+                @empty
+                    <div class="alert alert-danger">
+                        Belum Ada Projects.
+                    </div>
                 @endforelse
             </div>
             {{ $jobs->links() }}
-            <div class="d-flex justify-content-center mt-5">
-                <a href="shop.html" class="btn">See More</a>
-            </div>
-
         </div>
     </div>
     <!-- End Blog Section -->

@@ -6,6 +6,7 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 class PekerjaanController extends Controller
 {
     public function index(): View
@@ -13,8 +14,15 @@ class PekerjaanController extends Controller
         return view("post-job");
     }
 
-    public function FindJob(){
+    public function FindJob()
+    {
         $jobs = Pekerjaan::latest()->paginate(10);
+
+        // Calculate time difference for each job
+        foreach ($jobs as $job) {
+            $job->timeAgo = $job->created_at->diffForHumans();
+        }
+
         return view("find-job", compact("jobs"));
     }
 
