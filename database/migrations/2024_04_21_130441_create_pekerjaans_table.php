@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,15 +12,17 @@ return new class extends Migration
     {
         Schema::create('pekerjaans', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
-            $table->bigInteger('price');
-            $table->integer('rating');
-            $table->integer('postedBy');
-            $table->enum('protjectType',['One Time','Employment']);
-            $table->string('location');
-            $table->integer('categoryId');
-            $table->integer('employerId');
+            $table->string('projectFile');
+            $table->string('projectName');
+            $table->text('projectDescription');
+            $table->string('paymentType');
+            $table->integer('per25Payment')->default(0);
+            $table->integer('per50Payment')->default(0);
+            $table->integer('per75Payment')->default(0);
+            $table->integer('per100Payment')->default(0);
+            $table->integer('minimumPayment')->default(0);
+            $table->integer('maximumPayment')->default(0);
+            $table->integer('hourlyPayment')->default(0);
             $table->timestamps();
         });
     }

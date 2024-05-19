@@ -87,19 +87,22 @@
                 <div class="col-lg-12">
                     <div class="intro-excerpt">
                         <h1>Post Your Job For Our Talents</h1>
-                        <form action="/post-a-job" method="post" class="text-white">
+                        <form action="{{ route('job.PostJob') }}" method="post" class="text-white"
+                            enctype="multipart/form-data">
+                            @csrf
                             <div class="mb-3">
                                 <label for="projectName" class="form-label">Project Name</label>
-                                <input type="text" class="form-control" id="projectName"
+                                <input type="text" class="form-control" id="projectName" name="projectName"
                                     placeholder="Your Project Name...">
                             </div>
                             <div class="mb-3">
                                 <label for="projectDescription" class="form-label">Project Description</label>
-                                <textarea class="form-control" id="projectDescription" rows="5"></textarea>
+                                <textarea class="form-control" id="projectDescription" name="projectDescription"
+                                    rows="5"></textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="projectFile" class="form-label">Additional File</label>
-                                <input class="form-control" type="file" id="projectFile">
+                                <input class="form-control" type="file" id="projectFile" name="projectFile">
                             </div>
                             <div class="mb-6 payment-type">
                                 <h6 class="form-label">Jenis Pembayaran</h6>
@@ -115,30 +118,33 @@
                                     value="milestone">
                                 <label class="form-check-label" for="inlineRadio3">Milestone</label>
 
-
                                 <div class="mb6 payment-fields-milestone">
                                     <label for="25perPayment" class="form-label">25%</label>
-                                    <input type="number" class="form-control" id="25perPayment" name="25perPayment" placeholder="Price">
+                                    <input type="number" class="form-control" id="25perPayment" name="25perPayment"
+                                        placeholder="Price" value="0">
                                     <label for="50perPayment" class="form-label">50%</label>
-                                    <input type="number" class="form-control" id="50perPayment" placeholder="Price">
+                                    <input type="number" class="form-control" id="50perPayment" name="50perPayment"
+                                        placeholder="Price" value="0">
                                     <label for="75perPayment" class="form-label">75%</label>
-                                    <input type="number" class="form-control" id="75perPayment" placeholder="Price">
+                                    <input type="number" class="form-control" id="75perPayment" name="75perPayment"
+                                        placeholder="Price" value="0">
                                     <label for="100perPayment" class="form-label">100%</label>
-                                    <input type="number" class="form-control" id="100perPayment" placeholder="Price">
+                                    <input type="number" class="form-control" id="100perPayment" name="100perPayment"
+                                        placeholder="Price" value="0">
                                 </div>
                                 <div class="mb-6 payment-fields-project">
                                     <label for="minimumPayment" class="form-label">Minimmum</label>
                                     <input type="number" class="form-control" id="minimumPayment" name="minimumPayment"
-                                        placeholder="Minimum Price">
+                                        placeholder="Minimum Price" value="0">
                                     <label for="maximumPayment" class="form-label">Maximum</label>
                                     <input type="number" class="form-control" id="maximumPayment" name="maximumPayment"
-                                        placeholder="Maximum Price">
+                                        placeholder="Maximum Price" value="0">
                                 </div>
 
                                 <div class="mb-6 payment-fields-hourly">
                                     <label for="hourlyPayment" class="form-label">Hourly Rate</label>
                                     <input type="number" class="form-control" id="hourlyPayment" name="hourlyPayment"
-                                        placeholder="Hourly Price">
+                                        placeholder="Hourly Price" value="0">
                                 </div>
 
                                 <div class="mb-3 mt-5">
@@ -146,6 +152,8 @@
                                 </div>
                             </div>
                         </form>
+
+
                     </div>
                 </div>
             </div>

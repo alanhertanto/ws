@@ -44,8 +44,8 @@
 					<li class="nav-item active">
 						<a class="nav-link" href="/">Home</a>
 					</li>
-					<li><a class="nav-link" href="/job">Find Work</a></li>
-					<li><a class="nav-link" href="/talent">Find Talent</a></li>
+                    <li><a class="nav-link" href="/find-job">Find Work</a></li>
+                    <li><a class="nav-link" href="/job">Find Talent</a></li>
 					<li><a class="nav-link" href="/blog">Blog</a></li>
 					<li><a class="nav-link" href="/about">About Us</a></li>
 				</ul>
