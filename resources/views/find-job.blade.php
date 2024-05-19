@@ -23,6 +23,30 @@
     <link href="css/tiny-slider.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <title>WorkinStudio </title>
+    <style>
+        #modal-nav {
+            max-width: 100vw;
+            margin: 0;
+            height: 100vh;
+        }
+
+        #modal-nav .modal-content {
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .modal {
+            padding: 0 !important;
+        }
+
+        @media only screen and (min-width: 768px) {
+            #modal-nav {
+                max-width: 50vw !important;
+                margin-left: auto;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -73,9 +97,9 @@
         <div class="container">
             <div class="row">
                 @forelse ($jobs as $job)
-                    <div class="col-12 col-sm-6 col-md-4 mb-5">
+                    <div class="col-12 col-sm-6 col-md-4 mb-5" onclick="openModal('{{$job->id}}')">
                         <div class="post-entry">
-                            <h2><a href="#">{{$job->projectName}}</a></h2>
+                            <h2>{{$job->projectName}}</h2>
                             <div class="post-content-entry">
                                 <p>Posted {{$job->timeAgo}}</p>
                                 <p class="lead">{{$job->projectDescription}}</p>
@@ -83,6 +107,7 @@
                             </div>
                         </div>
                     </div>
+
                 @empty
                     <div class="alert alert-danger">
                         Belum Ada Projects.
@@ -90,6 +115,23 @@
                 @endforelse
             </div>
             {{ $jobs->links() }}
+            <div id="myModal{{$job->id}}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                aria-labelledby="myLargeModalLabel{{$job->id}}" aria-hidden="true">
+                <div class="modal-dialog modal-lg" id="modal-nav">
+                    <div class="modal-content">
+                        <div class="modal-body row">
+                            <div class="col-md-8">
+                                <h1>{{$job->projectName}}</h1>
+                                <p>Posted {{$job->timeAgo}}</p>
+                            </div>
+                            <div class="vr"></div>
+                            <div class="col-md-3">
+                                Nanti Client Ada Disini
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- End Blog Section -->
@@ -99,6 +141,15 @@
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/tiny-slider.js"></script>
     <script src="js/custom.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        function openModal(jobId) {
+            $('#myModal' + jobId).modal('toggle'); // Toggle the modal visibility
+        }
+    </script>
+
+
 </body>
 
 </html>
