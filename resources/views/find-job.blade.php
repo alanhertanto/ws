@@ -1,0 +1,98 @@
+<!-- /*
+* Bootstrap 5
+* Template Name: Furni
+* Template Author: Untree.co
+* Template URI: https://untree.co/
+* License: https://creativecommons.org/licenses/by/3.0/
+*/ -->
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Untree.co">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <meta name="description" content="" />
+    <meta name="keywords" content="bootstrap, bootstrap4" />
+
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="css/tiny-slider.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <title>WorkinStudio </title>
+</head>
+
+<body>
+
+    <!-- Start Header/Navigation -->
+    <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+
+        <div class="container">
+            <a class="navbar-brand" href="/">Workin<span>Studio</span></a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni"
+                aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarsFurni">
+                <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="active"><a class="nav-link" href="/find-job">Find Work</a></li>
+                    <li><a class="nav-link" href="/job">Find Talent</a></li>
+                    <li><a class="nav-link" href="/blog">Blog</a></li>
+                    <li><a class="nav-link" href="/about">About Us</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+    <!-- End Header/Navigation -->
+
+    <!-- Start Blog Section -->
+    <div class="blog-section">
+        <div class="container">
+            <h2 class="section-title text-center">Find Your Passion On Our Projects</h2>
+            <div class="row justify-content-center">
+                @forelse ($jobs as $job)
+                    <div class="col-12 col-sm-6 col-md-4 mb-5">
+                        <div class="post-entry">
+                            <a href="#" class="post-thumbnail"><img src="images/post-1.jpg" alt="Image"
+                                    class="img-fluid"></a>
+                            <div class="post-content-entry">
+                                <h3><a href="#">{{$job->projectName}}</a></h3>
+                                <div class="meta">
+                                    <span>by <a href="#">Kristin Watson</a></span> <span>on <a href="#">Dec 19,
+                                            2021</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @empty
+                                    <div class="alert alert-danger">
+                                        Belum Ada Projects.
+                                    </div>
+                @endforelse
+            </div>
+            {{ $jobs->links() }}
+            <div class="d-flex justify-content-center mt-5">
+                <a href="shop.html" class="btn">See More</a>
+            </div>
+
+        </div>
+    </div>
+    <!-- End Blog Section -->
+
+    @include('footer')
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/tiny-slider.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+
+</html>

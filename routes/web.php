@@ -13,3 +13,4 @@ Route::resource('/job', PekerjaanController::class);
 
 // Define the specific route for the PostJob method
 Route::post('/job/post-job', [PekerjaanController::class, 'PostJob'])->name('job.PostJob');
+Route::get('/find-job',[PekerjaanController::class,'FindJob']);

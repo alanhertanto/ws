@@ -13,6 +13,11 @@ class PekerjaanController extends Controller
         return view("post-job");
     }
 
+    public function FindJob(){
+        $jobs = Pekerjaan::latest()->paginate(10);
+        return view("find-job", compact("jobs"));
+    }
+
     public function PostJob(Request $request): RedirectResponse
     {
         // Validate form
