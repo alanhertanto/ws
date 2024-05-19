@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 use App\Models\Pekerjaan;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 class PekerjaanController extends Controller
 {
     public function index(): View
@@ -30,7 +33,7 @@ class PekerjaanController extends Controller
     {
         // Validate form
         $request->validate([
-            'projectFile' => 'mimes:jpeg,jpg,png,pdf,doc,docx|max:25000',
+            'projectFile' => 'mimes:jpeg,jpg,png,pdf,doc,docx|max:250000',
             'projectName' => 'required|min:5',
             'projectDescription' => 'required|min:10',
             'paymentType' => 'required',
@@ -78,6 +81,20 @@ class PekerjaanController extends Controller
             return redirect()->route('job.index')->with(['success' => 'Data Berhasil Disimpan!']);
         } else {
             return redirect()->back()->withErrors(['error' => 'Failed to save data.']);
+        }
+    }
+    public function downloadFile($projectName,$filename)
+    {
+        // Define the path to the file
+        $filePath = 'public/projects/'.$projectName.'/'. $filename;
+        echo $filePath;
+        // Check if the file exists in the storage
+        if (Storage::exists($filePath)) {
+            // Return the file as a download response
+            return Storage::download($filePath);
+        } else {
+            // File not found, return a 404 response
+            abort(404, 'File not found.');
         }
     }
     

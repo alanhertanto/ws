@@ -40,6 +40,44 @@
             padding: 0 !important;
         }
 
+        .modal .fsd7 {
+            font-size: 0.7vw;
+        }
+
+        .modal .fsd8 {
+            font-size: 0.8vw;
+        }
+
+        .modal .fsd9 {
+            font-size: 0.9vw;
+        }
+
+        .modal .fs1 {
+            font-size: 1vw;
+        }
+
+        .modal .fs1d5 {
+            font-size: 1.1vw;
+        }
+        .modal .fs1d2 {
+            font-size: 1.2vw;
+        }
+        .modal .fs1d3 {
+            font-size: 1.3vw;
+        }
+
+        .modal .fs1d4 {
+            font-size: 1.4vw;
+        }
+
+        .modal .fs1d5 {
+            font-size: 1.5vw;
+        }
+
+        .modal .nounderline{
+            text-decoration: none;
+        }
+
         @media only screen and (min-width: 768px) {
             #modal-nav {
                 max-width: 50vw !important;
@@ -119,12 +157,29 @@
                 aria-labelledby="myLargeModalLabel{{$job->id}}" aria-hidden="true">
                 <div class="modal-dialog modal-lg" id="modal-nav">
                     <div class="modal-content">
-                        <div class="modal-body row">
-                            <div class="col-md-8">
-                                <h1>{{$job->projectName}}</h1>
-                                <p>Posted {{$job->timeAgo}}</p>
+                        <div class="row px-4 mt-4">
+                            <div class="col-8">
+                                <a href="#" data-bs-dismiss="modal"><i
+                                        class="fa-solid fa-arrow-left-long fs1d5"></i></a>
                             </div>
-                            <div class="vr"></div>
+                            <div class="col-3">
+                                <a href="#" target="_blank" class="d-flex justify-content-center nounderline"><i class="fa-solid fa-arrow-right-to-bracket fs1d2"></i>&emsp;<span class="fsd8 text-center">Buka Di Tab Baru</span></a>
+                            </div>
+                        </div>
+                        <div class="modal-body row ms-1 mt-2">
+                            <div class="col-md-8 px-2">
+                                <h1 class="display-5">{{$job->projectName}}</h1>
+                                <p class="fsd7">Posted {{$job->timeAgo}}</p>
+                                <hr>
+                                <p class="fs1">{{$job->projectDescription}}</p>
+                                <hr>
+                                <p class="fs1"><strong>Attachment</strong></p>
+                                <p class="fsd8"><i class="fa-solid fa-paperclip fs1"></i> <a href="{{ route('download.file', ['projectName' => $job->projectName, 'filename' => $job->projectFile]) }}" target="_blank">
+                                        {{ strlen($job->projectFile) > 12 ? substr($job->projectFile, 0, 12) . '...' : $job->projectFile }}
+                                    </a>
+                                </p>
+                            </div>
+                            <div class="vr p-0"></div>
                             <div class="col-md-3">
                                 Nanti Client Ada Disini
                             </div>
