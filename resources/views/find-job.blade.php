@@ -178,6 +178,12 @@
                                         {{ strlen($job->projectFile) > 12 ? substr($job->projectFile, 0, 12) . '...' : $job->projectFile }}
                                     </a>
                                 </p>
+                                <hr>
+                                <p class="fs1"><strong>Terms</strong></p>
+                                <p class="fsd9"><strong>Rate Yang Akan Diajukan Untuk Pekerjaan Ini</strong></p>
+                                <div class="">
+
+                                </div>
                             </div>
                             <div class="vr p-0"></div>
                             <div class="col-md-3">
