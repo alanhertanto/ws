@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->routeMiddleware([
+            // Other route middleware...
+            'check.freelancer' => \App\Http\Middleware\CheckFreelancer::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

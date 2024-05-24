@@ -1162,3 +1162,7 @@ textarea {
 .gap-20{
   gap:20px;
 }
+
+.no-height{
+    height: auto;
+}

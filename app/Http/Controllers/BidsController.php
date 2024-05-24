@@ -1,15 +1,12 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Pekerjaan;
+use App\Models\Bids;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Response;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Carbon\Carbon;
-use Symfony\Component\HttpFoundation\StreamedResponse;
+
 class BidsController extends Controller
 {
     public function index(): View
@@ -21,9 +18,8 @@ class BidsController extends Controller
     {
         // Validate form
         $request->validate([
-            'projectFile' => 'mimes:jpeg,jpg,png,pdf,doc,docx|max:250000',
-            'projectName' => 'required|min:5',
-            'projectDescription' => 'required|min:10',
+            'bidPitchFile' => 'mimes:jpeg,jpg,png,pdf,doc,docx|max:250000',
+            'bidPitch' => 'nullable',
             'paymentType' => 'required',
             '25perPayment' => 'nullable',
             '50perPayment' => 'nullable',
@@ -34,38 +30,39 @@ class BidsController extends Controller
             'hourlyPayment' => 'nullable'
         ]);
     
+        // Retrieve projectId and userId
+        $projectId = $request->input('projectId');
+        $userId = $request->session()->get('userId');
+    
         // Upload image
-        $projectName = $request->projectName;
-        $projectFileName = null;
-        if ($request->hasFile('projectFile')) {
-            $projectFile = $request->file('projectFile');
-            $projectFile->storeAs('public/projects/' . $projectName . '/', $projectFile->hashName());
-            $projectFileName = $projectFile->hashName();
+        $pitchFileName = null;
+        if ($request->hasFile('bidPitchFile')) {
+            $pitchFile = $request->file('bidPitchFile');
+            $pitchFile->storeAs('public/projects/' . $projectId . '/', $pitchFile->hashName());
+            $pitchFileName = $pitchFile->hashName();
         }
     
-        // Build the query
-        $query = Pekerjaan::query()->create([
-            'projectFile' => $projectFileName,
-            'projectName' => $request->projectName,
-            'projectDescription' => $request->projectDescription,
-            'paymentType' => $request->paymentType,
-            'per25Payment' => $request->per25Payment,
-            'per50Payment' => $request->per50Payment,
-            'per75Payment' => $request->per75Payment,
-            'per100Payment' => $request->per100Payment,
-            'minimumPayment' => $request->minimumPayment,
-            'maximumPayment' => $request->maximumPayment,
-            'hourlyPayment' => $request->hourlyPayment
+        // Create the bid
+        $bid = Bids::create([
+            'projectId' => $projectId,
+            'userId' => $userId,
+            'projectFile' => $pitchFileName,
+            'projectName' => $request->input('projectName'),
+            'projectDescription' => $request->input('projectDescription'),
+            'paymentType' => $request->input('paymentType'),
+            'per25Payment' => $request->input('per25Payment'),
+            'per50Payment' => $request->input('per50Payment'),
+            'per75Payment' => $request->input('per75Payment'),
+            'per100Payment' => $request->input('per100Payment'),
+            'minimumPayment' => $request->input('minimumPayment'),
+            'maximumPayment' => $request->input('maximumPayment'),
+            'hourlyPayment' => $request->input('hourlyPayment'),
+            'bidPitch' => $request->input('bidPitch'),
+            'bidStatus' => 'pending'
         ]);
     
-        // Echo the SQL query
-        echo $query->toSql();
-    
-        // Execute the query
-        $queryCreate = $query->get();
-    
-        if ($queryCreate) {
-            // Redirect to index
+        if ($bid) {
+            // Redirect to index with success message
             return redirect()->route('job.index')->with(['success' => 'Data Berhasil Disimpan!']);
         } else {
             return redirect()->back()->withErrors(['error' => 'Failed to save data.']);

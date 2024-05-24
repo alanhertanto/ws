@@ -40,6 +40,14 @@
             padding: 0 !important;
         }
 
+        .modal .fsd5 {
+            font-size: 0.5vw;
+        }
+
+        .modal .fsd6 {
+            font-size: 0.6vw;
+        }
+
         .modal .fsd7 {
             font-size: 0.7vw;
         }
@@ -59,9 +67,11 @@
         .modal .fs1d5 {
             font-size: 1.1vw;
         }
+
         .modal .fs1d2 {
             font-size: 1.2vw;
         }
+
         .modal .fs1d3 {
             font-size: 1.3vw;
         }
@@ -74,7 +84,7 @@
             font-size: 1.5vw;
         }
 
-        .modal .nounderline{
+        .modal .nounderline {
             text-decoration: none;
         }
 
@@ -163,7 +173,9 @@
                                         class="fa-solid fa-arrow-left-long fs1d5"></i></a>
                             </div>
                             <div class="col-3">
-                                <a href="#" target="_blank" class="d-flex justify-content-center nounderline"><i class="fa-solid fa-arrow-right-to-bracket fs1d2"></i>&emsp;<span class="fsd8 text-center">Buka Di Tab Baru</span></a>
+                                <a href="#" target="_blank" class="d-flex justify-content-center nounderline"><i
+                                        class="fa-solid fa-arrow-right-to-bracket fs1d2"></i>&emsp;<span
+                                        class="fsd8 text-center">Buka Di Tab Baru</span></a>
                             </div>
                         </div>
                         <div class="modal-body row ms-1 mt-2">
@@ -174,16 +186,55 @@
                                 <p class="fs1">{{$job->projectDescription}}</p>
                                 <hr>
                                 <p class="fs1"><strong>Attachment</strong></p>
-                                <p class="fsd8"><i class="fa-solid fa-paperclip fs1"></i> <a href="{{ route('download.file', ['projectName' => $job->projectName, 'filename' => $job->projectFile]) }}" target="_blank">
+                                <p class="fsd8"><i class="fa-solid fa-paperclip fs1"></i> <a
+                                        href="{{ route('download.file', ['projectName' => $job->projectName, 'filename' => $job->projectFile]) }}"
+                                        target="_blank">
                                         {{ strlen($job->projectFile) > 12 ? substr($job->projectFile, 0, 12) . '...' : $job->projectFile }}
                                     </a>
                                 </p>
                                 <hr>
-                                <p class="fs1"><strong>Terms</strong></p>
-                                <p class="fsd9"><strong>Rate Yang Akan Diajukan Untuk Pekerjaan Ini</strong></p>
-                                <div class="">
+                                <!-- Bid Project -->
+                                <p class="fs1"><strong>Bid Project Ini</strong></p>
+                                <p class="fsd8"><strong>Rate Yang Akan Diajukan Untuk Pekerjaan Ini</strong></p>
+                                <form action="{{ route('bid.bidJob') }}" method="post" enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="hidden" name="projectId" value="{{ $job->id }}">
+                                    <!-- Other form fields -->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <span class="fs1"><strong>Rates</strong></span><br>
+                                        </div>
+                                        <div class="col-md-6 p">
+                                            <input type="number" class="form-control no-height" value="" id="rates"
+                                                name="rates">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="fs7"><strong>Potongan Jasa 10%</strong></p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="fs7">1 / Jam</p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="fs7"><strong>Total Yang Anda Akan Dapatkan Adalah:</strong></p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="fs7">1 / Jam</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <p class="fs1"><strong>Pitching (Opsional)</strong></p>
+                                    <span class="fs7">Tahukah Anda? Pitching Yang Baik Akan Meyakinkan Calon Client
+                                        Anda!</span>
+                                    <textarea class="form-control fs6" height="200px" name="bidPitch"></textarea>
+                                    <span class="fs7"><strong>Attachment</strong></span>
+                                    <input type="file" class="form-control no-height" id="inputGroupFile02"
+                                        name="bidPitchFile">
+                                    <div class="mb-3 mt-5">
+                                        <button class="btn btn-secondary" id="jobPosting">Bid Job</button>
+                                    </div>
+                                </form>
 
-                                </div>
+
                             </div>
                             <div class="vr p-0"></div>
                             <div class="col-md-3">
