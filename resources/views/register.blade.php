@@ -44,7 +44,7 @@
                             <input type="email" name="email" class="form-control" id="email" placeholder="" required>
                         </div>
                         <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
+                            <label for="password" class="form-label">Password (Min. Panjang 8)</label>
                             <input type="password" name="password" class="form-control" id="password" required>
                         </div>
                         <div class="mb-3">

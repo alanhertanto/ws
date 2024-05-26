@@ -37,15 +37,15 @@
         }
 
 
-        .payment-type input[value="milestone"]:checked~.payment-fields-milestone {
+        .payment-type input[value="Milestone"]:checked~.payment-fields-milestone {
             display: block;
         }
 
-        .payment-type input[value="hourly"]:checked~.payment-fields-hourly {
+        .payment-type input[value="Hourly"]:checked~.payment-fields-hourly {
             display: block;
         }
 
-        .payment-type input[value="project"]:checked~.payment-fields-project {
+        .payment-type input[value="Project"]:checked~.payment-fields-project {
             display: block;
         }
     </style>
