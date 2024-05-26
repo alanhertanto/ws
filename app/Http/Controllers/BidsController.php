@@ -20,20 +20,13 @@ class BidsController extends Controller
         $request->validate([
             'bidPitchFile' => 'mimes:jpeg,jpg,png,pdf,doc,docx|max:250000',
             'bidPitch' => 'nullable',
-            'paymentType' => 'required',
-            '25perPayment' => 'nullable',
-            '50perPayment' => 'nullable',
-            '75perPayment' => 'nullable',
-            '100perPayment' => 'nullable',
-            'minimumPayment' => 'nullable',
-            'maximumPayment' => 'nullable',
-            'hourlyPayment' => 'nullable'
+            'rates' => 'required'
+            
         ]);
-    
+
         // Retrieve projectId and userId
         $projectId = $request->input('projectId');
-        $userId = $request->session()->get('userId');
-    
+
         // Upload image
         $pitchFileName = null;
         if ($request->hasFile('bidPitchFile')) {
@@ -41,31 +34,22 @@ class BidsController extends Controller
             $pitchFile->storeAs('public/projects/' . $projectId . '/', $pitchFile->hashName());
             $pitchFileName = $pitchFile->hashName();
         }
-    
+
         // Create the bid
         $bid = Bids::create([
             'projectId' => $projectId,
-            'userId' => $userId,
-            'projectFile' => $pitchFileName,
-            'projectName' => $request->input('projectName'),
-            'projectDescription' => $request->input('projectDescription'),
-            'paymentType' => $request->input('paymentType'),
-            'per25Payment' => $request->input('per25Payment'),
-            'per50Payment' => $request->input('per50Payment'),
-            'per75Payment' => $request->input('per75Payment'),
-            'per100Payment' => $request->input('per100Payment'),
-            'minimumPayment' => $request->input('minimumPayment'),
-            'maximumPayment' => $request->input('maximumPayment'),
-            'hourlyPayment' => $request->input('hourlyPayment'),
+            'userId' => $request->input('userId'),
             'bidPitch' => $request->input('bidPitch'),
-            'bidStatus' => 'pending'
+            'bidPitchFile' => $pitchFileName,
+            'rates' => $request->input('rates'),
+            'bidStatus' => 'Submitted',
         ]);
-    
+
         if ($bid) {
             // Redirect to index with success message
-            return redirect()->route('job.index')->with(['success' => 'Data Berhasil Disimpan!']);
+            return redirect()->route('FindJob')->with(['success' => 'Bids Disimpan!']);
         } else {
-            return redirect()->back()->withErrors(['error' => 'Failed to save data.']);
+            return redirect()->back()->withErrors(['error' => 'Gagal Dalma Melakukan Proses Bidding!']);
         }
-    }    
+    }
 }

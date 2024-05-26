@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Middleware;
-
 use Closure;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Log;
 class CheckFreelancer
 {
     /**
@@ -16,10 +15,17 @@ class CheckFreelancer
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->role === 'freelancer') {
-            return $next($request);
+        Log::info('Executing CheckFreelancer middleware');
+        if (Auth::check()) {
+            if (Auth::user()->role != "null") {
+                if (Auth::user()->role == "Freelancer") {
+                    return $next($request);
+                }else if(Auth::user()->role == "Client") {
+                    return redirect('/')->with('error', 'Anda Bukan Freelancer!');
+                }
+            }
         }
 
-        return redirect('/')->with('error', 'You do not have access to this page');
+        return redirect('/login')->with('error', 'Anda Harus Login Terlebih Dahulu!');
     }
 }

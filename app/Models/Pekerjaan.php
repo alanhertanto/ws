@@ -15,6 +15,7 @@ class Pekerjaan extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'projectFile',
         'projectName',
         'projectDescription',
@@ -25,6 +26,8 @@ class Pekerjaan extends Model
         '100perPayment',
         'minimumPayment',
         'maximumPayment',
-        'hourlyPayment'
+        'hourlyPayment',
+        'clientId',
+        'status'
     ];
 }

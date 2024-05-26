@@ -15,16 +15,9 @@ return new class extends Migration
             $table->id();
             $table->integer('projectId');
             $table->integer('userId');
-            $table->string('paymentType');
-            $table->integer('per25Payment')->default(0);
-            $table->integer('per50Payment')->default(0);
-            $table->integer('per75Payment')->default(0);
-            $table->integer('per100Payment')->default(0);
-            $table->integer('minimumPayment')->default(0);
-            $table->integer('maximumPayment')->default(0);
-            $table->integer('hourlyPayment')->default(0);
             $table->string('bidPitch');
             $table->string('bidPitchFile');
+            $table->integer('rates');
             $table->string('bidStatus')->default('pending');
             $table->timestamps();
         });

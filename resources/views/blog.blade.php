@@ -39,16 +39,35 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarsFurni">
-                <ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li><a class="nav-link" href="/find-job">Find Work</a></li>
-                    <li><a class="nav-link" href="/job">Find Talent</a></li>
-                    <li class="active"><a class="nav-link" href="/blog">Blog</a></li>
-                    <li><a class="nav-link" href="/about">About Us</a></li>
-                </ul>
-            </div>
+				<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
+					<li class="">
+						<a class="nav-link" href="/">Home</a>
+					</li>
+					@auth
+						@if (Auth::user()->role == 'Freelancer')
+							<li class=""><a class="nav-link" href="/find-job">Find Work</a></li>
+						@endif
+					@endauth
+					@auth
+						@if (Auth::user()->role == 'Client')
+							<li class=""><a class="nav-link" href="/job">Find Talent</a></li>
+						@endif
+					@endauth
+					<li class="nav-item active"><a class="nav-link" href="/blog">Blog</a></li>
+					<li clas=""><a class="nav-link" href="/about">About Us</a></li>
+					@auth
+						@if (Auth::user()->role !== null)
+							<li><a class="nav-link" href="/logout">Logout</a></li>
+						@endif
+					@endauth
+					@auth
+						@if (Auth::user()->role == null)
+							<li><a class="nav-link" href="/login">Login</a></li>
+						@endif
+					@endauth
+
+				</ul>
+			</div>
         </div>
 
     </nav>

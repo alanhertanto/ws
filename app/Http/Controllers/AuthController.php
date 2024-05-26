@@ -15,9 +15,9 @@ class AuthController extends Controller
      *
      * @return View
      */
-    public function index(): View
+    function register()
     {
-        return view('home');
+        return view('register');
     }
 
     /**
@@ -32,18 +32,27 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:8',
+            'role' => 'required',
         ]);
 
-        // Create a new user
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->save();
+        try {
+            // Create a new user
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
+            ]);
 
-        return back()->with('success', 'Register successfully');
+            // If the user is created successfully, redirect back with success message
+            return back()->with('success', 'Registered successfully');
+        } catch (\Exception $e) {
+            // If there is any error, redirect back with error message
+            return redirect()->back()->withErrors(['error' => 'Failed to save data.']);
+        }
     }
+
 
     /**
      * Show the login form.
@@ -73,12 +82,8 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-
-            if ($user->role === 'freelancer') {
-                return redirect('/freelancer-dashboard')->with('success', 'Login successful');
-            }
-
-            return redirect('/home')->with('success', 'Login successful');
+            session(['user_id' => Auth::user()->id]);
+            return redirect('/')->with('success', 'Login successful');
         }
 
         return back()->with('error', 'Email or Password incorrect');
@@ -91,14 +96,13 @@ class AuthController extends Controller
     public function freelancerDashboard(): View
     {
         // Your logic to show the freelancer dashboard
-        return view('freelancer.dashboard');
+        return view('find-job');
     }
     public function clientDashboard()
     {
         // Implement client-specific dashboard logic here
-        return view('client.dashboard');
+        return view('post-job');
     }
-    
 
     /**
      * Log the user out of the application.
@@ -108,6 +112,6 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return redirect('/');
     }
 }

@@ -44,10 +44,27 @@
 					<li class="nav-item active">
 						<a class="nav-link" href="/">Home</a>
 					</li>
-                    <li><a class="nav-link" href="/find-job">Find Work</a></li>
-                    <li><a class="nav-link" href="/job">Find Talent</a></li>
+					@auth
+						@if (Auth::user()->role == 'Freelancer')
+							<li><a class="nav-link" href="/find-job">Find Work</a></li>
+						@endif
+					@endauth
+					@auth
+						@if (Auth::user()->role == 'Client')
+							<li><a class="nav-link" href="/job">Find Talent</a></li>
+						@endif
+					@endauth
 					<li><a class="nav-link" href="/blog">Blog</a></li>
 					<li><a class="nav-link" href="/about">About Us</a></li>
+					@auth
+						@if (Auth::user()->role !== null)
+							<li><a class="nav-link" href="/logout">Logout</a></li>
+						@endif
+					@endauth
+					@guest
+						<li><a class="nav-link" href="/login">Login</a></li>
+					@endguest
+
 				</ul>
 			</div>
 		</div>
@@ -67,10 +84,12 @@
 							Experience the freedom to work on your terms, anytime, anywhere. Fuel your passion,
 							collaborate effortlessly, and thrive in a flexible environment designed for your success.
 						</p>
-						<p>
-							<a href="" class="btn btn-secondary me-2">Find Jobs</a>
-							<a href="#"	class="btn btn-primary">Find Talent</a>
-						</p>
+						@guest
+							<p>
+								<a href="/register" class="btn btn-secondary me-2">Find Jobs</a>
+								<a href="/register" class="btn btn-primary">Find Talent</a>
+							</p>
+						@endguest
 					</div>
 				</div>
 				<div class="col-lg-4">
@@ -114,7 +133,7 @@
 
 				<!-- Start Column 2 -->
 				<div class="col-12 col-md-4 col-lg-2 mb-5 mb-md-0">
-				<a class="product-item" data-bs-toggle="modal" data-bs-target="#modalWebinar">
+					<a class="product-item" data-bs-toggle="modal" data-bs-target="#modalWebinar">
 						<img src="images/product-2.png" class="img-fluid product-thumbnail">
 						<h3 class="product-title">Webinar</h3>
 						<strong class="product-price">Learn more</strong>
@@ -128,7 +147,7 @@
 
 				<!-- Start Column 3 -->
 				<div class="col-12 col-md-4 col-lg-2 mb-5 mb-md-0">
-				<a class="product-item" data-bs-toggle="modal" data-bs-target="#modalCommunity">
+					<a class="product-item" data-bs-toggle="modal" data-bs-target="#modalCommunity">
 						<img src="images/product-3.png" class="img-fluid product-thumbnail">
 						<h3 class="product-title">Community Support</h3>
 						<strong class="product-price">Learn More</strong>
@@ -142,7 +161,7 @@
 
 				<!-- Start Column 4 -->
 				<div class="col-12 col-md-4 col-lg-2 mb-5 mb-md-0">
-				<a class="product-item" data-bs-toggle="modal" data-bs-target="#modalKOL">
+					<a class="product-item" data-bs-toggle="modal" data-bs-target="#modalKOL">
 						<img src="images/product-3.png" class="img-fluid product-thumbnail">
 						<h3 class="product-title">KOL Support</h3>
 						<strong class="product-price">Learn More</strong>
@@ -155,7 +174,7 @@
 				<!-- End Column 4 -->
 				<!-- Start Column 5 -->
 				<div class="col-12 col-md-4 col-lg-2 mb-5 mb-md-0">
-				<a class="product-item" data-bs-toggle="modal" data-bs-target="#modalPembicara">
+					<a class="product-item" data-bs-toggle="modal" data-bs-target="#modalPembicara">
 						<img src="images/product-3.png" class="img-fluid product-thumbnail">
 						<h3 class="product-title">Pembicara</h3>
 						<strong class="product-price">Learn More</strong>
@@ -239,7 +258,8 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body font-weight-normal">
-					Layanan Webinar ini berisi berbagai macam tema dengan ruang lingkup peningkatan Skill Digital, Sarana dan Tools untuk Freelancer, serta Bisnis. <br>
+					Layanan Webinar ini berisi berbagai macam tema dengan ruang lingkup peningkatan Skill Digital,
+					Sarana dan Tools untuk Freelancer, serta Bisnis. <br>
 					<b>Rate harga : Rp. 50.000 - Rp. 500.000 / Sesi</b>
 				</div>
 				<div class="modal-footer">
@@ -262,7 +282,8 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body font-weight-normal">
-					Layanan ini berisi dukungan komunitas untuk berbagai kebutuhan seperti akuisisi produk hingga visitasi event. <br>
+					Layanan ini berisi dukungan komunitas untuk berbagai kebutuhan seperti akuisisi produk hingga
+					visitasi event. <br>
 					<b>Rate harga : Rp. 50.000 - Rp. 500.000 / Sesi</b>
 				</div>
 				<div class="modal-footer">
@@ -307,27 +328,28 @@
 	<!-- End Vertically -->
 	<!-- Vertically centered scrollable modal -->
 	<div class="modal fade" id="modalPembicara" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content text-dark">
-					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel"><b>Pembicara</b></h5>
-						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-					</div>
-					<div class="modal-body font-weight-normal">
-						Kami memiliki berbagai talent profesional di berbagai bidang yang memiliki portofolio mumpuni untuk menjadi pengisi acara. <br>
-						<b>Rate harga Rp.300.000 - Rp.5.000.000 / talent</b>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-						<a href="https://wa.me/+62859106932912?text=Hai Saya Tertarik Dengan Servis KOL Support Dari Workin Studio!"
-							target="_blank">
-							<button type="button" class="btn btn-primary" link>Hubungi Kami</button>
-						</a>
-					</div>
+		<div class="modal-dialog">
+			<div class="modal-content text-dark">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel"><b>Pembicara</b></h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body font-weight-normal">
+					Kami memiliki berbagai talent profesional di berbagai bidang yang memiliki portofolio mumpuni untuk
+					menjadi pengisi acara. <br>
+					<b>Rate harga Rp.300.000 - Rp.5.000.000 / talent</b>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<a href="https://wa.me/+62859106932912?text=Hai Saya Tertarik Dengan Servis KOL Support Dari Workin Studio!"
+						target="_blank">
+						<button type="button" class="btn btn-primary" link>Hubungi Kami</button>
+					</a>
 				</div>
 			</div>
 		</div>
-		<!-- End Vertically -->
+	</div>
+	<!-- End Vertically -->
 	<!-- Start Why Choose Us Section -->
 	<div class="why-choose-section">
 		<div class="container">

@@ -17,15 +17,9 @@ class Bids extends Model
     protected $fillable = [
         'projectId',
         'userId',
-        'paymentType',
-        '25perPayment',
-        '50perPayment',
-        '75perPayment',
-        '100perPayment',
-        'minimumPayment',
-        'maximumPayment',
-        'hourlyPayment',
         'bidPitch',
-        'bidPitchFile',        
+        'bidPitchFile',
+        'rates',
+        'bidStatus',
     ];
 }

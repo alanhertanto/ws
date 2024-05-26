@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pekerjaan;
+use App\Models\Bids;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
@@ -10,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+
 class PekerjaanController extends Controller
 {
     public function index(): View
@@ -17,16 +19,27 @@ class PekerjaanController extends Controller
         return view("post-job");
     }
 
+    public function show(): View
+    {
+        return view("post-job");
+    }
+
     public function FindJob()
     {
-        $jobs = Pekerjaan::latest()->paginate(10);
-
-        // Calculate time difference for each job
+        $userId = auth()->id();
+        $jobs = Pekerjaan::latest()->where('status', 'Open')->paginate(10);
+        $interviewCounts = [];
+        $submittedCounts = [];
+        $hasBids = [];
+        $i=0;
+        // Loop through each job to get the count of interviews
         foreach ($jobs as $job) {
-            $job->timeAgo = $job->created_at->diffForHumans();
+            $interviewCount = Bids::where("projectId", $job->id)->where("bidStatus", "Interview")->count();
+            $submittedCount = Bids::where("projectId", $job->id)->where("bidStatus", "Submitted")->count();
+            $hasBid[$job->id] = Bids::where('userId', $userId)->where('projectId', $job->id)->exists();
+            $i++;
         }
-
-        return view("find-job", compact("jobs"));
+        return view("find-job", compact("jobs","interviewCount","submittedCount","hasBid"));
     }
 
     public function PostJob(Request $request): RedirectResponse
@@ -43,20 +56,22 @@ class PekerjaanController extends Controller
             '100perPayment' => 'nullable',
             'minimumPayment' => 'nullable',
             'maximumPayment' => 'nullable',
-            'hourlyPayment' => 'nullable'
+            'hourlyPayment' => 'nullable',
+            'clientId' => 'required'
         ]);
-    
+
         // Upload image
         $projectName = $request->projectName;
+        $projectName = preg_replace('/[^\p{L}\p{N}\s]/u', '', $projectName);
         $projectFileName = null;
         if ($request->hasFile('projectFile')) {
             $projectFile = $request->file('projectFile');
             $projectFile->storeAs('public/projects/' . $projectName . '/', $projectFile->hashName());
             $projectFileName = $projectFile->hashName();
         }
-    
+
         // Build the query
-        $query = Pekerjaan::query()->create([
+        $query = Pekerjaan::create([
             'projectFile' => $projectFileName,
             'projectName' => $request->projectName,
             'projectDescription' => $request->projectDescription,
@@ -67,26 +82,22 @@ class PekerjaanController extends Controller
             'per100Payment' => $request->per100Payment,
             'minimumPayment' => $request->minimumPayment,
             'maximumPayment' => $request->maximumPayment,
-            'hourlyPayment' => $request->hourlyPayment
+            'hourlyPayment' => $request->hourlyPayment,
+            'clientId' => $request->clientId,
+            'status' => 'Open'
         ]);
-    
-        // Echo the SQL query
-        echo $query->toSql();
-    
-        // Execute the query
-        $queryCreate = $query->get();
-    
-        if ($queryCreate) {
+
+        if ($query) {
             // Redirect to index
-            return redirect()->route('job.index')->with(['success' => 'Data Berhasil Disimpan!']);
+            return redirect()->route('job.index')->with(['success' => 'Project Berhasil Diposting!']);
         } else {
-            return redirect()->back()->withErrors(['error' => 'Failed to save data.']);
+            return redirect()->back()->withErrors(['error' => 'Gagal Untuk Posting Project.']);
         }
     }
-    public function downloadFile($projectName,$filename)
+    public function downloadFile($projectName, $filename)
     {
         // Define the path to the file
-        $filePath = 'public/projects/'.$projectName.'/'. $filename;
+        $filePath = 'public/projects/' . $projectName . '/' . $filename;
         echo $filePath;
         // Check if the file exists in the storage
         if (Storage::exists($filePath)) {
@@ -97,5 +108,5 @@ class PekerjaanController extends Controller
             abort(404, 'File not found.');
         }
     }
-    
+
 }
