@@ -34,12 +34,12 @@ class PekerjaanController extends Controller
         $i=0;
         // Loop through each job to get the count of interviews
         foreach ($jobs as $job) {
-            $interviewCount = Bids::where("projectId", $job->id)->where("bidStatus", "Interview")->count();
-            $submittedCount = Bids::where("projectId", $job->id)->where("bidStatus", "Submitted")->count();
+            $interviewCounts[$job->id] = Bids::where("projectId", $job->id)->where("bidStatus", "Interview")->count();
+            $submittedCounts[$job->id] = Bids::where("projectId", $job->id)->where("bidStatus", "Submitted")->count();
             $hasBid[$job->id] = Bids::where('userId', $userId)->where('projectId', $job->id)->exists();
             $i++;
         }
-        return view("find-job", compact("jobs","interviewCount","submittedCount","hasBid"));
+        return view("find-job", compact("jobs","interviewCounts","submittedCounts","hasBid"));
     }
 
     public function PostJob(Request $request): RedirectResponse

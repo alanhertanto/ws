@@ -23,8 +23,6 @@ Route::post('/job/post-job', [PekerjaanController::class, 'PostJob'])->name('job
 // Define routes for finding jobs and downloading files
 Route::get('/find-job', [PekerjaanController::class, 'FindJob'])->middleware(CheckFreelancer::class);
 Route::get('/download-file/{projectName?}/{filename?}', [PekerjaanController::class, 'downloadFile'])->name('download.file')->middleware(CheckFreelancer::class);
-
-// Define route for bidding on a job
 Route::post('/bid/bid-job', [BidsController::class, 'BidJob'])->name('bid.bidJob')->middleware(CheckFreelancer::class);
 
 // Routes for guest users (not authenticated)

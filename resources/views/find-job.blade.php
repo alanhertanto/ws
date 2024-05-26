@@ -314,8 +314,8 @@
                                         name="bidPitchFile">
                                     <hr>
                                     <p class="fs1"><strong>Partisipan</strong></p>
-                                    <p class="fsd8">Proposal Terkirim : {{$submittedCount}}</p>
-                                    <p class="fsd8">Dalam Interview : {{$interviewCount}}</p>
+                                    <p class="fsd8">Proposal Terkirim : {{$submittedCounts[$job->id]}}</p>
+                                    <p class="fsd8">Dalam Interview : {{$interviewCounts[$job->id]}}</p>
                                     <hr>
                                     <input type="hidden" name="userId" value="{{ session('user_id') }}">
                                     <div class="mb-3 mt-5">
