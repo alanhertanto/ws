@@ -308,7 +308,7 @@
                                     <p class="fs1"><strong>Pitching (Opsional)</strong></p>
                                     <span class="fsd7">Tahukah Anda? Pitching Yang Baik Akan Meyakinkan Calon Client
                                         Anda!</span>
-                                    <textarea class="form-control fsd6" rows="20" name="bidPitch"></textarea>
+                                    <textarea class="form-control fs1" rows="20" name="bidPitch"></textarea>
                                     <span class="fsd7"><strong>Attachment</strong></span>
                                     <input type="file" class="form-control no-height" id="inputGroupFile02"
                                         name="bidPitchFile">

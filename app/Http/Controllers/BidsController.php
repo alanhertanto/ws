@@ -47,7 +47,7 @@ class BidsController extends Controller
 
         if ($bid) {
             // Redirect to index with success message
-            return redirect()->route('FindJob')->with(['success' => 'Bids Disimpan!']);
+            return redirect()->route('find-job')->with(['success' => 'Bids Disimpan!']);
         } else {
             return redirect()->back()->withErrors(['error' => 'Gagal Dalma Melakukan Proses Bidding!']);
         }
