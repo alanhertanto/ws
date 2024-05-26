@@ -218,6 +218,7 @@
                 @endforelse
             </div>
             {{ $jobs->links() }}
+            @foreach($jobs as $job)
             <div id="myModal{{$job->id}}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
                 aria-labelledby="myLargeModalLabel{{$job->id}}" aria-hidden="true">
                 <div class="modal-dialog modal-lg" id="modal-nav">
@@ -338,6 +339,7 @@
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
     <!-- End Blog Section -->
