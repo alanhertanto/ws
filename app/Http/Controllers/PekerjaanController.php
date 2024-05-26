@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use DataTables;
+use Yajra\DataTables\Datatables;
 
 class PekerjaanController extends Controller
 {

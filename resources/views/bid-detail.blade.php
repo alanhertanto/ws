@@ -172,7 +172,8 @@
     <!-- Start Blog Section -->
     <div class="blog-section">
         <div class="container">
-            <div class="card mt-5">
+        <a href="/job" class="btn btn-success">Back</a>
+        <div class="card mt-5">
                 <h3 class="card-header p-3">Partisipan Project <strong>{{$projectName}}</strong></h3>
                 <div class="card-body">
                     <table class="table table-bordered data-table">
