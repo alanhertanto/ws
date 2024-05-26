@@ -14,12 +14,12 @@ Route::get('/', function () {
 
 // Route resource for blogs and jobs
 Route::resource('/blog', BlogController::class);
+Route::resource('/job', PekerjaanController::class);
 
-Route::resource('/job', PekerjaanController::class)->middleware(CheckClient::class);
-
+Route::get('/job',[PekerjaanController::class,'ClientDashboard'])->name('job.clientdashboard')->middleware(CheckClient::class);
 // Define the specific route for the PostJob method
 Route::post('/job/post-job', [PekerjaanController::class, 'PostJob'])->name('job.PostJob')->middleware(CheckClient::class);
-
+Route::get('/getBidDetail/{projectId}', [PekerjaanController::class, 'GetBidDetail'])->name('getBidDetail')->middleware(CheckClient::class);
 // Define routes for finding jobs and downloading files
 Route::get('/find-job', [PekerjaanController::class, 'FindJob'])->middleware(CheckFreelancer::class);
 Route::get('/download-file/{projectName?}/{filename?}', [PekerjaanController::class, 'downloadFile'])->name('download.file')->middleware(CheckFreelancer::class);

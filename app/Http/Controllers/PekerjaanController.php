@@ -11,19 +11,45 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use DataTables;
 
 class PekerjaanController extends Controller
 {
-    public function index(): View
+    public function ClientDashboard()
     {
-        return view("post-job");
+        $userId = auth()->id();
+        $jobs = Pekerjaan::latest()->where('clientId', $userId)->paginate(10);
+        // Loop through each job to get the count of interviews
+        $interviewCounts = [];
+        $submittedCounts = [];
+        foreach ($jobs as $job) {
+            $interviewCounts[$job->id] = Bids::where("projectId", $job->id)->where("bidStatus", "Interview")->count();
+            $submittedCounts[$job->id] = Bids::where("projectId", $job->id)->where("bidStatus", "Submitted")->count();
+        }
+        return view("client-dashboard", compact("jobs", "interviewCounts", "submittedCounts"));
     }
-
-    public function show(): View
+    public function GetBidDetail(Request $request)
     {
-        return view("post-job");
-    }
+        $projectId = $request->route('projectId');
+        $projectNames = Bids::query()->join('pekerjaans','bids.projectId','=','pekerjaans.id')->where('bids.projectId',$projectId)->first('projectName');
+        $projectName = $projectNames->projectName;
+        if ($request->ajax()) {
+            $participants = Bids::query()->join('users', 'bids.userId', '=', 'users.id')->where('bids.projectId', $projectId);
+            $pengalaman = Bids::query()->join('users', 'bids.userId', '=', 'users.id')->join('pekerjaans','bids.projectId','=','pekerjaans.id')->where('bids.projectId', $projectId)->where('pekerjaans.status','Finished')->count();
+            return Datatables::of($participants)
+                ->addIndexColumn()
+                ->addColumn('pengalaman',$pengalaman)
+                ->addColumn('action', function ($row) {
+                    $btn = '<a href="" class="edit btn btn-danger btn-sm">Interview</a> <a href="" class="edit btn btn-success btn-sm"> Pilih</a>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
 
+
+        }
+        return view('bid-detail', compact('projectId','projectName'));
+    }
     public function FindJob()
     {
         $userId = auth()->id();
@@ -31,15 +57,13 @@ class PekerjaanController extends Controller
         $interviewCounts = [];
         $submittedCounts = [];
         $hasBids = [];
-        $i=0;
         // Loop through each job to get the count of interviews
         foreach ($jobs as $job) {
             $interviewCounts[$job->id] = Bids::where("projectId", $job->id)->where("bidStatus", "Interview")->count();
             $submittedCounts[$job->id] = Bids::where("projectId", $job->id)->where("bidStatus", "Submitted")->count();
             $hasBid[$job->id] = Bids::where('userId', $userId)->where('projectId', $job->id)->exists();
-            $i++;
         }
-        return view("find-job", compact("jobs","interviewCounts","submittedCounts","hasBid"));
+        return view("find-job", compact("jobs", "interviewCounts", "submittedCounts", "hasBid"));
     }
 
     public function PostJob(Request $request): RedirectResponse

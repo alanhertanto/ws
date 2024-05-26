@@ -3,7 +3,7 @@
 		<div class="container relative">
 
 			<div class="sofa-img">
-				<img src="images/sofa.png" alt="Image" class="img-fluid">
+				<img src="{{asset('images/sofa.png')}}" alt="Image" class="img-fluid">
 			</div>
 
 			<div class="row g-5 mb-5">
@@ -68,10 +68,10 @@
 	</footer>
 	<!-- End Footer Section -->
 
-	<script src="js/bootstrap.bundle.min.js"></script>
-	<script src="js/tiny-slider.js"></script>
-	<script src="js/custom.js"></script>
-	<script src="js/card.gallery.js"></script>
+	<script src="{{ asset('js/bootstrap.bundle.min.js')}}"></script>
+	<script src="{{ asset('js/tiny-slider.js')}}"></script>
+	<script src="{{ asset('js/custom.js')}}"></script>
+	<script src="{{ asset('js/card.gallery.js')}}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>

@@ -18,10 +18,10 @@
     <meta name="keywords" content="bootstrap, bootstrap4" />
 
     <!-- Bootstrap CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset("css/bootstrap.min.css")}}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <link href="css/tiny-slider.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="{{asset("css/tiny-slider.css")}}" rel="stylesheet">
+    <link href="{{asset("css/style.css")}}" rel="stylesheet">
     <title>WorkinStudio </title>
     <style>
         #modal-nav {
@@ -218,135 +218,88 @@
                 @endforelse
             </div>
             {{ $jobs->links() }}
-            <div id="myModal{{$job->id}}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-                aria-labelledby="myLargeModalLabel{{$job->id}}" aria-hidden="true">
-                <div class="modal-dialog modal-lg" id="modal-nav">
-                    <div class="modal-content">
-                        <div class="row px-4 mt-4">
-                            <div class="col-8">
-                                <a href="#" data-bs-dismiss="modal"><i
-                                        class="fa-solid fa-arrow-left-long fs1d5"></i></a>
-                            </div>
-                            <div class="col-3">
-                                <a href="#" target="_blank" class="d-flex justify-content-center nounderline"><i
-                                        class="fa-solid fa-arrow-right-to-bracket fs1d2"></i>&emsp;<span
-                                        class="fsd8 text-center">Buka Di Tab Baru</span></a>
-                            </div>
-                        </div>
-                        <div class="modal-body row ms-1 mt-2">
-                            <div class="col-md-8 px-2">
-                                <h1 class="display-5">{{$job->projectName}}</h1>
-                                <p class="fsd7">Posted {{$job->timeAgo}}</p>
-                                <hr>
-                                <p class="fs1">{{$job->projectDescription}}</p>
-                                <hr>
-                                <div class="row px-2 pt-2">
-                                    <div class="col-sm-6">
-                                        <p class="fsd8"><i class="fa-solid fa-money-check-dollar fs1"></i>
-                                            {{$job->paymentType}}
-                                        </p>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <p class="fsd8"><i class="fa-solid fa-magnifying-glass-dollar fs1"></i> Est.
-                                            @if($job->paymentType == 'Hourly')
-                                                {{$job->hourlyPayment}}
-                                            @elseif($job->paymentType == 'Project')
-                                                                                        @php
-                                                                                            echo ($job->minimumPayment + $job->maximumPayment) / 2;
-                                                                                        @endphp
-                                            @elseif($job->paymentType == 'Milestone')
-                                                                                        @php
-                                                                                            echo ($job->per25Payment + $job->per50Payment + $job->per75Payment + $job->per100Payment);
-                                                                                        @endphp
-                                            @endif
-                                        </p>
-                                    </div>
-
+            @foreach ($jobs as $job)
+                <div id="myModal{{$job->id}}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                    aria-labelledby="myLargeModalLabel{{$job->id}}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" id="modal-nav">
+                        <div class="modal-content">
+                            <div class="row px-4 mt-4">
+                                <div class="col-8">
+                                    <a href="#" data-bs-dismiss="modal"><i
+                                            class="fa-solid fa-arrow-left-long fs1d5"></i></a>
                                 </div>
-
-                                <hr>
-                                <p class="fs1"><strong>Attachment</strong></p>
-                                <p class="fsd8"><i class="fa-solid fa-paperclip fs1"></i> <a
-                                        href="{{ route('download.file', ['projectName' => $job->projectName, 'filename' => $job->projectFile]) }}"
-                                        target="_blank">
-                                        {{ strlen($job->projectFile) > 12 ? substr($job->projectFile, 0, 12) . '...' : $job->projectFile }}
+                                <div class="col-3">
+                                    <a href="{{ route('getBidDetail', ['projectId' => $job->id]) }}" target="_blank"
+                                        class="d-flex justify-content-center nounderline">
+                                        <i class="fa-solid fa-arrow-right-to-bracket fs1d2"></i>&emsp;<span
+                                            class="fsd8 text-center">Lihat Partisipan</span>
                                     </a>
-                                </p>
-                                <hr>
-                                <!-- Bid Project -->
-                                <p class="fs1"><strong>Bid Project Ini</strong></p>
-                                <p class="fsd8"><strong>Rate Yang Akan Diajukan Untuk Pekerjaan Ini</strong></p>
-                                <form action="{{ route('bid.bidJob') }}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="hidden" name="projectId" value="{{ $job->id }}">
-                                    <!-- Other form fields -->
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <span class="fs1"><strong>Rates</strong></span><br>
-                                        </div>
-                                        <div class="col-md-6 p">
-                                            <input type="number" class="form-control no-height" value="0" id="rates"
-                                                name="rates" onchange="feeRates()">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p class="fs7"><strong>Potongan Jasa 10%</strong></p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="readonly" class="noborder nobg" value="" id="feeDeduction"
-                                                disabled>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p class="fs7"><strong>Total Rate</strong></p>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="readonly" class="noborder nobg" value="" id="feeTotal"
-                                                disabled>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                    <p class="fs1"><strong>Pitching (Opsional)</strong></p>
-                                    <span class="fsd7">Tahukah Anda? Pitching Yang Baik Akan Meyakinkan Calon Client
-                                        Anda!</span>
-                                    <textarea class="form-control fsd6" rows="20" name="bidPitch"></textarea>
-                                    <span class="fsd7"><strong>Attachment</strong></span>
-                                    <input type="file" class="form-control no-height" id="inputGroupFile02"
-                                        name="bidPitchFile">
-                                    <hr>
-                                    <p class="fs1"><strong>Partisipan</strong></p>
-                                    <p class="fsd8">Proposal Terkirim : {{$submittedCount}}</p>
-                                    <p class="fsd8">Dalam Interview : {{$interviewCount}}</p>
-                                    <hr>
-                                    <input type="hidden" name="userId" value="{{ session('user_id') }}">
-                                    <div class="mb-3 mt-5">
-                                        @if($hasBid[$job->id])
-                                            <button class="btn btn-success" disabled>Sudah Di Submit</button>
-                                        @else
-                                            <button class="btn btn-secondary" id="jobPosting">Bid Job</button>
-                                        @endif
-                                    </div>
-                                </form>
+                                </div>
                             </div>
-                            <div class="vr p-0"></div>
-                            <div class="col-md-3">
-                                <div class="px-2">
-                                    <div class="clientInfo">
+                            <div class="modal-body row ms-1 mt-2">
+                                <div class="col-md-8 px-2">
+                                    <h1 class="display-5">{{$job->projectName}}</h1>
+                                    <p class="fsd7">Posted {{$job->timeAgo}}</p>
+                                    <hr>
+                                    <p class="fs1">{{$job->projectDescription}}</p>
+                                    <hr>
+                                    <div class="row px-2 pt-2">
+                                        <div class="col-sm-6">
+                                            <p class="fsd8"><i class="fa-solid fa-money-check-dollar fs1"></i>
+                                                {{$job->paymentType}}
+                                            </p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <p class="fsd8"><i class="fa-solid fa-magnifying-glass-dollar fs1"></i> Budget.
+                                                @if($job->paymentType == 'Hourly')
+                                                    {{$job->hourlyPayment}} / Jam
+                                                @elseif($job->paymentType == 'Project')
+                                                    {{$job->minimumPayment}} - {{$job->maximumPayment}}
+                                                @elseif($job->paymentType == 'Milestone')
+                                                    25% : {{$job->per25Payment}} | 50% : {{$job->per50Payment}} | 75% :
+                                                    {{$job->per75Payment}} | 100% : {{$job->per100Payment}}
+                                                @endif
+                                            </p>
+                                        </div>
 
+                                    </div>
+
+                                    <hr>
+                                    <p class="fs1"><strong>Attachment</strong></p>
+                                    <p class="fsd8"><i class="fa-solid fa-paperclip fs1"></i> <a
+                                            href="{{ route('download.file', ['projectName' => $job->projectName, 'filename' => $job->projectFile]) }}"
+                                            target="_blank">
+                                            {{ strlen($job->projectFile) > 12 ? substr($job->projectFile, 0, 12) . '...' : $job->projectFile }}
+                                        </a>
+                                    </p>
+                                    <hr>
+                                    <!-- Bid Project -->
+                                    <p class="fs1"><strong>Partisipan</strong></p>
+                                    <p class="fsd8">Proposal Terkirim : {{$submittedCounts[$job->id]}}</p>
+                                    <p class="fsd8">Dalam Interview : {{$interviewCounts[$job->id]}}</p>
+                                </div>
+                                <div class="vr p-0"></div>
+                                <div class="col-md-3">
+                                    <div class="px-2">
+                                        <div class="clientInfo">
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
         </div>
     </div>
     <!-- End Blog Section -->
 
     @include('footer')
 
-    <script src="js/bootstrap.bundle.min.js"></script>
-    <script src="js/tiny-slider.js"></script>
-    <script src="js/custom.js"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/tiny-slider.js') }}"></script>
+    <script src="{{ asset('js/custom.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script>
