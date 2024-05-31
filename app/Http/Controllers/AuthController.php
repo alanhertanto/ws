@@ -104,6 +104,10 @@ class AuthController extends Controller
         return view('post-job');
     }
 
+    public function adminDashboard(){
+        return view('admin.index');
+    }
+
     /**
      * Log the user out of the application.
      *

@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Pekerjaan;
 use App\Models\Bids;
+use App\Models\User;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Yajra\DataTables\Datatables;
+use Mail;
 
 class PekerjaanController extends Controller
 {
@@ -31,16 +33,16 @@ class PekerjaanController extends Controller
     public function GetBidDetail(Request $request)
     {
         $projectId = $request->route('projectId');
-        $projectNames = Bids::query()->join('pekerjaans','bids.projectId','=','pekerjaans.id')->where('bids.projectId',$projectId)->first('projectName');
+        $projectNames = Bids::query()->join('pekerjaans', 'bids.projectId', '=', 'pekerjaans.id')->where('bids.projectId', $projectId)->first('projectName');
         $projectName = $projectNames->projectName;
         if ($request->ajax()) {
             $participants = Bids::query()->join('users', 'bids.userId', '=', 'users.id')->where('bids.projectId', $projectId);
-            $pengalaman = Bids::query()->join('users', 'bids.userId', '=', 'users.id')->join('pekerjaans','bids.projectId','=','pekerjaans.id')->where('bids.projectId', $projectId)->where('pekerjaans.status','Finished')->count();
+            $pengalaman = Bids::query()->join('users', 'bids.userId', '=', 'users.id')->join('pekerjaans', 'bids.projectId', '=', 'pekerjaans.id')->where('bids.projectId', $projectId)->where('pekerjaans.status', 'Finished')->count();
             return Datatables::of($participants)
                 ->addIndexColumn()
-                ->addColumn('pengalaman',$pengalaman)
+                ->addColumn('pengalaman', $pengalaman)
                 ->addColumn('action', function ($row) {
-                    $btn = '<a href="" class="edit btn btn-danger btn-sm">Interview</a> <a href="" class="edit btn btn-success btn-sm"> Pilih</a>';
+                    $btn = '<a href="" class="edit btn btn-danger btn-sm">Interview</a> <a href="'.route('getBidDetail', ['projectId' =>$projectId]) .'" class="edit btn btn-success btn-sm"> Pilih</a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -48,7 +50,7 @@ class PekerjaanController extends Controller
 
 
         }
-        return view('bid-detail', compact('projectId','projectName'));
+        return view('bid-detail', compact('projectId', 'projectName'));
     }
     public function FindJob()
     {
@@ -65,6 +67,8 @@ class PekerjaanController extends Controller
         }
         return view("find-job", compact("jobs", "interviewCounts", "submittedCounts", "hasBid"));
     }
+
+    
 
     public function PostJob(Request $request): RedirectResponse
     {

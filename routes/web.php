@@ -15,15 +15,17 @@ Route::get('/', function () {
 // Route resource for blogs and jobs
 Route::resource('/blog', BlogController::class);
 Route::resource('/job', PekerjaanController::class);
-
 Route::get('/job',[PekerjaanController::class,'ClientDashboard'])->name('job.clientdashboard')->middleware(CheckClient::class);
 // Define the specific route for the PostJob method
 Route::post('/job/post-job', [PekerjaanController::class, 'PostJob'])->name('job.PostJob')->middleware(CheckClient::class);
 Route::get('/getBidDetail/{projectId}', [PekerjaanController::class, 'GetBidDetail'])->name('getBidDetail')->middleware(CheckClient::class);
+Route::post('/inviteInterview/{projectId}', [PekerjaanController::class, 'send'])->name('sendInterview')->middleware(CheckClient::class);
 // Define routes for finding jobs and downloading files
 Route::get('/find-job', [PekerjaanController::class, 'FindJob'])->middleware(CheckFreelancer::class);
 Route::get('/download-file/{projectName?}/{filename?}', [PekerjaanController::class, 'downloadFile'])->name('download.file')->middleware(CheckFreelancer::class);
 Route::post('/bid/bid-job', [BidsController::class, 'BidJob'])->name('bid.bidJob')->middleware(CheckFreelancer::class);
+
+
 
 // Routes for guest users (not authenticated)
 Route::group(['middleware' => 'guest'], function () {
@@ -33,17 +35,3 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');
 });
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
-// // Routes for authenticated users
-// Route::group(['middleware' => 'auth'], function () {
-//     // Route for freelancer dashboard with additional middleware
-//     Route::get('/freelancer-dashboard', [AuthController::class, 'freelancerDashboard'])
-//         ->name('freelancer.dashboard')
-//         ->middleware('check.freelancer');
-
-//     // Route for logging out
-// });
-// Route::group(['middleware' => ['auth', 'check.client']], function () {
-//     Route::get('/client-dashboard', [AuthController::class, 'clientDashboard'])
-//         ->name('client.dashboard');
-// });
