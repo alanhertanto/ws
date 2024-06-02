@@ -26,11 +26,9 @@
                                     class="icon nalika-diamond icon-wrap"></i> <span
                                     class="mini-click-non">Transaksi</span></a>
                             <ul class="submenu-angle" aria-expanded="false">
-                                <li><a title="Lihat Transaksi" href="/lihat-transaksi"><span class="mini-sub-pro">Lihat
+                                <li><a title="Lihat Transaksi" href="/admin/lihat-transaksi"><span class="mini-sub-pro">Lihat
                                             Transaksi</span></a></li>
-                                <li><a title="Approval Pembayaran Maps" href="/approval-pembayaran"><span class="mini-sub-pro">Approval
-                                            Pembayaran</span></a></li>
-                                <li><a title="Cetak Laporan" href="/cetak-laporan"><span class="mini-sub-pro">Cetak
+                                <li><a title="Cetak Laporan" href="/admin/cetak-laporan"><span class="mini-sub-pro">Cetak
                                             Laporan</span></a></li>
                             </ul>
                         </li>

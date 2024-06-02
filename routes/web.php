@@ -33,7 +33,10 @@ Route::get('/admin/lihat-pekerjaan',[AdminController::class,'viewJobs'])->name('
 Route::get('/getAllJob',[AdminController::class,'getAllJob'])->name('getAllJob')->middleware(CheckAdmin::class);
 Route::get('/approveProject/{projectId}', [AdminController::class, 'ApproveProject'])->name('approveProject')->middleware(CheckAdmin::class);
 Route::get('/finishProject/{projectId}', [AdminController::class, 'FinishProject'])->name('finishProject')->middleware(CheckAdmin::class);
-
+Route::get('/admin/lihat-transaksi',[AdminController::class,'viewTrans'])->name('lihat-transaksi')->middleware(CheckAdmin::class);
+Route::get('/getAllTransaction', [AdminController::class,'getAllTransaction'])->name('getAllTransaction')->middleware(CheckAdmin::class);
+Route::get('/approveTransaction/{transactionId}', [AdminController::class, 'approveTransaction'])->name('approveTransaction')->middleware(CheckAdmin::class);
+Route::get('/completeTransaction/{transactionId}', [AdminController::class, 'completeTransaction'])->name('completeTransaction')->middleware(CheckAdmin::class);
 
 // Routes for guest users (not authenticated)
 Route::group(['middleware' => 'guest'], function () {
