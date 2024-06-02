@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('clientId')->default(0);
             $table->integer('freelancerId')->default(0);
             $table->integer('amount')->default(0);
+            $table->string('status');
             $table->timestamps();
         });
     }

@@ -48,7 +48,7 @@ class AdminController extends Controller
                 ->addColumn('action', function ($participant) {
                     if($participant->status=="Pending"){
                         $btn = '<a href="'.route('approveProject', ['projectId' => $participant->id]).'" class="edit btn btn-danger btn-sm">Approve Pekerjaan</a>';
-                    }else if($participant->status=="Open"){
+                    }else if($participant->status=="Working"){
                         $btn = '<a href="'.route('finishProject', ['projectId' => $participant->id]).'" class="edit btn btn-success btn-sm"> Selesai</a>';
                     }
                     return $btn;

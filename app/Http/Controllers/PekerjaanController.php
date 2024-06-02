@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Transaksi;
 use App\Models\Pekerjaan;
 use App\Models\Bids;
 use App\Models\User;
@@ -51,6 +52,7 @@ class PekerjaanController extends Controller
             $participants = Bids::query()
                 ->join('users', 'bids.userId', '=', 'users.id')
                 ->where('bids.projectId', $projectId)
+                ->where('bids.bidStatus','Terpilih')
                 ->select('bids.*', 'users.id as userId', 'bids.projectId as projectId', 'users.name as userName');
 
             return Datatables::of($participants)
@@ -65,30 +67,40 @@ class PekerjaanController extends Controller
                 })
                 ->addColumn('interview', function ($participant) {
                     $csrfToken = csrf_field();
-                    if($participant->bidStatus=="Interviewed"){
+                    if ($participant->bidStatus == "Interviewed" || $participant->bidStatus=="Terpilih") {
                         $btni = '<form action="' . route('interviewTheFreelance') . '" method="post" style="display:inline;">' .
-                        $csrfToken .
-                        '<input type="hidden" name="freelancerId" value="' . $participant->userId . '">' .
-                        '<input type="hidden" name="projectId" value="' . $participant->projectId . '">' .
-                        '<button class="edit btn btn-danger btn-sm" disabled>Sudah Interview</button></form>';
+                            $csrfToken .
+                            '<input type="hidden" name="freelancerId" value="' . $participant->userId . '">' .
+                            '<input type="hidden" name="projectId" value="' . $participant->projectId . '">' .
+                            '<button class="edit btn btn-danger btn-sm" disabled>Sudah Interview</button></form>';
 
-                    }else{
+                    } else {
                         $btni = '<form action="' . route('interviewTheFreelance') . '" method="post" style="display:inline;">' .
-                        $csrfToken .
-                        '<input type="hidden" name="freelancerId" value="' . $participant->userId . '">' .
-                        '<input type="hidden" name="projectId" value="' . $participant->projectId . '">' .
-                        '<button class="edit btn btn-danger btn-sm">Interview</button></form>';
+                            $csrfToken .
+                            '<input type="hidden" name="freelancerId" value="' . $participant->userId . '">' .
+                            '<input type="hidden" name="projectId" value="' . $participant->projectId . '">' .
+                            '<button class="edit btn btn-danger btn-sm">Interview</button></form>';
                     }
                     return $btni;
                 })
                 ->addColumn('choose', function ($participant) {
                     $csrfToken = csrf_field();
-                    $btn = '<form action="' . route('chooseTheFreelance') . '" method="post" style="display:inline;">' .
+                    if ($participant->bidStatus == "Terpilih") {
+                        $btn = '<form action="' . route('chooseTheFreelance') . '" method="post" style="display:inline;">' .
+                            $csrfToken .
+                            '<input type="hidden" name="freelancerId" value="' . $participant->userId . '">' .
+                            '<input type="hidden" name="projectId" value="' . $participant->projectId . '">' .
+                            '<button class="edit btn btn-success btn-sm" disabled>Sudah Terpilih</button></form>';
+                        return $btn;
+                    } else {
+
+                    }$btn = '<form action="' . route('chooseTheFreelance') . '" method="post" style="display:inline;">' .
                         $csrfToken .
                         '<input type="hidden" name="freelancerId" value="' . $participant->userId . '">' .
                         '<input type="hidden" name="projectId" value="' . $participant->projectId . '">' .
                         '<button class="edit btn btn-success btn-sm">Pilih</button></form>';
                     return $btn;
+
                 })
                 ->rawColumns(['interview', 'choose'])
                 ->make(true);
@@ -109,7 +121,7 @@ class PekerjaanController extends Controller
         // Send the email
         Mail::to($freelancer->email)->send(new InterviewInvitation($freelancer, $project));
 
-        $query = DB::table('bids')->where('projectId',$projectId )->update(['bidStatus'=> 'Interviewed']);
+        $query = DB::table('bids')->where('projectId', $projectId)->update(['bidStatus' => 'Interviewed']);
 
         return redirect()->back()->with('success', 'Interview invitation sent to the freelancer.');
     }
@@ -117,7 +129,36 @@ class PekerjaanController extends Controller
 
     public function ChooseTheFreelance(Request $request)
     {
+        $freelancerId = $request->input('freelancerId');
+        $projectId = $request->input('projectId');
 
+        $freelancer = User::find($freelancerId);
+        $project = Pekerjaan::find($projectId);
+        $bid = Bids::query()
+            ->join('pekerjaans', 'bids.projectId', '=', 'pekerjaans.id')
+            ->where('bids.projectId', $projectId)
+            ->get();
+        // Send the email
+        Mail::to($freelancer->email)->send(new InterviewInvitation($freelancer, $project));
+
+        $query = DB::table('bids')->where('projectId', $projectId)->update(['bidStatus' => 'Terpilih']);
+        DB::table('pekerjaans')->where('id', $projectId)->update(['status' => 'Working']);
+        try {
+            // Create a new transaksi
+            $transaction = Transaksi::create([
+                'projectId' => $projectId,
+                'clientId' => $bid[0]->userId,
+                'freelancerId' => $freelancerId,
+                'amount' => $bid[0]->rates,
+                'status' => 'Unpaid'
+            ]);
+
+            // If the user is created successfully, redirect back with success message
+            return redirect()->back()->with('success', 'Sukses Memilih Talent.');
+        } catch (\Exception $e) {
+            // If there is any error, redirect back with error message
+            return redirect()->back()->withErrors(['error' => $e . 'Failed to save data.']);
+        }
     }
 
     public function FindJob()

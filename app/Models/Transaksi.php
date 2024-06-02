@@ -9,6 +9,7 @@ class Transaksi extends Model
 {
     use HasFactory;
 
+    protected $table = 'transaksi';
      /**
      * fillable
      *
@@ -19,6 +20,7 @@ class Transaksi extends Model
         'projectId',
         'clientId',
         'freelancerId',
-        'amount'
+        'amount',
+        'status'
     ];
 }
