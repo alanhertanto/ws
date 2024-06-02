@@ -56,6 +56,8 @@ class AdminController extends Controller
                         $btn = '<a href="' . route('approveProject', ['projectId' => $participant->id]) . '" class="edit btn btn-danger btn-sm">Approve Pekerjaan</a>';
                     } else if ($participant->status == "Working") {
                         $btn = '<a href="' . route('finishProject', ['projectId' => $participant->id]) . '" class="edit btn btn-success btn-sm"> Selesai</a>';
+                    } else {
+                        $btn = 'Project Selesai!';
                     }
                     return $btn;
                 })
@@ -113,6 +115,8 @@ class AdminController extends Controller
                         $btn = '<a href="' . route('approveTransaction', ['transactionId' => $participant->id]) . '" class="edit btn btn-danger btn-sm">Approve Pembayaran</a>';
                     } else if ($participant->status_transaksi == "Paid") {
                         $btn = '<a href="' . route('completeTransaction', ['transactionId' => $participant->id]) . '" class="edit btn btn-success btn-sm">Project Selesai</a>';
+                    } else {
+                        $btn = 'Selesai!';
                     }
                     return $btn;
                 })
