@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Yajra\DataTables\Datatables;
-use Mail;
+use App\Mail\InterviewInvitation;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Blade;
 
 class PekerjaanController extends Controller
 {
@@ -38,45 +40,84 @@ class PekerjaanController extends Controller
     public function GetBidDetail(Request $request)
     {
         $projectId = $request->route('projectId');
-        $projectNames = Bids::query()->join('pekerjaans', 'bids.projectId', '=', 'pekerjaans.id')->where('bids.projectId', $projectId)->first('projectName');
+        $projectNames = Bids::query()
+            ->join('pekerjaans', 'bids.projectId', '=', 'pekerjaans.id')
+            ->where('bids.projectId', $projectId)
+            ->first('projectName');
+
         $projectName = $projectNames->projectName;
+
         if ($request->ajax()) {
-            $participants = Bids::query()->join('users', 'bids.userId', '=', 'users.id')->where('bids.projectId', $projectId);
-            $pengalaman = Bids::query()->join('users', 'bids.userId', '=', 'users.id')->join('pekerjaans', 'bids.projectId', '=', 'pekerjaans.id')->where('bids.projectId', $projectId)->where('pekerjaans.status', 'Finished')->count();
+            $participants = Bids::query()
+                ->join('users', 'bids.userId', '=', 'users.id')
+                ->where('bids.projectId', $projectId)
+                ->select('bids.*', 'users.id as userId', 'bids.projectId as projectId', 'users.name as userName');
+
             return Datatables::of($participants)
                 ->addIndexColumn()
-                ->addColumn('pengalaman', $pengalaman)
-                ->addColumn('interview', function ($participants) {
-                    $btni = '<form action="' . route('interviewTheFreelance') . '" method="post" style="display:inline;">
-                        <input type="hidden" name="freelancerId" value="' . $participants->userId . '">
-                        <input type="hidden" name="projectId" value="' . $participants->projectId . '">
-                        <button class="edit btn btn-danger btn-sm">Interview</button></form>';
+                ->addColumn('pengalaman', function ($participant) use ($projectId) {
+                    $pengalaman = Pekerjaan::query()
+                        ->join('bids', 'pekerjaans.id', '=', 'bids.projectId')
+                        ->where('bids.projectId', $projectId)
+                        ->where('pekerjaans.status', 'Finished')
+                        ->count();
+                    return $pengalaman;
+                })
+                ->addColumn('interview', function ($participant) {
+                    $csrfToken = csrf_field();
+                    if($participant->bidStatus=="Interviewed"){
+                        $btni = '<form action="' . route('interviewTheFreelance') . '" method="post" style="display:inline;">' .
+                        $csrfToken .
+                        '<input type="hidden" name="freelancerId" value="' . $participant->userId . '">' .
+                        '<input type="hidden" name="projectId" value="' . $participant->projectId . '">' .
+                        '<button class="edit btn btn-danger btn-sm" disabled>Sudah Interview</button></form>';
+
+                    }else{
+                        $btni = '<form action="' . route('interviewTheFreelance') . '" method="post" style="display:inline;">' .
+                        $csrfToken .
+                        '<input type="hidden" name="freelancerId" value="' . $participant->userId . '">' .
+                        '<input type="hidden" name="projectId" value="' . $participant->projectId . '">' .
+                        '<button class="edit btn btn-danger btn-sm">Interview</button></form>';
+                    }
                     return $btni;
                 })
-                ->addColumn('choose', function ($participants) {
-                    $btn = '
-                    <form action="' . route('chooseTheFreelance') . '" method="post" style="display:inline;">
-                        <input type="hidden" name="freelancerId" value="' . $participants->userId . '">
-                        <input type="hidden" name="projectId" value="' . $participants->projectId . '">
-                        <button class="edit btn btn-success btn-sm"> Pilih</button>
-                    </form>
-                                    ';
+                ->addColumn('choose', function ($participant) {
+                    $csrfToken = csrf_field();
+                    $btn = '<form action="' . route('chooseTheFreelance') . '" method="post" style="display:inline;">' .
+                        $csrfToken .
+                        '<input type="hidden" name="freelancerId" value="' . $participant->userId . '">' .
+                        '<input type="hidden" name="projectId" value="' . $participant->projectId . '">' .
+                        '<button class="edit btn btn-success btn-sm">Pilih</button></form>';
                     return $btn;
                 })
-                ->rawColumns(['interview','choose'])
+                ->rawColumns(['interview', 'choose'])
                 ->make(true);
-
-
         }
+
         return view('bid-detail', compact('projectId', 'projectName'));
     }
 
-    public function InterviewFreelancer(Request $request){
 
+    public function InterviewTheFreelance(Request $request)
+    {
+        $freelancerId = $request->input('freelancerId');
+        $projectId = $request->input('projectId');
+
+        $freelancer = User::find($freelancerId);
+        $project = Pekerjaan::find($projectId);
+
+        // Send the email
+        Mail::to($freelancer->email)->send(new InterviewInvitation($freelancer, $project));
+
+        $query = DB::table('bids')->where('projectId',$projectId )->update(['bidStatus'=> 'Interviewed']);
+
+        return redirect()->back()->with('success', 'Interview invitation sent to the freelancer.');
     }
 
-    public function ChooseTheFreelance(Request $request){
-    
+
+    public function ChooseTheFreelance(Request $request)
+    {
+
     }
 
     public function FindJob()

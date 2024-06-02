@@ -109,7 +109,7 @@ class AdminController extends Controller
                 ->addColumn('action', function ($participant) {
                     if($participant->status=="Pending"){
                         $btn = '<a href="" class="edit btn btn-danger btn-sm">Approve Pekerjaan</a>';
-                    }else if($participant->status=="Open"){
+                    }else if($participant->status=="Pengerjaan"){
                         $btn = '<a href="" class="edit btn btn-success btn-sm"> Selesai</a>';
                     }
                     return $btn;

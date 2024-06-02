@@ -229,7 +229,7 @@
                     type: "GET"
                 },
                 columns: [
-                    { data: 'name', name: 'name' },
+                    { data: 'userName', name: 'userName' },
                     { data: 'rates', name: 'rates' },
                     { data: 'pengalaman', name: 'pengalaman' },
                     { data: 'interview', name: 'interview', orderable: false, searchable: false },
