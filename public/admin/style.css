@@ -3667,3 +3667,15 @@ th.fc-day-header.fc-widget-header {
 	border-color: #152036;
 	color:#fff;
 }
+
+.highlight{
+    background-color: #152036;
+}
+
+.white{
+    color:white;
+}
+
+.black{
+    color:black;
+}

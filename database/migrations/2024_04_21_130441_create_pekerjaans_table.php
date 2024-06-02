@@ -23,6 +23,8 @@ return new class extends Migration {
             $table->integer('minimumPayment')->default(0);
             $table->integer('maximumPayment')->default(0);
             $table->integer('hourlyPayment')->default(0);
+            $table->integer('clientId');
+            $table->string('status');
             $table->timestamps();
         });
     }

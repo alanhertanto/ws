@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bids', function (Blueprint $table) {
+        Schema::create('blog', function (Blueprint $table) {
             $table->id();
-            $table->integer('projectId');
-            $table->integer('userId');
-            $table->longText('bidPitch');
-            $table->string('bidPitchFile');
-            $table->integer('rates');
-            $table->string('bidStatus')->default('pending');
             $table->timestamps();
         });
     }
@@ -28,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bids');
+        Schema::dropIfExists('blog');
     }
 };

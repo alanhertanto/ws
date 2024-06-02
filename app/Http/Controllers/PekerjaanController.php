@@ -17,6 +17,11 @@ use Mail;
 
 class PekerjaanController extends Controller
 {
+
+    public function show(): View
+    {
+        return view('post-job');
+    }
     public function ClientDashboard()
     {
         $userId = auth()->id();
@@ -41,17 +46,39 @@ class PekerjaanController extends Controller
             return Datatables::of($participants)
                 ->addIndexColumn()
                 ->addColumn('pengalaman', $pengalaman)
-                ->addColumn('action', function ($row) {
-                    $btn = '<a href="" class="edit btn btn-danger btn-sm">Interview</a> <a href="'.route('getBidDetail', ['projectId' =>$projectId]) .'" class="edit btn btn-success btn-sm"> Pilih</a>';
+                ->addColumn('interview', function ($participants) {
+                    $btni = '<form action="' . route('interviewTheFreelance') . '" method="post" style="display:inline;">
+                        <input type="hidden" name="freelancerId" value="' . $participants->userId . '">
+                        <input type="hidden" name="projectId" value="' . $participants->projectId . '">
+                        <button class="edit btn btn-danger btn-sm">Interview</button></form>';
+                    return $btni;
+                })
+                ->addColumn('choose', function ($participants) {
+                    $btn = '
+                    <form action="' . route('chooseTheFreelance') . '" method="post" style="display:inline;">
+                        <input type="hidden" name="freelancerId" value="' . $participants->userId . '">
+                        <input type="hidden" name="projectId" value="' . $participants->projectId . '">
+                        <button class="edit btn btn-success btn-sm"> Pilih</button>
+                    </form>
+                                    ';
                     return $btn;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['interview','choose'])
                 ->make(true);
 
 
         }
         return view('bid-detail', compact('projectId', 'projectName'));
     }
+
+    public function InterviewFreelancer(Request $request){
+
+    }
+
+    public function ChooseTheFreelance(Request $request){
+    
+    }
+
     public function FindJob()
     {
         $userId = auth()->id();
@@ -65,10 +92,13 @@ class PekerjaanController extends Controller
             $submittedCounts[$job->id] = Bids::where("projectId", $job->id)->where("bidStatus", "Submitted")->count();
             $hasBid[$job->id] = Bids::where('userId', $userId)->where('projectId', $job->id)->exists();
         }
-        return view("find-job", compact("jobs", "interviewCounts", "submittedCounts", "hasBid"));
+        if ($hasBids > 0)
+            return view("find-job", compact("jobs", "interviewCounts", "submittedCounts", "hasBid"));
+        else
+            return view("find-job", compact("jobs", "interviewCounts", "submittedCounts"));
     }
 
-    
+
 
     public function PostJob(Request $request): RedirectResponse
     {
@@ -112,12 +142,12 @@ class PekerjaanController extends Controller
             'maximumPayment' => $request->maximumPayment,
             'hourlyPayment' => $request->hourlyPayment,
             'clientId' => $request->clientId,
-            'status' => 'Open'
+            'status' => 'Pending'
         ]);
 
         if ($query) {
             // Redirect to index
-            return redirect()->route('job.index')->with(['success' => 'Project Berhasil Diposting!']);
+            return redirect()->route('job.clientdashboard')->with(['success' => 'Project Berhasil Diposting!']);
         } else {
             return redirect()->back()->withErrors(['error' => 'Gagal Untuk Posting Project.']);
         }

@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Untree.co">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="{{asset("favicon.ico")}}">
 
     <meta name="description" content="" />
     <meta name="keywords" content="bootstrap, bootstrap4" />
@@ -305,7 +305,7 @@
                                         </div>
                                     </div>
                                     <hr>
-                                    <p class="fs1"><strong>Pitching (Opsional)</strong></p>
+                                    <p class="fs1"><strong>Pitching (Maks.255 Karakter)</strong></p>
                                     <span class="fsd7">Tahukah Anda? Pitching Yang Baik Akan Meyakinkan Calon Client
                                         Anda!</span>
                                     <textarea class="form-control fs1" rows="20" name="bidPitch"></textarea>

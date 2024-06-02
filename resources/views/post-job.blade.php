@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Untree.co">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="{{asset("favicon.ico")}}">
 
     <meta name="description" content="" />
     <meta name="keywords" content="bootstrap, bootstrap4" />
@@ -103,7 +103,11 @@
     <div class="hero">
         <div class="container">
             <div class="row justify-content-between">
-                <div class="col-lg-12">
+            <div class="col-12 sm-12 mb-4 mb-5">
+                    <a href="/job" class="btn btn-secondary">Kembali</a>
+                </div>
+
+            <div class="col-lg-12">
                     <div class="intro-excerpt">
                         @if(Session::has('success'))
                             <div class="alert alert-success" role="alert">

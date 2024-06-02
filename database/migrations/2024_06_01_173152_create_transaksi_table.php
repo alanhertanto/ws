@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bids', function (Blueprint $table) {
+        Schema::create('transaksi', function (Blueprint $table) {
             $table->id();
-            $table->integer('projectId');
-            $table->integer('userId');
-            $table->longText('bidPitch');
-            $table->string('bidPitchFile');
-            $table->integer('rates');
-            $table->string('bidStatus')->default('pending');
+            $table->integer('projectId')->default(0);
+            $table->integer('clientId')->default(0);
+            $table->integer('freelancerId')->default(0);
+            $table->integer('amount')->default(0);
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bids');
+        Schema::dropIfExists('transaksi');
     }
 };

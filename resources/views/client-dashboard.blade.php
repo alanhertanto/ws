@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Untree.co">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="{{asset("favicon.ico")}}">
 
     <meta name="description" content="" />
     <meta name="keywords" content="bootstrap, bootstrap4" />
@@ -172,6 +172,9 @@
     <div class="blog-section">
         <div class="container">
             <div class="row">
+                <div class="col-12 sm-12 mb-4 mb-5">
+                    <a href="/job/post-job" class="btn btn-secondary">Buat Pekerjaan Baru</a>
+                </div>
                 @if(Session::has('success'))
                     <div class="alert alert-success" role="alert">
                         {{ Session::get('success') }}
@@ -191,8 +194,9 @@
                                 <div class="post-entry">
                                     <h2>{{$job->projectName}}</h2>
                                     <div class="post-content-entry">
-                                        <p>Posted {{$job->timeAgo}}</p>
-                                        <p class="lead">{{$job->projectDescription}} </p>
+                                        <p class="lead">
+                                            {{ strlen($job->projectDescription) > 25 ? substr($job->projectDescription, 0, 25) . '...' : $job->projectDescription }}
+                                        </p>
                                         <p class="text-capitalize small">
                                             Tipe {{$job->paymentType}}
                                             | Est. @if($job->paymentType == 'Hourly')
@@ -206,6 +210,9 @@
                                                                             echo ($job->per25Payment + $job->per50Payment + $job->per75Payment + $job->per100Payment);
                                                                         @endphp
                                             @endif
+                                        </p>
+                                        <p class="text-capitalize small">
+                                            Status: {{$job->status}}
                                         </p>
                                     </div>
                                 </div>
@@ -229,11 +236,14 @@
                                             class="fa-solid fa-arrow-left-long fs1d5"></i></a>
                                 </div>
                                 <div class="col-3">
-                                    <a href="{{ route('getBidDetail', ['projectId' => $job->id]) }}" target="_blank"
-                                        class="d-flex justify-content-center nounderline">
-                                        <i class="fa-solid fa-arrow-right-to-bracket fs1d2"></i>&emsp;<span
-                                            class="fsd8 text-center">Lihat Partisipan</span>
-                                    </a>
+                                    @if ($submittedCounts[$job->id] > 0)
+                                        <a href="{{ route('getBidDetail', ['projectId' => $job->id]) }}" target="_blank"
+                                            class="d-flex justify-content-center nounderline">
+                                            <i class="fa-solid fa-arrow-right-to-bracket fs1d2"></i>&emsp;<span
+                                                class="fsd8 text-center">Lihat Partisipan</span>
+                                        </a>
+
+                                    @endif
                                 </div>
                             </div>
                             <div class="modal-body row ms-1 mt-2">
@@ -277,6 +287,9 @@
                                     <p class="fs1"><strong>Partisipan</strong></p>
                                     <p class="fsd8">Proposal Terkirim : {{$submittedCounts[$job->id]}}</p>
                                     <p class="fsd8">Dalam Interview : {{$interviewCounts[$job->id]}}</p>
+                                    <hr>
+                                    <p class="fs1"><strong>Status Pekerjaan</strong></p>
+                                    <p class="fsd8">{{$job->status}}</p>
                                 </div>
                                 <div class="vr p-0"></div>
                                 <div class="col-md-3">

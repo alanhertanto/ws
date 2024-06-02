@@ -12,7 +12,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Untree.co">
-    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="shortcut icon" href="{{asset("favicon.ico")}}">
 
     <meta name="description" content="" />
     <meta name="keywords" content="bootstrap, bootstrap4" />
@@ -172,8 +172,8 @@
     <!-- Start Blog Section -->
     <div class="blog-section">
         <div class="container">
-        <a href="/job" class="btn btn-success">Back</a>
-        <div class="card mt-5">
+            <a href="/job" class="btn btn-success">Back</a>
+            <div class="card mt-5">
                 <h3 class="card-header p-3">Partisipan Project <strong>{{$projectName}}</strong></h3>
                 <div class="card-body">
                     <table class="table table-bordered data-table">
@@ -182,7 +182,8 @@
                                 <th>Name</th>
                                 <th>Rates</th>
                                 <th>Pengalaman Project</th>
-                                <th width="230px">Action</th>
+                                <th>Interview</th>
+                                <th>Pilih Talent</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -231,7 +232,8 @@
                     { data: 'name', name: 'name' },
                     { data: 'rates', name: 'rates' },
                     { data: 'pengalaman', name: 'pengalaman' },
-                    { data: 'action', name: 'action', orderable: false, searchable: false },
+                    { data: 'interview', name: 'interview', orderable: false, searchable: false },
+                    { data: 'choose', name: 'choose', orderable: false, searchable: false },
                 ]
             });
 

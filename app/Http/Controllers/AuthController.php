@@ -43,13 +43,14 @@ class AuthController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role' => $request->role,
+                // 'role' => "Admin",
             ]);
 
             // If the user is created successfully, redirect back with success message
             return back()->with('success', 'Registered successfully');
         } catch (\Exception $e) {
             // If there is any error, redirect back with error message
-            return redirect()->back()->withErrors(['error' => 'Failed to save data.']);
+            return redirect()->back()->withErrors(['error' => $e.'Failed to save data.']);
         }
     }
 
@@ -83,6 +84,9 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             session(['user_id' => Auth::user()->id]);
+            if(Auth::user()->role=='Admin'){
+                return redirect('/admin/index');
+            }
             return redirect('/')->with('success', 'Login successful');
         }
 
