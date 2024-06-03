@@ -18,6 +18,7 @@ Route::get('/', function () {
 Route::resource('/blog', BlogController::class);
 Route::get('/job',[PekerjaanController::class,'ClientDashboard'])->name('job.clientdashboard')->middleware(CheckClient::class);
 // Define the specific route for the PostJob method
+Route::get('/job/post-job', [PekerjaanController::class, 'show'])->name('job.PostJob')->middleware(CheckClient::class);
 Route::post('/job/post-job', [PekerjaanController::class, 'PostJob'])->name('job.PostJob')->middleware(CheckClient::class);
 Route::get('/getBidDetail/{projectId}', [PekerjaanController::class, 'GetBidDetail'])->name('getBidDetail')->middleware(CheckClient::class);
 Route::post('/inviteInterview/{projectId}', [PekerjaanController::class, 'send'])->name('sendInterview')->middleware(CheckClient::class);

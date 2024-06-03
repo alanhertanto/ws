@@ -174,7 +174,7 @@ class PekerjaanController extends Controller
             $submittedCounts[$job->id] = Bids::where("projectId", $job->id)->where("bidStatus", "Submitted")->count();
             $hasBid[$job->id] = Bids::where('userId', $userId)->where('projectId', $job->id)->exists();
         }
-        if ($hasBids > 0)
+        if (count($hasBids) > 0)
             return view("find-job", compact("jobs", "interviewCounts", "submittedCounts", "hasBid"));
         else
             return view("find-job", compact("jobs", "interviewCounts", "submittedCounts"));
