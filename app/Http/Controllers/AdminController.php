@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Datatables;
+use PDF;
 
 class AdminController extends Controller
 {
@@ -24,6 +25,12 @@ class AdminController extends Controller
     {
         return view('admin.lihat-transaksi');
     }
+
+    public function printTrans(): View
+    {
+        return view('admin.cetak-transaksi');
+    }
+
 
     public function getAllJob(Request $request)
     {
@@ -123,6 +130,28 @@ class AdminController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
+    }
+
+    public function printTransaction(Request $request)
+    {
+        $participants = Transaksi::query()
+            ->join('pekerjaans', 'pekerjaans.id', '=', 'transaksi.projectId')
+            ->join('users as clients', 'clients.id', '=', 'pekerjaans.clientId') // Join users for clients
+            ->join('bids', 'bids.projectId', '=', 'pekerjaans.id')
+            ->join('users as freelancers', 'freelancers.id', '=', 'bids.userId') // Join users for freelancers
+            ->select(
+                'pekerjaans.*',
+                'transaksi.*',
+                'transaksi.status as status_transaksi',
+                'clients.name as clientName',
+                'freelancers.name as talentName',
+                'transaksi.created_at as transaksi_created_at'
+            )
+            ->get();
+
+        $pdf = PDF::loadView('pdf.report', compact('participants'));
+
+        return $pdf->download('report.pdf');
     }
 
     public function approveTransaction($request)

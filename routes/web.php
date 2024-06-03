@@ -36,6 +36,8 @@ Route::get('/approveProject/{projectId}', [AdminController::class, 'ApproveProje
 Route::get('/finishProject/{projectId}', [AdminController::class, 'FinishProject'])->name('finishProject')->middleware(CheckAdmin::class);
 Route::get('/admin/lihat-transaksi',[AdminController::class,'viewTrans'])->name('lihat-transaksi')->middleware(CheckAdmin::class);
 Route::get('/getAllTransaction', [AdminController::class,'getAllTransaction'])->name('getAllTransaction')->middleware(CheckAdmin::class);
+Route::get('/admin/cetak-transaksi',[AdminController::class,'printTrans'])->name('cetak-transaksi')->middleware(CheckAdmin::class);
+Route::get('/printTransaction', [AdminController::class,'printTransaction'])->name('printTransaction')->middleware(CheckAdmin::class);
 Route::get('/approveTransaction/{transactionId}', [AdminController::class, 'approveTransaction'])->name('approveTransaction')->middleware(CheckAdmin::class);
 Route::get('/completeTransaction/{transactionId}', [AdminController::class, 'completeTransaction'])->name('completeTransaction')->middleware(CheckAdmin::class);
 
