@@ -120,7 +120,7 @@
 				<!-- Start Column 1 -->
 				<div class="col-12 col-md-4 col-lg-2 mb-5 mb-md-0">
 					<a class="product-item" data-bs-toggle="modal" data-bs-target="#modalMentoring">
-						<img src="images/product-1.png" class="img-fluid product-thumbnail">
+						<img src="images/mentoring.jpg" class="img-fluid product-thumbnail">
 						<h3 class="product-title">Mentoring</h3>
 						<strong class="product-price">Learn More</strong>
 
@@ -134,7 +134,7 @@
 				<!-- Start Column 2 -->
 				<div class="col-12 col-md-4 col-lg-2 mb-5 mb-md-0">
 					<a class="product-item" data-bs-toggle="modal" data-bs-target="#modalWebinar">
-						<img src="images/product-2.png" class="img-fluid product-thumbnail">
+						<img src="images/webinar.jpg" class="img-fluid product-thumbnail">
 						<h3 class="product-title">Webinar</h3>
 						<strong class="product-price">Learn more</strong>
 
@@ -148,7 +148,7 @@
 				<!-- Start Column 3 -->
 				<div class="col-12 col-md-4 col-lg-2 mb-5 mb-md-0">
 					<a class="product-item" data-bs-toggle="modal" data-bs-target="#modalCommunity">
-						<img src="images/product-3.png" class="img-fluid product-thumbnail">
+						<img src="images/community-support.jpg" class="img-fluid product-thumbnail">
 						<h3 class="product-title">Community Support</h3>
 						<strong class="product-price">Learn More</strong>
 
@@ -162,7 +162,7 @@
 				<!-- Start Column 4 -->
 				<div class="col-12 col-md-4 col-lg-2 mb-5 mb-md-0">
 					<a class="product-item" data-bs-toggle="modal" data-bs-target="#modalKOL">
-						<img src="images/product-3.png" class="img-fluid product-thumbnail">
+						<img src="images/kol-support.jpg" class="img-fluid product-thumbnail">
 						<h3 class="product-title">KOL Support</h3>
 						<strong class="product-price">Learn More</strong>
 
@@ -175,7 +175,7 @@
 				<!-- Start Column 5 -->
 				<div class="col-12 col-md-4 col-lg-2 mb-5 mb-md-0">
 					<a class="product-item" data-bs-toggle="modal" data-bs-target="#modalPembicara">
-						<img src="images/product-3.png" class="img-fluid product-thumbnail">
+						<img src="images/pembicara.jpg" class="img-fluid product-thumbnail">
 						<h3 class="product-title">Pembicara</h3>
 						<strong class="product-price">Learn More</strong>
 
