@@ -9,11 +9,9 @@ use App\Http\Controllers\BidsController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/',[HomeController::class,'Home'])->name('home');
 // Route resource for blogs and jobs
 Route::resource('/blog', BlogController::class);
 Route::get('/job',[PekerjaanController::class,'ClientDashboard'])->name('job.clientdashboard')->middleware(CheckClient::class);

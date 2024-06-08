@@ -12,7 +12,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="author" content="Untree.co">
-    <link rel="shortcut icon" href="{{asset("favicon.ico")}}">
+	<link rel="shortcut icon" href="{{asset("favicon.ico")}}">
 
 	<meta name="description" content="" />
 	<meta name="keywords" content="bootstrap, bootstrap4" />
@@ -24,6 +24,12 @@
 	<link href="{{asset("css/style.css")}}" rel="stylesheet">
 	<link href="css/card_gallery.css" rel="stylesheet">
 	<title>WorkinStudio </title>
+	<style>
+		.sameImage {
+			object-fit: cover;
+			/* Ensures the image covers the element while maintaining aspect ratio */
+		}
+	</style>
 </head>
 
 <body>
@@ -406,77 +412,37 @@
 
 	<!-- Start Gallery Slider -->
 	<div class="product-section	 galleryfilter">
-		<h2 class="mb-4 section-title text-center">Gallery Kegiatan dan Aktivitas Kami</h2>
-		<div id="myBtnContainer" class="d-flex gap-20 justify-content-center">
-			<button class="btn active" onclick="filterSelection('all')"> Show all</button>
-			<button class="btn" onclick="filterSelection('nature')"> Nature</button>
-			<button class="btn" onclick="filterSelection('cars')"> Cars</button>
-			<button class="btn" onclick="filterSelection('people')"> People</button>
-		</div>
-
+		<h2 class="mb-4 section-title text-center">Kegiatan dan Aktivitas Terbaru Kami</h2>
 		<!-- Portfolio Gallery Grid -->
 		<div class="row galleryfilter">
 			<div class="column nature">
-				<div class="content">
-					<img src="/images/mountains.jpg" alt="Mountains" style="width:100%">
-					<h4>Mountains</h4>
-					<p>Lorem ipsum dolor..</p>
+				<div class="content sameImage">
+					<img src="/images/sertifikasi.jpg" style="width:100%">
+					<h4>Certification BNSP of CTWM (Certified Teamwork Management)</h4>
 				</div>
 			</div>
 			<div class="column nature">
-				<div class="content">
-					<img src="/images/lights.jpg" alt="Lights" style="width:100%">
-					<h4>Lights</h4>
-					<p>Lorem ipsum dolor..</p>
+				<div class="content sameImage">
+					<img src="/images/jakartasmartcity.jpg" style="width:100%">
+					<h4>Comunity Visit Jakarta Smart City Lab</h4>
 				</div>
 			</div>
 			<div class="column nature">
-				<div class="content">
-					<img src="/images/nature.jpg" alt="Nature" style="width:100%">
-					<h4>Forest</h4>
-					<p>Lorem ipsum dolor..</p>
+				<div class="content sameImage">
+					<img src="/images/hicool2024.jpg" style="width:100%">
+					<h4>Digital start-up gathering & networking Hicool 2024</h4>
 				</div>
 			</div>
 			<div class="column cars">
-				<div class="content">
-					<img src="/images/cars1.jpg" alt="Car" style="width:100%">
-					<h4>Retro</h4>
-					<p>Lorem ipsum dolor..</p>
+				<div class="content sameImage">
+					<img src="/images/bealeaf.jpg" style="width:100%">
+					<h4>Talkshow-BeaLeaf</h4>
 				</div>
 			</div>
 			<div class="column cars">
-				<div class="content">
-					<img src="/images/cars2.jpg" alt="Car" style="width:100%">
-					<h4>Fast</h4>
-					<p>Lorem ipsum dolor..</p>
-				</div>
-			</div>
-			<div class="column cars">
-				<div class="content">
-					<img src="/images/cars3.jpg" alt="Car" style="width:100%">
-					<h4>Classic</h4>
-					<p>Lorem ipsum dolor..</p>
-				</div>
-			</div>
-			<div class="column people">
-				<div class="content">
-					<img src="/images/people1.jpg" alt="People" style="width:100%">
-					<h4>Girl</h4>
-					<p>Lorem ipsum dolor..</p>
-				</div>
-			</div>
-			<div class="column people">
-				<div class="content">
-					<img src="/images/people2.jpg" alt="People" style="width:100%">
-					<h4>Man</h4>
-					<p>Lorem ipsum dolor..</p>
-				</div>
-			</div>
-			<div class="column people">
-				<div class="content">
-					<img src="/images/people3.jpg" alt="People" style="width:100%">
-					<h4>Woman</h4>
-					<p>Lorem ipsum dolor..</p>
+				<div class="content sameImage">
+					<img src="/images/yotnc.jpg" style="width:100%">
+					<h4>YOTNC young on top nasional conference</h4>
 				</div>
 			</div>
 			<!-- END GRID -->
@@ -485,7 +451,7 @@
 	<!-- End Gallery Slider -->
 
 	<!-- Start client Slider -->
-	<div class="client-section">
+	<div class="client-section mb-5">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-6 mx-auto text-center">
@@ -495,54 +461,31 @@
 					<h2 class="section-title">Client Kami</h2>
 				</div>
 			</div>
-
 			<div class="row justify-content-center">
 				<div class="col-lg-6">
-					<div class="testimonial-slider-wrap text-center">
-
-						<div id="testimonial-nav">
+				<div id="testimonial-nav">
 							<span class="prev" data-controls="prev"><span class="fa fa-chevron-left"></span></span>
 							<span class="next" data-controls="next"><span class="fa fa-chevron-right"></span></span>
 						</div>
 
+					<div class="testimonial-slider-wrap text-center">
 						<div class="testimonial-slider">
-							<div class="item">
-								<div class="row justify-content-center">
+							@foreach ($achievements as $achievement)
+								<div class="item">
 									<div class="col-lg-8 mx-auto">
-
 										<div class="testimonial-block text-center">
 											<div class="author-info">
 												<div class="author-pic">
-													<img src="images/person-1.png" alt="Maria Jones" class="img-fluid">
+													<img src="images/achievement/{{$achievement->foto}}" class="img-fluid">
 												</div>
-												<h3 class="font-weight-bold">Maria Jones</h3>
-												<span class="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
+												<h3 class="font-weight-bold">{{$achievement->nama}}</h3>
+												<span class="position d-block mb-3">{{$achievement->tanggal}}</span>
 											</div>
 										</div>
-
 									</div>
 								</div>
-							</div>
-							<div class="item">
-								<div class="row justify-content-center">
-									<div class="col-lg-8 mx-auto">
-
-										<div class="testimonial-block text-center">
-											<div class="author-info">
-												<div class="author-pic">
-													<img src="images/person-1.png" alt="Maria Jones" class="img-fluid">
-												</div>
-												<h3 class="font-weight-bold">Maria Jones</h3>
-												<span class="position d-block mb-3">CEO, Co-Founder, XYZ Inc.</span>
-											</div>
-										</div>
-
-									</div>
-								</div>
-							</div>
-
+							@endforeach
 						</div>
-
 					</div>
 				</div>
 				<div class="col-lg-6">
@@ -550,43 +493,24 @@
 
 						<div id="client-nav">
 						</div>
-
 						<div class="client-slider">
-
-							<div class="item">
-								<div class="row justify-content-center">
-									<div class="col-lg-8 mx-auto">
-										<div class="client-block text-center">
-											<div class="author-info">
-												<div class="author-pic">
-													<img src="images/person-1.png" alt="Maria Jones" class="img-fluid">
+							@foreach ($clients as $client)
+								<div class="item">
+									<div class="row justify-content-center">
+										<div class="col-lg-8 mx-auto">
+											<div class="client-block text-center">
+												<div class="author-info">
+													<div class="author-pic">
+														<img src="images/client/{{$client->foto}}" class="img-fluid">
+													</div>
+													<h3 class="font-weight-bold">{{$client->nama}}</h3>
 												</div>
-												<h3 class="font-weight-bold">XL Axiata</h3>
 											</div>
 										</div>
-
 									</div>
 								</div>
-							</div>
-							<div class="item">
-								<div class="row justify-content-center">
-									<div class="col-lg-8 mx-auto">
-
-										<div class="client-block text-center">
-											<div class="author-info">
-												<div class="author-pic">
-													<img src="images/person-1.png" alt="Maria Jones" class="img-fluid">
-												</div>
-												<h3 class="font-weight-bold">XL Axiata</h3>
-											</div>
-										</div>
-
-									</div>
-								</div>
-							</div>
-
+							@endforeach
 						</div>
-
 					</div>
 				</div>
 
