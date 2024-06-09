@@ -39,7 +39,6 @@
                                 class="mini-click-non">Konten</span></a>
                         <ul class="submenu-angle" aria-expanded="false">
                             <li><a title="Blog" href="/admin/blog"><span class="mini-sub-pro">Blog</span></a></li>
-                            <li><a title="FAQ" href="/admin/faq"><span class="mini-sub-pro">FAQ</span></a>
                             </li>
                         </ul>
                     </li>

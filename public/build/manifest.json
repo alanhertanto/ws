@@ -1,0 +1,19 @@
+{
+  "resources/css/app.css": {
+    "file": "style.js",
+    "name": "style",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "main.js",
+    "name": "main",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/sass/app.scss": {
+    "file": "sass.css",
+    "src": "resources/sass/app.scss",
+    "isEntry": true
+  }
+}

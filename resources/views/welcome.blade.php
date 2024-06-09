@@ -61,6 +61,11 @@
 						@endif
 					@endauth
 					<li><a class="nav-link" href="/blog">Blog</a></li>
+                    @auth
+                        @if (Auth::user()->role !== null)
+                            <li class=""><a class="nav-link" href="/chat">Chat</a></li>
+                        @endif
+                    @endauth
 					<li><a class="nav-link" href="/about">About Us</a></li>
 					@auth
 						@if (Auth::user()->role !== null)

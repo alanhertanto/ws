@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('blogTitle');
             $table->longText('blogDescription');
             $table->string('foto');
-            $table->boolean('isFeatured');
+            $table->string('isFeatured');
             $table->timestamps();
         });
     }

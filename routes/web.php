@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\CheckClient;
 use App\Http\Middleware\CheckFreelancer;
@@ -16,6 +17,11 @@ Route::get('/', [HomeController::class, 'Home'])->name('home');
 Route::resource('/blog', BlogController::class);
 Route::get('/blogDetail/{blogId}', [BlogController::class, 'GetDetail'])->name('blogDetail');
 
+//Message
+Route::get('/messages', [HomeController::class, 'messages'])
+    ->name('messages');
+Route::post('/message', [HomeController::class, 'message'])
+    ->name('message');
 
 Route::get('/job', [PekerjaanController::class, 'ClientDashboard'])->name('job.clientdashboard')->middleware(CheckClient::class);
 // Define the specific route for the PostJob method
@@ -55,3 +61,9 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/login', [AuthController::class, 'loginPost'])->name('login.post');
 });
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/chat', [ChatController::class, 'index'])->name('chat');
+Route::get('/messages', [ChatController::class, 'messages'])
+    ->name('messages');
+Route::post('/message', [ChatController::class, 'message'])
+    ->name('message');

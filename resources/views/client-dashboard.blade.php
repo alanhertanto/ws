@@ -134,6 +134,7 @@
                             <li class=""><a class="nav-link" href="/find-job">Find Talent</a></li>
                         @endif
                     @endauth
+                    <li class=""><a class="nav-link" href="/chat">Chat </a></li>
                     <li class=""><a class="nav-link" href="/blog">Blog</a></li>
                     <li class=""><a class="nav-link" href="/about">About Us</a></li>
                     @auth

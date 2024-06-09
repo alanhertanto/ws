@@ -1,1 +1,2 @@
-import './bootstrap';
+import './bootstrap.js';
+import './components/Main.jsx';
