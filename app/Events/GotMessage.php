@@ -12,12 +12,15 @@ class GotMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public function __construct(public array $message) {
-        //
+    public $message;
+
+    public function __construct(array $message)
+    {
+        $this->message = $message;
     }
 
-    public function broadcastOn(): array {
-        // $this->message is available here
+    public function broadcastOn(): array
+    {
         return [
             new PrivateChannel("channel_for_everyone"),
         ];

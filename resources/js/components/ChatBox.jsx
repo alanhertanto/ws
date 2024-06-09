@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from 'axios';
 import Message from "./Message.jsx";
 import MessageInput from "./MessageInput.jsx";
@@ -20,7 +20,8 @@ const ChatBox = ({ rootUrl }) => {
     const connectWebSocket = () => {
         window.Echo.private(webSocketChannel)
             .listen('GotMessage', async (e) => {
-                await getMessages();
+                // When a new message is received, update the messages state
+                setMessages(prevMessages => [...prevMessages, e.message]);
             });
     }
 
@@ -34,6 +35,7 @@ const ChatBox = ({ rootUrl }) => {
     };
 
     useEffect(() => {
+        // Fetch initial messages when the component mounts
         getMessages();
         connectWebSocket();
 
@@ -46,13 +48,24 @@ const ChatBox = ({ rootUrl }) => {
         scrollToBottom();
     }, [messages]);
 
+    const handleSendMessage = async (text) => {
+        // Send the message to the server
+        try {
+            const response = await axios.post(`${rootUrl}/messages`, { text });
+            // When the message is successfully sent, update the messages state
+            setMessages(prevMessages => [...prevMessages, response.data]);
+        } catch (err) {
+            console.log(err.message);
+        }
+    };
+
     return (
         <div className="row justify-content-center">
             <div className="col-md-8">
                 <div className="card">
                     <div className="card-header">Chat Box</div>
                     <div className="card-body" style={{height: "500px", overflowY: "auto"}}>
-                        {messages?.map((message, index) => (
+                        {messages.map((message, index) => (
                             <Message
                                 key={message.id}
                                 userId={user.id}
@@ -63,7 +76,7 @@ const ChatBox = ({ rootUrl }) => {
                         <span ref={lastMessageRef}></span>
                     </div>
                     <div className="card-footer">
-                        <MessageInput rootUrl={rootUrl} />
+                        <MessageInput rootUrl={rootUrl} onSendMessage={handleSendMessage} />
                     </div>
                 </div>
             </div>

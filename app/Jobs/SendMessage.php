@@ -14,11 +14,19 @@ class SendMessage implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function __construct(public Message $message) {
+    /**
+     * Create a new job instance.
+     */
+    public function __construct(public Message $message)
+    {
         //
     }
 
-    public function handle(): void {
+    /**
+     * Execute the job.
+     */
+    public function handle(): void
+    {
         GotMessage::dispatch([
             'id' => $this->message->id,
             'user_id' => $this->message->user_id,
