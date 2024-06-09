@@ -27,6 +27,7 @@
   <link rel="stylesheet" href="{{asset("admin/css/owl.carousel.css")}}">
   <link rel="stylesheet" href="{{asset("admin/css/owl.theme.css")}}">
   <link rel="stylesheet" href="{{asset("admin/css/owl.transitions.css")}}">
+  <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
   <!-- animate CSS
 		============================================ -->
   <link rel="stylesheet" href="{{asset("admin/css/animate.css")}}">
@@ -62,8 +63,6 @@
   <!-- modernizr JS
 		============================================ -->
   <script src="{{asset("admin/js/vendor/modernizr-2.8.3.min.js")}}"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
 </head>
 
 <body>
@@ -105,7 +104,7 @@
                     <div class="header-right-info">
                       <ul class="nav navbar-nav mai-top-nav header-right-menu">
                         <li class="nav-item">
-                          <a href="#" data-toggle="dropdown" role="button" aria-expanded="false"
+                          <a href="" data-toggle="dropdown" role="button" aria-expanded="false"
                             class="nav-link dropdown-toggle">
                             <i class="icon nalika-user"></i>
                             <span class="admin-name">Admin</span>
@@ -133,7 +132,7 @@
                         <i class="icon nalika-home"></i>
                       </div>
                       <div class="breadcomb-ctn">
-                        <h2>Lihat Transaksi</h2>
+                        <h2>Lihat Blog</h2>
                         <p>Selamat Datang <span class="bread-ntd">Admin</span></p>
                       </div>
                     </div>
@@ -151,18 +150,113 @@
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="product-sales-chart table">
               <div class="card mt-5">
-                <h3 class="card-header p-3"><strong>Semua Project</strong></h3>
+                <h3 class="card-header p-3"><strong>Semua Blog</strong></h3>
+                <hr>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Buat Postingan Blog
+                </button>
+                <!-- Modal Popup -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Buat Postingan Blog</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="{{ route('postBlog') }}" method="post" class="text-white"
+                          enctype="multipart/form-data">
+                          @csrf
+                          <div class="mb-3">
+                            <label for="blogTitle" class="form-label black">Judul Blog</label>
+                            <input type="text" class="form-control" id="blogTitle" name="blogTitle"
+                              placeholder="Judul Blog...">
+                          </div>
+                          <div class="mb-3">
+                            <label for="blogDescription" class="form-label black">Isi Blog</label>
+                            <textarea class="form-control" id="blogDescription" name="blogDescription"
+                              style="height: 25em;"></textarea>
+                          </div>
+                          <div class="mb-3">
+                            <label for="blogFile" class="form-label black">Foto Blog</label>
+                            <input class="form-control no-height" type="file" id="blogFile" name="blogFile">
+                          </div>
+                          <div class="mb-3">
+                            <label for="isFeatured" class="form-label black">Apakah Featured/Headline ?</label>
+                            <select class="form-control" id="isFeatured" name="isFeatured">
+                              <option value="false">Tidak</option>
+                              <option value="true">Iya</option>
+                            </select>
+                          </div>
+                          <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Edit Blog Modal -->
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Edit Blog</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="{{ route('updatePosting') }}" method="post" class="text-white"
+                          enctype="multipart/form-data">
+                          @csrf
+                          <input type="hidden" id="editblogId" name="id">
+                          <div class="form-group">
+                            <label for="editblogTitle">Title</label>
+                            <input type="text" class="form-control" id="editblogTitle" name="blogTitle" required>
+                          </div>
+                          <div class="form-group">
+                            <label for="editblogDescription">Description</label>
+                            <textarea class="form-control" id="editblogDescription" name="blogDescription" required
+                              style="height: 25em;"></textarea>
+                          </div>
+                          <div class="form-group">
+                            <label for="editisFeatured">Is Featured</label>
+                            <select class="form-control" id="editisFeatured" name="isFeatured" required>
+                              <option value="true">Yes</option>
+                              <option value="false">No</option>
+                            </select>
+                          </div>
+                          <div class="form-group">
+                            <label for="editblogFile">File</label>
+                            <input type="file" class="form-control" id="editblogFile" name="blogFile">
+                          </div>
+                          <button type="submit" class="btn btn-primary" id="updateBtn">Simpan</button>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <hr>
                 <div class="card-body" style="with:100%">
                   <table class="table table-bordered data-table black">
                     <thead>
                       <tr>
-                        <th>No.</th>
                         <th>Pekerjaan</th>
                         <th>Nama Talent</th>
                         <th>Nama Client</th>
-                        <th>Harga Project</th>
+                        <th>Harga blog</th>
                         <th>Tgl Dibuat</th>
                         <th>Status</th>
+                        <th>Aksi</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -243,34 +337,86 @@
   <!-- main JS
 		============================================ -->
   <script src="{{asset("admin/js/main.js")}}"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
+
+  <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+
   <script type="text/javascript">
-    $(function () {
+    $(document).ready(function () {
       var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ route('getAllTransaction') }}",
+          url: "{{ route('getAllBlog') }}",
           type: "GET"
         },
         columns: [
-          { data: 'DT_RowIndex', name: 'DT_RowIndex' },
-          { data: 'projectName', name: 'projectName' },
-          { data: 'talentName', name: 'talentName' },
-          { data: 'clientName', name: 'clientName' },
-          { data: 'amount', name: 'amount' },
-          { data: 'transaksi_created_at', name: 'transaksi_created_at' },
-          { data: 'status_transaksi', name: 'status_transaksi' },
-        ],
-        dom: 'Bfrtip',
-        buttons: [
-          'copy', 'csv', 'excel', 'pdf', 'print'
+          { data: 'blogTitle', name: 'blogTitle' },
+          {
+            data: 'blogDescription',
+            name: 'blogDescription',
+            render: function (data, type, full, meta) {
+              return data.length > 100 ? data.substr(0, 100) + '...' : data;
+            }
+          },
+          { data: 'isFeatured', name: 'isFeatured' },
+          {
+            data: 'foto',
+            name: 'foto',
+            render: function (data, type, full, meta) {
+              // Assuming 'foto' contains the image filename
+              return '<img src="{{ asset('blogs/') }}/' + data + '" style="max-width: 100px; max-height: 100px;">';
+            }
+          },
+          { data: 'created_at', name: 'created_at' },
+          { data: 'updated_at', name: 'updated_at' },
+          { data: 'action', name: 'action', orderable: false, searchable: false },
         ]
+      });
+
+      // Edit button click event
+      $(document).on('click', '.edit', function () {
+        var blogId = $(this).data('id');
+
+        // AJAX request to fetch blog details
+        $.ajax({
+          url: "{{ route('editPosting') }}",
+          type: 'GET',
+          data: { blogId: blogId },
+          success: function (response) {
+            console.log(response); // Log the response data
+            $('#editblogTitle').val(response.blogTitle);
+            $('#editblogDescription').val(response.blogDescription);
+            $('#editisFeatured').val(response.isFeatured ? 'true' : 'false');
+            $('#editblogId').val(blogId);
+
+            // Open the modal
+            $('#editModal').modal('show');
+          },
+          error: function (xhr) {
+            console.log(xhr.responseText);
+          }
+        });
+      });
+
+      // Delete button click event
+      $(document).on('click', '.delete', function () {
+        var blogId = $(this).data('id');
+
+        // AJAX request to delete blog post
+        $.ajax({
+          url: "{{ route('deletePosting') }}",
+          type: 'DELETE',
+          data: { blogId: blogId },
+          success: function (response) {
+            // Reload page
+            table.ajax.reload();
+          },
+          error: function (xhr) {
+            // Handle errors
+            console.log(xhr.responseText);
+          }
+        });
       });
     });
   </script>

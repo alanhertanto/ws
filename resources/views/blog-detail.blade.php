@@ -57,13 +57,12 @@
                     <li clas=""><a class="nav-link" href="/about">About Us</a></li>
                     @auth
                         @if (Auth::user()->role !== null)
-                            <li><a class="nav-link" href="{{url('/logout')}}">Logout</a></li>
+                            <li><a class="nav-link" href="/logout">Logout</a></li>
                         @endif
                     @endauth
                     @guest
                         <li><a class="nav-link" href="/login">Login</a></li>
                     @endguest
-
                 </ul>
             </div>
         </div>
@@ -88,7 +87,7 @@
                 </div>
                 <div class="col-lg-7">
                     <div class="hero-img-wrap">
-                        <img src="images/blog-post.png" class="img-fluid">
+                        <img src="{{asset('images/blog-post.png')}}" class="img-fluid">
                     </div>
                 </div>
             </div>
@@ -96,79 +95,23 @@
     </div>
     <!-- End Hero Section -->
 
-    <!-- Start client Slider -->
-    <div class="client-section mb-n10">
-        <div class="container">
-            <h2 class="section-title text-center my-4">Out Featured Posts</h2>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-indicators">
-                            @foreach ($featuredBlogs as $featuredBlog)
-                                <button type="button" data-bs-target="#carouselExampleCaptions"
-                                    data-bs-slide-to="{{$featuredBlog->id}}" class="active" aria-current="true"
-                                    aria-label="Slide {{$featuredBlog->id}}"></button>
-                            @endforeach
-                        </div>
-                        <div class="carousel-inner">
-                            @foreach ($featuredBlogs as $key => $featuredBlog)
-                                <a href="/blogDetail/{{$featuredBlog->id}}" target="_blank">
-                                    <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
-                                        <img src="blogs/{{ $featuredBlog->foto }}"
-                                            class="d-none d-md-block w-50 img-thumbnail" alt="...">
-                                        <div class="carousel-caption d-none d-md-block">
-                                            <h2 class="text-end text-black-50">{{ $featuredBlog->blogTitle }}</h2>
-                                            <p class="text-end text-black-50">
-                                                {{ strlen($featuredBlog->blogDescription) > 25 ? substr($featuredBlog->blogDescription, 0, 25) . '...' : $featuredBlog->blogDescription }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </a>
-                            @endforeach
-
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
-                            data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
-                            data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End client Slider -->
-
-
     <!-- Start Blog Section -->
     <div class="blog-section">
         <div class="container">
-            <h2 class="section-title text-center">Our Other Blog</h2>
             <div class="row justify-content-center">
-                @foreach ($blogs as $blog)
-                    <div class="col-12 col-sm-6 col-md-4 mb-5">
-                        <div class="post-entry">
-                            <a href="/blogDetail/{{$blog->id}}" target="_blank" class="post-thumbnail"><img src="blogs/{{$blog->foto}}" alt="Image"
-                                    class="img-fluid"></a>
-                            <div class="post-content-entry">
-                                <h3><a href="{{route('blogDetail', ['blogId' => $blog->id])}}">{{$blog->blogTitle}}</a></h3>
-                                <div class="meta">
-                                    <span>on{{$blog->created_at}}</span>
-                                </div>
-                            </div>
+                <div class="col-md-8">
+                    <h2 class="section-title text-center my-4">{{$blog->blogTitle}}</h2>
+                    <div class="text-center my-5">
+                        <img src="{{ asset('blogs/' . $blog->foto) }}" alt="Image" class="img-fluid">
+                    </div>
+                    <div class="text-justify">
+                        <p>{{$blog->blogDescription}}</p>
+                        <div class="meta">
+                            <strong><span>Diterbitkan Pada {{$blog->created_at}}</span></strong>
                         </div>
                     </div>
-                @endforeach
+                </div>
             </div>
-            <div class="d-flex justify-content-center mt-5">
-                {{ $blogs->links() }}
-            </div>
-
         </div>
     </div>
     <!-- End Blog Section -->

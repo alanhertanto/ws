@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
     <!-- Bootstrap CSS
 		============================================ -->
-    <link rel="stylesheet" href="{{asset("admin/css/bootstrap.min.css")}}">
+    <link rel="stylesheet" href="{{asset("css/bootstrap.min.css")}}">
     <!-- Bootstrap CSS
 		============================================ -->
     <link rel="stylesheet" href="{{asset("admin/css/font-awesome.min.css")}}">
@@ -108,15 +108,7 @@
                                                         aria-expanded="false" class="nav-link dropdown-toggle">
                                                         <i class="icon nalika-user"></i>
                                                         <span class="admin-name">Admin</span>
-                                                        <i class="icon nalika-down-arrow nalika-angle-dw"></i>
                                                     </a>
-                                                    <ul role="menu"
-                                                        class="dropdown-header-top author-log dropdown-menu animated zoomIn">
-                                                        <li><a href="/logout"><span
-                                                                    class="icon nalika-unlocked author-log-ic"></span>
-                                                                Log Out</a>
-                                                        </li>
-                                                    </ul>
                                                 </li>
                                             </ul>
                                         </div>
@@ -158,7 +150,7 @@
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="product-sales-chart table">
                             <div class="card mt-5">
-                                <h3 class="card-header p-3  white"><strong>Semua Project</strong></h3>
+                                <h3 class="card-header p-3"><strong>Semua Project</strong></h3>
                                 <div class="card-body" style="with:100%">
                                     <table class="table table-bordered data-table black">
                                         <thead>
@@ -202,7 +194,7 @@
     <script src="{{asset("admin/js/vendor/jquery-1.12.4.min.js")}}"></script>
     <!-- bootstrap JS
 		============================================ -->
-    <script src="{{asset("admin/js/bootstrap.min.js")}}"></script>
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <!-- wow JS
 		============================================ -->
     <script src="{{asset("admin/js/wow.min.js")}}"></script>

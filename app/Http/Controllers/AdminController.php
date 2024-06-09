@@ -25,6 +25,10 @@ class AdminController extends Controller
     {
         return view('admin.lihat-transaksi');
     }
+    public function viewBlogs(): View
+    {
+        return view('admin.blog');
+    }
 
     public function printTrans(): View
     {
