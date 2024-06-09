@@ -27,10 +27,6 @@
 					<div class="row links-wrap">
 						<div class="col-4 col-sm-4 col-md-4">
 							<ul class="list-unstyled">
-								<li><a href="#">Jobs</a></li>
-								<li><a href="#">Our team</a></li>
-								<li><a href="#">Services</a></li>
-								<li><a href="#">Blog</a></li>
 							</ul>
 						</div>
 

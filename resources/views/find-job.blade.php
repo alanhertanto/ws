@@ -319,7 +319,7 @@
                                     <hr>
                                     <input type="hidden" name="userId" value="{{ session('user_id') }}">
                                     <div class="mb-3 mt-5">
-                                        @if($hasBid[$job->id])
+                                        @if(isset($hasBid[$job->id]))
                                             <button class="btn btn-success" disabled>Sudah Di Submit</button>
                                         @else
                                             <button class="btn btn-secondary" id="jobPosting">Bid Job</button>
