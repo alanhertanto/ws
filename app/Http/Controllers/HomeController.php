@@ -29,4 +29,8 @@ class HomeController extends Controller
         $achievements = DB::table("Achievements")->get();
         return view('welcome',compact("clients", "achievements"));
     }
+    public function About(): View
+    {
+        return view('about');
+    }
 }

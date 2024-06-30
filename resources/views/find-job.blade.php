@@ -269,7 +269,8 @@
                                     </div>
 
                                 </div>
-
+                                <hr>
+                                <p class="fs1">Deadline Project: {{$job->deadline}}</p>
                                 <hr>
                                 <p class="fs1"><strong>Attachment</strong></p>
                                 <p class="fsd8"><i class="fa-solid fa-paperclip fs1"></i> <a

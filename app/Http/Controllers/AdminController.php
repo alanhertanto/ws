@@ -65,6 +65,7 @@ class AdminController extends Controller
                 ->addColumn('action', function ($participant) {
                     if ($participant->status == "Pending") {
                         $btn = '<a href="' . route('approveProject', ['projectId' => $participant->id]) . '" class="edit btn btn-danger btn-sm">Approve Pekerjaan</a>';
+                        $btn = '<a href="' . route('hapusProject', ['projectId' => $participant->id]) . '" class="edit btn btn-danger btn-sm">Tolak Pekerjaan</a>';
                     } else if ($participant->status == "Working") {
                         $btn = '<a href="' . route('finishProject', ['projectId' => $participant->id]) . '" class="edit btn btn-success btn-sm"> Selesai</a>';
                     } else {
@@ -99,6 +100,17 @@ class AdminController extends Controller
         }
 
     }
+
+    public function HapusProject(Request $request)
+    {
+        $blogId = $request->blogId;
+        $blog = Pekerjaan::findOrFail($blogId);
+        // Delete the blog post
+        $blog->delete();
+
+        return response()->json(['message' => 'Project Berhasil Di Tolak']);
+    }
+
 
     public function getAllTransaction(Request $request)
     {

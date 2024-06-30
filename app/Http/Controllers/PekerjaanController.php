@@ -197,6 +197,7 @@ class PekerjaanController extends Controller
             'minimumPayment' => 'nullable',
             'maximumPayment' => 'nullable',
             'hourlyPayment' => 'nullable',
+            'deadline'=>'required',
             'clientId' => 'required'
         ]);
 
@@ -224,6 +225,7 @@ class PekerjaanController extends Controller
             'maximumPayment' => $request->maximumPayment,
             'hourlyPayment' => $request->hourlyPayment,
             'clientId' => $request->clientId,
+            'deadline'=>$request->deadline,
             'status' => 'Pending'
         ]);
 

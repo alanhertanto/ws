@@ -25,6 +25,7 @@ return new class extends Migration {
             $table->integer('hourlyPayment')->default(0);
             $table->integer('clientId');
             $table->string('status');
+            $table->timestamp('deadline');
             $table->timestamps();
         });
     }

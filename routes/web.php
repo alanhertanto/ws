@@ -13,6 +13,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'Home'])->name('home');
+Route::get('/about', [HomeController::class,'About'])->name('about');
 // Route resource for blogs and jobs
 Route::resource('/blog', BlogController::class);
 Route::get('/blogDetail/{blogId}', [BlogController::class, 'GetDetail'])->name('blogDetail');
@@ -40,6 +41,7 @@ Route::get('/admin/index', [AuthController::class, 'adminDashboard'])->middlewar
 Route::get('/admin/lihat-pekerjaan', [AdminController::class, 'viewJobs'])->name('lihat-pekerjaan')->middleware(CheckAdmin::class);
 Route::get('/getAllJob', [AdminController::class, 'getAllJob'])->name('getAllJob')->middleware(CheckAdmin::class);
 Route::get('/approveProject/{projectId}', [AdminController::class, 'ApproveProject'])->name('approveProject')->middleware(CheckAdmin::class);
+Route::get('/hapusProject/{projectId}', [AdminController::class, 'HapusProject'])->name('hapusProject')->middleware(CheckAdmin::class);
 Route::get('/finishProject/{projectId}', [AdminController::class, 'FinishProject'])->name('finishProject')->middleware(CheckAdmin::class);
 Route::get('/admin/lihat-transaksi', [AdminController::class, 'viewTrans'])->name('lihat-transaksi')->middleware(CheckAdmin::class);
 Route::get('/getAllTransaction', [AdminController::class, 'getAllTransaction'])->name('getAllTransaction')->middleware(CheckAdmin::class);

@@ -63,6 +63,7 @@
   <!-- modernizr JS
 		============================================ -->
   <script src="{{asset("admin/js/vendor/modernizr-2.8.3.min.js")}}"></script>
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -343,6 +344,12 @@
 
   <script type="text/javascript">
     $(document).ready(function () {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
       var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
@@ -364,7 +371,6 @@
             data: 'foto',
             name: 'foto',
             render: function (data, type, full, meta) {
-              // Assuming 'foto' contains the image filename
               return '<img src="{{ asset('blogs/') }}/' + data + '" style="max-width: 100px; max-height: 100px;">';
             }
           },
@@ -374,23 +380,19 @@
         ]
       });
 
-      // Edit button click event
       $(document).on('click', '.edit', function () {
         var blogId = $(this).data('id');
 
-        // AJAX request to fetch blog details
         $.ajax({
           url: "{{ route('editPosting') }}",
           type: 'GET',
           data: { blogId: blogId },
           success: function (response) {
-            console.log(response); // Log the response data
             $('#editblogTitle').val(response.blogTitle);
             $('#editblogDescription').val(response.blogDescription);
             $('#editisFeatured').val(response.isFeatured ? 'true' : 'false');
             $('#editblogId').val(blogId);
 
-            // Open the modal
             $('#editModal').modal('show');
           },
           error: function (xhr) {
@@ -399,21 +401,17 @@
         });
       });
 
-      // Delete button click event
       $(document).on('click', '.delete', function () {
         var blogId = $(this).data('id');
 
-        // AJAX request to delete blog post
         $.ajax({
           url: "{{ route('deletePosting') }}",
           type: 'DELETE',
           data: { blogId: blogId },
           success: function (response) {
-            // Reload page
             table.ajax.reload();
           },
           error: function (xhr) {
-            // Handle errors
             console.log(xhr.responseText);
           }
         });

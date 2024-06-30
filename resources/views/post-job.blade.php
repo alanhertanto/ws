@@ -146,6 +146,10 @@
                                 <label for="projectFile" class="form-label">Additional File</label>
                                 <input class="form-control no-height" type="file" id="projectFile" name="projectFile">
                             </div>
+                            <div class="mb-3">
+                                <label for="deadline" class="form-label">Deadline</label>
+                                <input class="form-control no-height" type="date" id="deadline" name="deadline">
+                            </div>
                             <div class="mb-6 payment-type">
                                 <h6 class="form-label">Jenis Pembayaran</h6>
                                 <input class="form-check-input" type="radio" name="paymentType" id="inlineRadio1"
