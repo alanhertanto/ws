@@ -10,6 +10,7 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Yajra\DataTables\Datatables;
 use PDF;
 
@@ -64,10 +65,13 @@ class AdminController extends Controller
                 })
                 ->addColumn('action', function ($participant) {
                     if ($participant->status == "Pending") {
-                        $btn = '<a href="' . route('approveProject', ['projectId' => $participant->id]) . '" class="edit btn btn-danger btn-sm">Approve Pekerjaan</a>';
-                        $btn = '<a href="' . route('hapusProject', ['projectId' => $participant->id]) . '" class="edit btn btn-danger btn-sm">Tolak Pekerjaan</a>';
+                        $btn = '<a href="' . route('approveProject', ['projectId' => $participant->id]) . '" class="edit btn btn-warning btn-sm">Approve Pekerjaan</a> ';
+                        $btn .= '<a href="' . route('hapusProject', ['projectId' => $participant->id]) . '" class="edit btn btn-danger btn-sm">Tolak Pekerjaan</a>';
                     } else if ($participant->status == "Working") {
                         $btn = '<a href="' . route('finishProject', ['projectId' => $participant->id]) . '" class="edit btn btn-success btn-sm"> Selesai</a>';
+                    } else if ($participant->status == "Open") {
+                        $btn = 'Project Sedang Berlangsung!';
+
                     } else {
                         $btn = 'Project Selesai!';
                     }
@@ -103,12 +107,17 @@ class AdminController extends Controller
 
     public function HapusProject(Request $request)
     {
-        $blogId = $request->blogId;
-        $blog = Pekerjaan::findOrFail($blogId);
-        // Delete the blog post
-        $blog->delete();
+        $projectId = $request->projectId;
+        $project = Pekerjaan::findOrFail($projectId);
 
-        return response()->json(['message' => 'Project Berhasil Di Tolak']);
+        // Delete associated file from public directory
+        if ($project->projectFile && File::exists(public_path('projects/' . $project->projectName . '/' . $project->projectFile))) {
+            File::delete(public_path('projects/' . $project->projectName . '/' . $project->projectFile));
+        }
+
+        // Delete the blog post
+        $project->delete();
+        return redirect()->route('lihat-pekerjaan')->with(['success' => 'Project Berhasil Di Tolak']);
     }
 
 

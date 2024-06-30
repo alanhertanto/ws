@@ -38,22 +38,21 @@ class PekerjaanController extends Controller
         }
         return view("client-dashboard", compact("jobs", "interviewCounts", "submittedCounts"));
     }
-    public function GetBidDetail(Request $request)
+
+    public function GetBidDetailClient(Request $request)
     {
         $projectId = $request->route('projectId');
-        $projectNames = Bids::query()
+        $projectName = Bids::query()
             ->join('pekerjaans', 'bids.projectId', '=', 'pekerjaans.id')
             ->where('bids.projectId', $projectId)
-            ->first('projectName');
-
-        $projectName = $projectNames->projectName;
+            ->first('projectName')->projectName;
 
         if ($request->ajax()) {
             $participants = Bids::query()
                 ->join('users', 'bids.userId', '=', 'users.id')
                 ->where('bids.projectId', $projectId)
-                ->where('bids.bidStatus','Terpilih')
-                ->select('bids.*', 'users.id as userId', 'bids.projectId as projectId', 'users.name as userName');
+                ->where('bids.bidStatus', 'Terpilih')
+                ->select('bids.*', 'users.id as userId', 'users.name as userName');
 
             return Datatables::of($participants)
                 ->addIndexColumn()
@@ -67,40 +66,21 @@ class PekerjaanController extends Controller
                 })
                 ->addColumn('interview', function ($participant) {
                     $csrfToken = csrf_field();
-                    if ($participant->bidStatus == "Interviewed" || $participant->bidStatus=="Terpilih") {
-                        $btni = '<form action="' . route('interviewTheFreelance') . '" method="post" style="display:inline;">' .
-                            $csrfToken .
-                            '<input type="hidden" name="freelancerId" value="' . $participant->userId . '">' .
-                            '<input type="hidden" name="projectId" value="' . $participant->projectId . '">' .
-                            '<button class="edit btn btn-danger btn-sm" disabled>Sudah Interview</button></form>';
-
-                    } else {
-                        $btni = '<form action="' . route('interviewTheFreelance') . '" method="post" style="display:inline;">' .
-                            $csrfToken .
-                            '<input type="hidden" name="freelancerId" value="' . $participant->userId . '">' .
-                            '<input type="hidden" name="projectId" value="' . $participant->projectId . '">' .
-                            '<button class="edit btn btn-danger btn-sm">Interview</button></form>';
-                    }
-                    return $btni;
-                })
-                ->addColumn('choose', function ($participant) {
-                    $csrfToken = csrf_field();
-                    if ($participant->bidStatus == "Terpilih") {
-                        $btn = '<form action="' . route('chooseTheFreelance') . '" method="post" style="display:inline;">' .
-                            $csrfToken .
-                            '<input type="hidden" name="freelancerId" value="' . $participant->userId . '">' .
-                            '<input type="hidden" name="projectId" value="' . $participant->projectId . '">' .
-                            '<button class="edit btn btn-success btn-sm" disabled>Sudah Terpilih</button></form>';
-                        return $btn;
-                    } else {
-
-                    }$btn = '<form action="' . route('chooseTheFreelance') . '" method="post" style="display:inline;">' .
+                    $disabled = ($participant->bidStatus == "Interviewed" || $participant->bidStatus == "Terpilih") ? 'disabled' : '';
+                    return '<form action="' . route('interviewTheFreelance') . '" method="post" style="display:inline;">' .
                         $csrfToken .
                         '<input type="hidden" name="freelancerId" value="' . $participant->userId . '">' .
                         '<input type="hidden" name="projectId" value="' . $participant->projectId . '">' .
-                        '<button class="edit btn btn-success btn-sm">Pilih</button></form>';
-                    return $btn;
-
+                        '<button class="edit btn btn-danger btn-sm" ' . $disabled . '>Interview</button></form>';
+                })
+                ->addColumn('choose', function ($participant) {
+                    $csrfToken = csrf_field();
+                    $disabled = ($participant->bidStatus == "Terpilih") ? 'disabled' : '';
+                    return '<form action="' . route('chooseTheFreelance') . '" method="post" style="display:inline;">' .
+                        $csrfToken .
+                        '<input type="hidden" name="freelancerId" value="' . $participant->userId . '">' .
+                        '<input type="hidden" name="projectId" value="' . $participant->projectId . '">' .
+                        '<button class="edit btn btn-success btn-sm" ' . $disabled . '>Pilih</button></form>';
                 })
                 ->rawColumns(['interview', 'choose'])
                 ->make(true);
@@ -108,6 +88,56 @@ class PekerjaanController extends Controller
 
         return view('bid-detail', compact('projectId', 'projectName'));
     }
+
+    public function GetBidDetail(Request $request)
+    {
+        $projectId = $request->route('projectId');
+        $projectName = Bids::query()
+            ->join('pekerjaans', 'bids.projectId', '=', 'pekerjaans.id')
+            ->where('bids.projectId', $projectId)
+            ->first('projectName')->projectName;
+
+        if ($request->ajax()) {
+            $participants = Bids::query()
+                ->join('users', 'bids.userId', '=', 'users.id')
+                ->where('bids.projectId', $projectId)
+                ->select('bids.*', 'users.id as userId', 'users.name as userName');
+
+            return Datatables::of($participants)
+                ->addIndexColumn()
+                ->addColumn('pengalaman', function ($participant) use ($projectId) {
+                    $pengalaman = Pekerjaan::query()
+                        ->join('bids', 'pekerjaans.id', '=', 'bids.projectId')
+                        ->where('bids.projectId', $projectId)
+                        ->where('pekerjaans.status', 'Finished')
+                        ->count();
+                    return $pengalaman;
+                })
+                ->addColumn('interview', function ($participant) {
+                    $csrfToken = csrf_field();
+                    $disabled = ($participant->bidStatus == "Interviewed" || $participant->bidStatus == "Terpilih") ? 'disabled' : '';
+                    return '<form action="' . route('interviewTheFreelance') . '" method="post" style="display:inline;">' .
+                        $csrfToken .
+                        '<input type="hidden" name="freelancerId" value="' . $participant->userId . '">' .
+                        '<input type="hidden" name="projectId" value="' . $participant->projectId . '">' .
+                        '<button class="edit btn btn-danger btn-sm" ' . $disabled . '>Interview</button></form>';
+                })
+                ->addColumn('choose', function ($participant) {
+                    $csrfToken = csrf_field();
+                    $disabled = ($participant->bidStatus == "Terpilih") ? 'disabled' : '';
+                    return '<form action="' . route('chooseTheFreelance') . '" method="post" style="display:inline;">' .
+                        $csrfToken .
+                        '<input type="hidden" name="freelancerId" value="' . $participant->userId . '">' .
+                        '<input type="hidden" name="projectId" value="' . $participant->projectId . '">' .
+                        '<button class="edit btn btn-success btn-sm" ' . $disabled . '>Pilih</button></form>';
+                })
+                ->rawColumns(['interview', 'choose'])
+                ->make(true);
+        }
+
+        return view('bid-detail', compact('projectId', 'projectName'));
+    }
+
 
 
     public function InterviewTheFreelance(Request $request)
@@ -172,12 +202,9 @@ class PekerjaanController extends Controller
         foreach ($jobs as $job) {
             $interviewCounts[$job->id] = Bids::where("projectId", $job->id)->where("bidStatus", "Interview")->count();
             $submittedCounts[$job->id] = Bids::where("projectId", $job->id)->where("bidStatus", "Submitted")->count();
-            $hasBid[$job->id] = Bids::where('userId', $userId)->where('projectId', $job->id)->exists();
+            $hasBids[$job->id] = Bids::where('userId', $userId)->where('projectId', $job->id)->exists();
         }
-        if (count($hasBids) > 0)
-            return view("find-job", compact("jobs", "interviewCounts", "submittedCounts", "hasBid"));
-        else
-            return view("find-job", compact("jobs", "interviewCounts", "submittedCounts"));
+        return view("find-job", compact("jobs", "interviewCounts", "submittedCounts", "hasBids"));
     }
 
 
@@ -197,7 +224,7 @@ class PekerjaanController extends Controller
             'minimumPayment' => 'nullable',
             'maximumPayment' => 'nullable',
             'hourlyPayment' => 'nullable',
-            'deadline'=>'required',
+            'deadline' => 'required',
             'clientId' => 'required'
         ]);
 
@@ -225,7 +252,7 @@ class PekerjaanController extends Controller
             'maximumPayment' => $request->maximumPayment,
             'hourlyPayment' => $request->hourlyPayment,
             'clientId' => $request->clientId,
-            'deadline'=>$request->deadline,
+            'deadline' => $request->deadline,
             'status' => 'Pending'
         ]);
 

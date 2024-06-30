@@ -28,6 +28,7 @@ class Pekerjaan extends Model
         'maximumPayment',
         'hourlyPayment',
         'clientId',
+        'deadline',
         'status'
     ];
 }
