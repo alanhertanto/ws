@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pekerjaan;
+use App\Models\Transaksi;
 use App\Models\User;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
@@ -50,7 +52,7 @@ class AuthController extends Controller
             return back()->with('success', 'Registered successfully');
         } catch (\Exception $e) {
             // If there is any error, redirect back with error message
-            return redirect()->back()->withErrors(['error' => $e.'Failed to save data.']);
+            return redirect()->back()->withErrors(['error' => $e . 'Failed to save data.']);
         }
     }
 
@@ -84,7 +86,7 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             session(['user_id' => Auth::user()->id]);
-            if(Auth::user()->role=='Admin'){
+            if (Auth::user()->role == 'Admin') {
                 return redirect('/admin/index');
             }
             return redirect('/')->with('success', 'Login successful');
@@ -108,8 +110,16 @@ class AuthController extends Controller
         return view('post-job');
     }
 
-    public function adminDashboard(){
-        return view('admin.index');
+    public function adminDashboard()
+    {
+
+        $totalBelumSelesai = Pekerjaan::latest()->where('status', 'Open')->orWhere('status', 'working')->count();
+        $totalPekerjaan = Pekerjaan::count();
+        $totalSelesai = Pekerjaan::where('status', 'Finish')->count();
+        $totalTransaksi = Transaksi::count();
+        $totalClient = User::where('role','Client')->count();
+        $totalTalent = User::where('role','Freelancer')->count();
+        return view("admin.index", compact("totalBelumSelesai", "totalPekerjaan", "totalSelesai", "totalTransaksi","totalClient","totalTalent"));
     }
 
     /**
