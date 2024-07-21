@@ -16,13 +16,21 @@ class BidsController extends Controller
 
     public function BidJob(Request $request): RedirectResponse
     {
-        // Validate form
-        $request->validate([
+        // Validation rules
+        $rules = [
             'bidPitchFile' => 'mimes:jpeg,jpg,png,pdf,doc,docx|max:250000',
-            'bidPitch' => 'nullable',
-            'rates' => 'required'
-            
-        ]);
+            'bidPitch' => 'nullable'
+        ];
+
+        // Dynamically add 'rates' validation for any input containing 'rates' in its name
+        foreach ($request->all() as $key => $value) {
+            if (strpos($key, 'rates') !== false) {
+                $rules[$key] = 'required';
+            }
+        }
+
+        // Validate form
+        $request->validate($rules);
 
         // Retrieve projectId and userId
         $projectId = $request->input('projectId');
@@ -35,21 +43,30 @@ class BidsController extends Controller
             $pitchFileName = $pitchFile->hashName();
         }
 
-        // Create the bid
-        $bid = Bids::create([
+        // Prepare bid data
+        $bidData = [
             'projectId' => $projectId,
             'userId' => $request->input('userId'),
             'bidPitch' => $request->input('bidPitch'),
             'bidPitchFile' => $pitchFileName,
-            'rates' => $request->input('rates'),
             'bidStatus' => 'Submitted',
-        ]);
+        ];
+
+        // Add all 'rates' fields to bid data
+        foreach ($request->all() as $key => $value) {
+            if (strpos($key, 'rates') !== false) {
+                $bidData['rates'] = $value;
+            }
+        }
+
+        // Create the bid
+        $bid = Bids::create($bidData);
 
         if ($bid) {
             // Redirect to index with success message
             return redirect('find-job')->with(['success' => 'Berhasil Bidding!']);
         } else {
-            return redirect()->back()->withErrors(['error' => 'Gagal Dalma Melakukan Proses Bidding!']);
+            return redirect()->back()->withErrors(['error' => 'Gagal Dalam Melakukan Proses Bidding!']);
         }
     }
 }
