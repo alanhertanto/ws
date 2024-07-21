@@ -253,7 +253,7 @@ class AdminController extends Controller
 
         } catch (\Exception $e) {
             // Log the error
-            return redirect()->back()->withErrors(['error' => 'Gagal Untuk Posting Blog.']);
+            return redirect()->back()->withErrors(['error' => 'Gagal Untuk Update Akun.']);
         }
     }
 
