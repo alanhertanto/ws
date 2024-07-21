@@ -233,7 +233,7 @@
                                 <a href="#" data-bs-dismiss="modal"><i
                                         class="fa-solid fa-arrow-left-long fs1d5"></i></a>
                             </div>
-                            <div class="col-3">
+                            <div class="col-3"> 
                                 <a href="#" target="_blank" class="d-flex justify-content-center nounderline"><i
                                         class="fa-solid fa-arrow-right-to-bracket fs1d2"></i>&emsp;<span
                                         class="fsd8 text-center">Buka Di Tab Baru</span></a>
@@ -362,12 +362,12 @@
             $('#myModal' + jobId).modal('toggle'); // Toggle the modal visibility
         }
 
-        function feeRates() {
-            var fee = $('#rates').val();
+        function feeRates(jobId) {
+            var fee = $('#rates'+jobId).val();
             var feeDeduction = ((fee * 10 / 100));
-            $('#feeDeduction').val(feeDeduction);
+            $('#feeDeduction'+jobId).val(feeDeduction);
             var totalFee = fee - feeDeduction;
-            $('#feeTotal').val(totalFee);
+            $('#feeTotal'+jobId).val(totalFee);
         }
     </script>
 
