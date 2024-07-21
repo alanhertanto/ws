@@ -292,21 +292,21 @@
                                             <span class="fs1"><strong>Rates</strong></span><br>
                                         </div>
                                         <div class="col-md-6 p">
-                                            <input type="number" class="form-control no-height" value="0" id="rates"
-                                                name="rates" onchange="feeRates()">
+                                            <input type="number" class="form-control no-height" value="0" id="rates{{$job->id}}"
+                                                name="rates{{$job->id}}" onchange="feeRates('{{$job->id}}')">
                                         </div>
                                         <div class="col-md-6">
                                             <p class="fs7"><strong>Potongan Jasa 10%</strong></p>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="readonly" class="noborder nobg" value="" id="feeDeduction"
+                                            <input type="readonly" class="noborder nobg" value="" id="feeDeduction{{$job->id}}"
                                                 disabled>
                                         </div>
                                         <div class="col-md-6">
                                             <p class="fs7"><strong>Total Rate</strong></p>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="readonly" class="noborder nobg" value="" id="feeTotal"
+                                            <input type="readonly" class="noborder nobg" value="" id="feeTotal{{$job->id}}"
                                                 disabled>
                                         </div>
                                     </div>
@@ -363,11 +363,11 @@
         }
 
         function feeRates(jobId) {
-            var fee = $('#rates'+jobId).val();
+            var fee = $('#rates' + jobId).val();
             var feeDeduction = ((fee * 10 / 100));
-            $('#feeDeduction'+jobId).val(feeDeduction);
+            $('#feeDeduction' + jobId).val(feeDeduction);
             var totalFee = fee - feeDeduction;
-            $('#feeTotal'+jobId).val(totalFee);
+            $('#feeTotal' + jobId).val(totalFee);
         }
     </script>
 

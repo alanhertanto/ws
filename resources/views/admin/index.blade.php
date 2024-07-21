@@ -303,7 +303,7 @@
                                 <h4 class="text-left text-uppercase"><b>Total Pekerjaan</b></h4>
                                 <div class="row vertical-center-box vertical-center-box-tablet">
                                     <div class="col-xs-12 cus-gh-hd-pro">
-                                        <h2 class="text-left no-margin">10,000</h2>
+                                        <h2 class="text-left no-margin">{{$totalPekerjaan}}</h2>
                                     </div>
                                 </div>
                                 <div class="progress progress-mini">
@@ -316,7 +316,7 @@
                                 <h4 class="text-left text-uppercase"><b>Pekerjaan Belum Selesai</b></h4>
                                 <div class="row vertical-center-box vertical-center-box-tablet">
                                     <div class="col-xs-12 cus-gh-hd-pro">
-                                        <h2 class="text-left no-margin">5,000</h2>
+                                        <h2 class="text-left no-margin">{{$totalBelumSelesai}}</h2>
                                     </div>
                                 </div>
                                 <div class="progress progress-mini">
@@ -329,7 +329,7 @@
                                 <h4 class="text-left text-uppercase"><b>Pekerjaan Selesai</b></h4>
                                 <div class="row vertical-center-box vertical-center-box-tablet">
                                     <div class="col-xs-12 cus-gh-hd-pro">
-                                        <h2 class="text-left no-margin">$70,000</h2>
+                                        <h2 class="text-left no-margin">{{$totalSelesai}}</h2>
                                     </div>
                                 </div>
                                 <div class="progress progress-mini">
@@ -342,7 +342,7 @@
                                 <h4 class="text-left text-uppercase"><b>Total Transaksi Berhasil</b></h4>
                                 <div class="row vertical-center-box vertical-center-box-tablet">
                                     <div class="col-xs-9 cus-gh-hd-pro">
-                                        <h2 class="text-left no-margin">100,000</h2>
+                                        <h2 class="text-left no-margin">{{$totalTransaksi}}</h2>
                                     </div>
                                 </div>
                                 <div class="progress progress-mini">
@@ -391,7 +391,7 @@
                                     <div id="sparklinedash"></div>
                                 </li>
                                 <li class="text-right sp-cn-r"><i class="fa fa-level-up" aria-hidden="true"></i> <span
-                                        class="counter sales-sts-ctn">8659</span></li>
+                                        class="counter sales-sts-ctn">{{$totalTalent}}</span></li>
                             </ul>
                         </div>
                         <div class="white-box analytics-info-cs mg-b-30">
@@ -401,27 +401,17 @@
                                     <div id="sparklinedash2"></div>
                                 </li>
                                 <li class="text-right"><i class="fa fa-level-up" aria-hidden="true"></i> <span
-                                        class="counter sales-sts-ctn">7469</span></li>
+                                        class="counter sales-sts-ctn">{{$totalClient}}</span></li>
                             </ul>
                         </div>
                         <div class="white-box analytics-info-cs mg-b-30">
-                            <h3 class="box-title">Total Pengunjungb</h3>
+                            <h3 class="box-title">Total Pengunjung</h3>
                             <ul class="list-inline two-part-sp">
                                 <li>
                                     <div id="sparklinedash3"></div>
                                 </li>
                                 <li class="text-right"><i class="fa fa-level-up" aria-hidden="true"></i> <span
-                                        class="counter sales-sts-ctn">6011</span></li>
-                            </ul>
-                        </div>
-                        <div class="white-box analytics-info-cs">
-                            <h3 class="box-title">Total Komplain</h3>
-                            <ul class="list-inline two-part-sp">
-                                <li>
-                                    <div id="sparklinedash4"></div>
-                                </li>
-                                <li class="text-right"><i class="fa fa-level-down" aria-hidden="true"></i> <span
-                                        class="sales-sts-ctn">18%</span></li>
+                                        class="counter sales-sts-ctn">{{$totalPengunjung}}</span></li>
                             </ul>
                         </div>
                     </div>
