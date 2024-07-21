@@ -77,9 +77,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <div class="logo-pro">
-            <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
-          </div>
+          <br>
         </div>
       </div>
     </div>
@@ -194,7 +192,7 @@
   <script src="{{asset("admin/js/vendor/jquery-1.12.4.min.js")}}"></script>
   <!-- bootstrap JS
 		============================================ -->
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
   <!-- wow JS
 		============================================ -->
   <script src="{{asset("admin/js/wow.min.js")}}"></script>

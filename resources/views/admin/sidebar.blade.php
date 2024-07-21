@@ -49,8 +49,6 @@
                         <ul class="submenu-angle" aria-expanded="false">
                             <li><a title="Akun User" href="/admin/akun"><span class="mini-sub-pro">Akun
                                         User</span></a></li>
-                            <li><a title="Rekening WS" href="/admin/rekening"><span class="mini-sub-pro">Rekening
-                                        WS</span></a></li>
                         </ul>
                     </li>
                     <li><a href="/logout"><span class="icon nalika-unlocked author-log-ic"></span>

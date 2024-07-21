@@ -55,6 +55,11 @@ Route::post('/postBlog', [BlogController::class, 'PostBlog'])->name('postBlog')-
 Route::get('/editPosting', [BlogController::class, 'editPosting'])->name('editPosting')->middleware(CheckAdmin::class);
 Route::post('/updatePosting', [BlogController::class, 'updatePosting'])->name('updatePosting');
 Route::delete('/deletePosting', [BlogController::class, 'deletePosting'])->name('deletePosting')->middleware(CheckAdmin::class);
+Route::get('/admin/akun', [AdminController::class, 'viewAkuns'])->name('viewAkuns')->middleware(CheckAdmin::class);
+Route::get('/getAllAkun', [AdminController::class, 'getAllAkun'])->name('getAllAkun')->middleware(CheckAdmin::class);
+Route::get('/editAkun', [AdminController::class, 'editAkun'])->name('editAkun')->middleware(CheckAdmin::class);
+Route::post('/updateAkun', [AdminController::class, 'updateAkun'])->name('updateAkun');
+Route::delete('/deleteAkun', [AdminController::class, 'deleteAkun'])->name('deleteAkun')->middleware(CheckAdmin::class);
 // Routes for guest users (not authenticated)
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/register', [AuthController::class, 'register'])->name('register');

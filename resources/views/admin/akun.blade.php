@@ -8,62 +8,62 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- favicon
-		============================================ -->
+    ============================================ -->
   <link rel="shortcut icon" href="{{asset("favicon.ico")}}">
   <!-- Google Fonts
-		============================================ -->
+    ============================================ -->
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
   <!-- Bootstrap CSS
-		============================================ -->
+    ============================================ -->
   <link rel="stylesheet" href="{{asset("css/bootstrap.min.css")}}">
   <!-- Bootstrap CSS
-		============================================ -->
+    ============================================ -->
   <link rel="stylesheet" href="{{asset("admin/css/font-awesome.min.css")}}">
   <!-- nalika Icon CSS
-		============================================ -->
+    ============================================ -->
   <link rel="stylesheet" href="{{asset("admin/css/nalika-icon.css")}}">
   <!-- owl.carousel CSS
-		============================================ -->
+    ============================================ -->
   <link rel="stylesheet" href="{{asset("admin/css/owl.carousel.css")}}">
   <link rel="stylesheet" href="{{asset("admin/css/owl.theme.css")}}">
   <link rel="stylesheet" href="{{asset("admin/css/owl.transitions.css")}}">
+  <link href="https://cdn.datatables.net/1.11.4/css/dataTables.bootstrap5.min.css" rel="stylesheet">
   <!-- animate CSS
-		============================================ -->
+    ============================================ -->
   <link rel="stylesheet" href="{{asset("admin/css/animate.css")}}">
   <!-- normalize CSS
-		============================================ -->
+    ============================================ -->
   <link rel="stylesheet" href="{{asset("admin/css/normalize.css")}}">
   <!-- meanmenu icon CSS
-		============================================ -->
+    ============================================ -->
   <link rel="stylesheet" href="{{asset("admin/css/meanmenu.min.css")}}">
   <!-- main CSS
-		============================================ -->
+    ============================================ -->
   <link rel="stylesheet" href="{{asset("admin/css/main.css")}}">
   <!-- morrisjs CSS
-		============================================ -->
+    ============================================ -->
   <link rel="stylesheet" href="{{asset("admin/css/morrisjs/morris.css")}}">
   <!-- mCustomScrollbar CSS
-		============================================ -->
+    ============================================ -->
   <link rel="stylesheet" href="{{asset("admin/css/scrollbar/jquery.mCustomScrollbar.min.css")}}">
   <!-- metisMenu CSS
-		============================================ -->
+    ============================================ -->
   <link rel="stylesheet" href="{{asset("admin/css/metisMenu/metisMenu.min.css")}}">
   <link rel="stylesheet" href="{{asset("admin/css/metisMenu/metisMenu-vertical.css")}}">
   <!-- calendar CSS
-		============================================ -->
+    ============================================ -->
   <link rel="stylesheet" href="{{asset("admin/css/calendar/fullcalendar.min.css")}}">
   <link rel="stylesheet" href="{{asset("admin/css/calendar/fullcalendar.print.min.css")}}">
   <!-- style CSS
-		============================================ -->
+    ============================================ -->
   <link rel="stylesheet" href="{{asset("admin/style.css")}}">
   <!-- responsive CSS
-		============================================ -->
+    ============================================ -->
   <link rel="stylesheet" href="{{asset("admin/css/responsive.css")}}">
   <!-- modernizr JS
-		============================================ -->
+    ============================================ -->
   <script src="{{asset("admin/js/vendor/modernizr-2.8.3.min.js")}}"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -103,7 +103,7 @@
                     <div class="header-right-info">
                       <ul class="nav navbar-nav mai-top-nav header-right-menu">
                         <li class="nav-item">
-                          <a href="#" data-toggle="dropdown" role="button" aria-expanded="false"
+                          <a href="" data-toggle="dropdown" role="button" aria-expanded="false"
                             class="nav-link dropdown-toggle">
                             <i class="icon nalika-user"></i>
                             <span class="admin-name">Admin</span>
@@ -131,7 +131,7 @@
                         <i class="icon nalika-home"></i>
                       </div>
                       <div class="breadcomb-ctn">
-                        <h2>Lihat Transaksi</h2>
+                        <h2>Lihat Blog</h2>
                         <p>Selamat Datang <span class="bread-ntd">Admin</span></p>
                       </div>
                     </div>
@@ -149,18 +149,56 @@
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="product-sales-chart table">
               <div class="card mt-5">
-                <h3 class="card-header p-3"><strong>Semua Project</strong></h3>
+                <h3 class="card-header p-3"><strong>Semua Akun</strong></h3>
+                <hr>
+                <!-- Edit Blog Modal -->
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+                  aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Edit Akun</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form action="{{ route('updateAkun') }}" method="post" class="text-white"
+                          enctype="multipart/form-data">
+                          @csrf
+                          <input type="hidden" id="id" name="id">
+                          <div class="form-group">
+                            <label for="nama">Nama</label>
+                            <input type="text" class="form-control" id="nama" name="nama" readonly>
+                          </div>
+                          <div class="form-group">
+                            <label for="email">Email</label>
+                            <input class="form-control" id="email" name="email" style="height: 25em;" type="email"
+                              readonly>
+                          </div>
+                          <div class="form-group">
+                            <label for="password">Password</label>
+                            <input class="form-control" id="password" name="password" required style="height: 25em;"
+                              type="password">
+                          </div>
+                          <button type="submit" class="btn btn-primary" id="updateBtn">Simpan</button>
+                        </form>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <hr>
                 <div class="card-body" style="with:100%">
                   <table class="table table-bordered data-table black">
                     <thead>
                       <tr>
-                        <th>No.</th>
-                        <th>Pekerjaan</th>
-                        <th>Nama Talent</th>
-                        <th>Nama Client</th>
-                        <th>Harga Project</th>
-                        <th>Tgl Dibuat</th>
-                        <th>Status</th>
+                        <th>Nama</th>
+                        <th>Email</th>
+                        <th>Aksi</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -168,19 +206,19 @@
                   </table>
                 </div>
                 @if(Session::has('success'))
-          <div class="alert alert-success" role="alert">
-            {{ Session::get('success') }}
-          </div>
-        @endif
+                <div class="alert alert-success" role="alert">
+                  {{ Session::get('success') }}
+                </div>
+                @endif
                 @if($errors->any())
-          <div class="alert alert-danger">
-            <ul>
-            @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-      @endforeach
-            </ul>
-          </div>
-        @endif
+                <div class="alert alert-danger">
+                  <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                  </ul>
+                </div>
+                @endif
               </div>
             </div>
           </div>
@@ -189,86 +227,118 @@
     </div>
   </div>
   <!-- jquery
-		============================================ -->
+    ============================================ -->
   <script src="{{asset("admin/js/vendor/jquery-1.12.4.min.js")}}"></script>
   <!-- bootstrap JS
-		============================================ -->
+    ============================================ -->
   <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
   <!-- wow JS
-		============================================ -->
+    ============================================ -->
   <script src="{{asset("admin/js/wow.min.js")}}"></script>
   <!-- price-slider JS
-		============================================ -->
+    ============================================ -->
   <script src="{{asset("admin/js/jquery-price-slider.js")}}"></script>
   <!-- meanmenu JS
-		============================================ -->
+    ============================================ -->
   <script src="{{asset("admin/js/jquery.meanmenu.js")}}"></script>
   <!-- owl.carousel JS
-		============================================ -->
+    ============================================ -->
   <script src="{{asset("admin/js/owl.carousel.min.js")}}"></script>
   <!-- sticky JS
-		============================================ -->
+    ============================================ -->
   <script src="{{asset("admin/js/jquery.sticky.js")}}"></script>
   <!-- scrollUp JS
-		============================================ -->
+    ============================================ -->
   <script src="{{asset("admin/js/jquery.scrollUp.min.js")}}"></script>
   <!-- mCustomScrollbar JS
-		============================================ -->
+    ============================================ -->
   <script src="{{asset("admin/js/scrollbar/jquery.mCustomScrollbar.concat.min.js")}}"></script>
   <script src="{{asset("admin/js/scrollbar/mCustomScrollbar-active.js")}}"></script>
   <!-- metisMenu JS
-		============================================ -->
+    ============================================ -->
   <script src="{{asset("admin/js/metisMenu/metisMenu.min.js")}}"></script>
   <script src="{{asset("admin/js/metisMenu/metisMenu-active.js")}}"></script>
   <!-- sparkline JS
-		============================================ -->
+    ============================================ -->
   <script src="{{asset("admin/js/sparkline/jquery.sparkline.min.js")}}"></script>
   <script src="{{asset("admin/js/sparkline/jquery.charts-sparkline.js")}}"></script>
   <!-- calendar JS
-		============================================ -->
+    ============================================ -->
   <script src="{{asset("admin/js/calendar/moment.min.js")}}"></script>
   <script src="{{asset("admin/js/calendar/fullcalendar.min.js")}}"></script>
   <script src="{{asset("admin/js/calendar/fullcalendar-active.js")}}"></script>
   <!-- float JS
-		============================================ -->
+    ============================================ -->
   <script src="{{asset("admin/js/flot/jquery.flot.js")}}"></script>
   <script src="{{asset("admin/js/flot/jquery.flot.resize.js")}}"></script>
   <script src="{{asset("admin/js/flot/curvedLines.js")}}"></script>
   <script src="{{asset("admin/js/flot/flot-active.js")}}"></script>
   <!-- plugins JS
-		============================================ -->
+    ============================================ -->
   <script src="{{asset("admin/js/plugins.js")}}"></script>
   <!-- main JS
-		============================================ -->
+    ============================================ -->
   <script src="{{asset("admin/js/main.js")}}"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
-  <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
+
+  <script src="https://cdn.datatables.net/1.11.4/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.4/js/dataTables.bootstrap5.min.js"></script>
+
   <script type="text/javascript">
-    $(function () {
+    $(document).ready(function () {
+      $.ajaxSetup({
+        headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+      });
+
       var table = $('.data-table').DataTable({
         processing: true,
         serverSide: true,
         ajax: {
-          url: "{{ route('getAllTransaction') }}",
+          url: "{{ route('getAllAkun') }}",
           type: "GET"
         },
         columns: [
-          { data: 'DT_RowIndex', name: 'DT_RowIndex' },
-          { data: 'projectName', name: 'projectName' },
-          { data: 'talentName', name: 'talentName' },
-          { data: 'clientName', name: 'clientName' },
-          { data: 'amount', name: 'amount' },
-          { data: 'transaksi_created_at', name: 'transaksi_created_at' },
-          { data: 'status_transaksi', name: 'status_transaksi' },
-        ],
-        dom: 'Bfrtip',
-        buttons: [
-          'copy', 'csv', 'excel', 'pdf', 'print'
+          { data: 'name', name: 'name' },
+          { data: 'email', name: 'email' },
+          { data: 'action', name: 'action', orderable: false, searchable: false },
         ]
+      });
+
+      $(document).on('click', '.edit', function () {
+        var id = $(this).data('id');
+
+        $.ajax({
+          url: "{{ route('editAkun') }}",
+          type: 'GET',
+          data: { id: id },
+          success: function (response) {
+            $('#nama').val(response.name);
+            $('#email').val(response.email);
+            $('#id').val(id);
+
+            $('#editModal').modal('show');
+          },
+          error: function (xhr) {
+            console.log(xhr.responseText);
+          }
+        });
+      });
+
+      $(document).on('click', '.delete', function () {
+        var id = $(this).data('id');
+
+        $.ajax({
+          url: "{{ route('deleteAkun') }}",
+          type: 'DELETE',
+          data: { id: id },
+          success: function (response) {
+            table.ajax.reload();
+          },
+          error: function (xhr) {
+            console.log(xhr.responseText);
+          }
+        });
       });
     });
   </script>

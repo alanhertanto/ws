@@ -184,7 +184,7 @@ class BlogController extends Controller
         // Delete the blog post
         $blog->delete();
 
-        return response()->json(['message' => 'Blog post deleted successfully']);
+        return response()->json(['message' => 'Blog post berhasil dihapus']);
     }
 
 

@@ -75,9 +75,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <div class="logo-pro">
-                        <a href="index.html"><img class="main-logo" src="img/logo/logo.png" alt="" /></a>
-                    </div>
+                    <br>
                 </div>
             </div>
         </div>
@@ -358,7 +356,8 @@
                                         <div id="sparklinedash"></div>
                                     </li>
                                     <li class="text-right sp-cn-r"><i class="fa fa-level-up" aria-hidden="true"></i>
-                                        <span class="counter sales-sts-ctn">{{$totalTalent}}</span></li>
+                                        <span class="counter sales-sts-ctn">{{$totalTalent}}</span>
+                                    </li>
                                 </ul>
                             </div>
 
@@ -380,7 +379,7 @@
                 </div>
             </div>
         </div>
-      
+
     </div>
     <!-- jquery
 		============================================ -->

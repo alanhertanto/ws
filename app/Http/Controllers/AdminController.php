@@ -203,6 +203,68 @@ class AdminController extends Controller
         }
 
     }
+    public function viewAkuns(): View
+    {
+        return view('admin.akun');
+    }
+
+    public function getAllAkun(Request $request)
+    {
+        if ($request->ajax()) {
+            $participants = User::query()
+                ->get();
+
+            return Datatables::of($participants)
+                ->addIndexColumn()
+                ->addColumn('action', function ($participant) {
+                    $btn = '<button class="edit btn btn-danger btn-sm" data-id="' . $participant->id . '">Edit Akun</button>';
+                    $btn .= '<button class="delete btn btn-success btn-sm" data-id="' . $participant->id . '">Hapus Akun</button>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+    }
+
+    public function editAkun(Request $request)
+    {
+        $akun = User::findOrFail($request->id);
+        return response()->json($akun);
+    }
+
+    public function updateAkun(Request $request)
+    {
+        try {
+            // Validate the request
+            $request->validate([
+                'nama' => 'required|min:5',
+                'email' => 'required|min:10',
+                'password' => 'required',
+            ]);
+
+            $akun = User::findOrFail($request->id);
+            $akun->name = $request->nama;
+            $akun->email = $request->email;
+            $akun->password = Hash::make($request->password);
+            $akun->save();
+
+            // Return success response
+            return redirect()->route('viewAkuns')->with(['success' => 'Akun Berhasil Di Update!']);
+
+        } catch (\Exception $e) {
+            // Log the error
+            return redirect()->back()->withErrors(['error' => 'Gagal Untuk Posting Blog.']);
+        }
+    }
+
+    public function deleteAkun(Request $request)
+    {
+        $akun = User::findOrFail($request->id);
+        // Delete the blog post
+        $akun->delete();
+
+        return response()->json(['message' => 'Akun Berhasil DiHapus']);
+    }
 
 
     public function logout()
